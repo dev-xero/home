@@ -22,7 +22,6 @@ export const metadata: Metadata = {
                 url: 'https://home-xero.netlify.app/favicon.svg',
                 width: 600,
                 height: 600,
-                type: 'logo',
             },
         ]
     },
