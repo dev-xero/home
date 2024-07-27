@@ -16,7 +16,7 @@ export default function Header() {
 
     return (
         <>
-            <div className="transition-all fixed top-0 left-[50%] translate-x-[-50%] z-[1000] max-w-screen-lg w-full p-8 bg-bg-dark">
+            <div className="transition-all fixed top-0 left-[50%] translate-x-[-50%] z-[1000] max-w-screen-lg w-full px-4 sm:px-8 py-8 bg-bg-dark">
                 <header className="flex justify-between items-center bg-bg-dark select-none">
                     {/* Escaping '/' with &#47; */}
                     <h3 className="text-lg font-bold tracking-wide select-none">
