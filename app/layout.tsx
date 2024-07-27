@@ -10,6 +10,16 @@ export const metadata: Metadata = {
     icons: {
         shortcut: 'favicon.svg',
     },
+    openGraph: {
+        locale: "en-US",
+        title: "ゼロ Xero",
+        siteName: "ゼロ Xero",
+        description: "Xero's space on the internet.",
+        images: [{
+            url: "favicon.svg",
+            type: "svg"
+        }]
+    }
 };
 
 export default function RootLayout({
