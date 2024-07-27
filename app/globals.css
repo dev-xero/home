@@ -2,6 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+::-moz-selection {
+    background: #577FBC;
+    color: #FFFFFF;
+}
+::-webkit-selection {
+    background: #577FBC;
+    color: #FFFFFF;
+}
+::selection {
+    background: #577FBC;
+    color: #FFFFFF;
+}
+
 :root {
     --foreground-rgb: 0, 0, 0;
     --background-rgb: 225, 225, 225;
@@ -27,4 +40,8 @@ body {
     .text-balance {
         text-wrap: balance;
     }
+}
+
+span.blue {
+    color: #8EB8F8 !important;
 }

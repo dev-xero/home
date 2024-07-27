@@ -8,9 +8,9 @@ export default function Header() {
 
     return (
         <div className="transition-all">
-            <header className="flex justify-between items-center bg-bg-dark">
+            <header className="flex justify-between items-center bg-bg-dark select-none">
                 {/* Escaping '/' with &#47; */}
-                <h3 className="text-lg font-bold tracking-wide">
+                <h3 className="text-lg font-bold tracking-wide select-none">
                     <a href="/">&#47;&#47; XERO</a>
                 </h3>
 
@@ -37,12 +37,12 @@ export default function Header() {
 
                 {/* GitHub + Theme */}
                 <ul className="flex items-center gap-4 text-grey-050">
-                    <li className="hover:text-white transition-colors">
+                    <li className="hover:text-white transition-colors select-none">
                         <a href="https://github.com/dev-xero" target="_blank">
                             <GithubIcon size={24} />
                         </a>
                     </li>
-                    <li className="cursor-pointer hover:text-white transition-colors">
+                    <li className="cursor-pointer hover:text-white transition-colors select-none">
                         <Moon02Icon size={24} />
                     </li>
                 </ul>
