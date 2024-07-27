@@ -11,15 +11,21 @@ export const metadata: Metadata = {
         shortcut: 'favicon.svg',
     },
     openGraph: {
-        locale: "en-US",
-        title: "ゼロ Xero",
-        siteName: "ゼロ Xero",
+        locale: 'en_US',
+        title: 'ゼロ Xero',
+        siteName: 'ゼロ Xero',
         description: "Xero's space on the internet.",
-        images: [{
-            url: "favicon.svg",
-            type: "svg"
-        }]
-    }
+        type: 'website',
+        url: 'https://home-xero.netlify.app',
+        images: [
+            {
+                url: '/favicon.svg',
+                width: 600,
+                height: 600,
+                type: 'logo',
+            },
+        ],
+    },
 };
 
 export default function RootLayout({
