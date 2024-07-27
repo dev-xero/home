@@ -1,3 +1,3 @@
-# `/ home`
+# `/home`
 
-My personal website.
+Xero's space on the internet.
