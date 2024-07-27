@@ -6,9 +6,11 @@ import NavOverlay from './NavOverlay';
 
 interface HeaderProps {
     active: 'about' | 'blog' | 'projects' | 'none';
+    aboutRedirect?: string;
+    projectRedirect?: string;
 }
 
-export default function Header({ active }: HeaderProps) {
+export default function Header({ active, aboutRedirect, projectRedirect }: HeaderProps) {
     const [isNavExpanded, setIsNavExpanded] = useState(false);
 
     const toggleNavigation = () => {
@@ -39,7 +41,7 @@ export default function Header({ active }: HeaderProps) {
                         </li>
                         <li className="hover:text-white transition-all hover:underline underline-offset-4">
                             <a
-                                href="#about"
+                                href={aboutRedirect ? aboutRedirect : '#about'}
                                 className={`${
                                     active == 'about'
                                         ? 'text-white underline'
@@ -51,7 +53,7 @@ export default function Header({ active }: HeaderProps) {
                         </li>
                         <li className="hover:text-white transition-all hover:underline underline-offset-4">
                             <a
-                                href="#projects"
+                                href={projectRedirect ? projectRedirect : '#projects'}
                                 className={`${
                                     active == 'projects'
                                         ? 'text-white underline'

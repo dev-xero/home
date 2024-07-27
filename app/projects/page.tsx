@@ -1,5 +1,5 @@
-import About from '@/components/About';
 import Container from '@/components/Container';
+import ProjectsPage from '@/components/ProjectsPage';
 import Header from '@/components/ui/Header';
 
 export default function Page() {
@@ -7,10 +7,10 @@ export default function Page() {
         <Container>
             <>
                 <Header
-                    active="about"
-                    projectRedirect="/projects"
+                    active="projects"
+                    aboutRedirect="/about"
                 />
-                <About />
+                <ProjectsPage />
             </>
         </Container>
     );

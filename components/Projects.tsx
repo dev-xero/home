@@ -26,27 +26,48 @@ export default function Projects() {
                             >
                                 <div className="flex gap-4 items-center">
                                     <a href={project.source} target="_blank">
-                                        <GithubIcon size={16} className="hover:text-blue transition-all" />
+                                        <GithubIcon
+                                            size={16}
+                                            className="hover:text-blue transition-all"
+                                        />
                                     </a>
-                                    {project.external && 
-                                        project.type == "app"
-                                            ? (
-                                                <a href={project.external} target="_blank">
-                                                    <Download04Icon size={16} className="hover:text-green transition-colors" />
-                                                </a>
-                                            )
-                                        : (
-                                            <a href={project.external} target="_blank">
-                                                 <LinkSquare02Icon size={16} className="hover:text-green transition-colors" />
-                                            </a>
-                                            )
-                                    }
+                                    {project.external &&
+                                    project.type == 'app' ? (
+                                        <a
+                                            href={project.external}
+                                            target="_blank"
+                                        >
+                                            <Download04Icon
+                                                size={16}
+                                                className="hover:text-green transition-colors"
+                                            />
+                                        </a>
+                                    ) : (
+                                        <a
+                                            href={project.external}
+                                            target="_blank"
+                                        >
+                                            <LinkSquare02Icon
+                                                size={16}
+                                                className="hover:text-green transition-colors"
+                                            />
+                                        </a>
+                                    )}
                                 </div>
                                 <span>{project.title}</span>
                             </li>
                         ))}
                     </ul>
                 </section>
+                <p className="mt-8">
+                    <a
+                        href="/projects"
+                        className="decoration-dashed underline-4 hover:underline text-grey-050 flex gap-2 items-center transition-colors hover:text-blue"
+                    >
+                        <span>More</span>
+                        <LinkSquare02Icon size={16} />
+                    </a>
+                </p>
             </section>
         </main>
     );
