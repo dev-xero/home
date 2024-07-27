@@ -76,8 +76,8 @@ export default function Header() {
                 {/* Mobile nav menu */}
                 <nav
                     className={`${
-                        isNavExpanded ? 'h-[110px]' : 'h-0'
-                    } mt-8 transition-all overflow-hidden select-none border-l-2 border-l-green pl-4 sm:hidden block`}
+                        isNavExpanded ? 'h-[110px] mt-8' : 'h-0 mt-0'
+                    } transition-all overflow-hidden select-none border-l-2 border-l-green pl-4 sm:hidden block`}
                 >
                     <ul className="flex flex-col gap-1 text-grey-050 transition-colors text-base">
                         <li className="hover:text-white transition-all hover:underline underline-offset-4">
