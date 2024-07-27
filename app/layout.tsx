@@ -19,13 +19,14 @@ export const metadata: Metadata = {
         url: 'https://home-xero.netlify.app',
         images: [
             {
-                url: '/favicon.svg',
+                url: 'https://home-xero.netlify.app/favicon.svg',
                 width: 600,
                 height: 600,
                 type: 'logo',
             },
-        ],
+        ]
     },
+    metadataBase: new URL("https://home-xero.netlify.app")
 };
 
 export default function RootLayout({
