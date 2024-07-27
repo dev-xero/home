@@ -4,7 +4,11 @@ import { GithubIcon, Chess02Icon, Menu09Icon } from 'hugeicons-react';
 import { useState } from 'react';
 import NavOverlay from './NavOverlay';
 
-export default function Header() {
+interface HeaderProps {
+    active: 'about' | 'blog' | 'projects' | 'none';
+}
+
+export default function Header({ active }: HeaderProps) {
     const [isNavExpanded, setIsNavExpanded] = useState(false);
 
     const toggleNavigation = () => {
@@ -34,13 +38,40 @@ export default function Header() {
                             </a>
                         </li>
                         <li className="hover:text-white transition-all hover:underline underline-offset-4">
-                            <a href="#about">about me</a>
+                            <a
+                                href="#about"
+                                className={`${
+                                    active == 'about'
+                                        ? 'text-white underline'
+                                        : ''
+                                }`}
+                            >
+                                about me
+                            </a>
                         </li>
                         <li className="hover:text-white transition-all hover:underline underline-offset-4">
-                            <a href="#projects">projects</a>
+                            <a
+                                href="#projects"
+                                className={`${
+                                    active == 'projects'
+                                        ? 'text-white underline'
+                                        : ''
+                                }`}
+                            >
+                                projects
+                            </a>
                         </li>
                         <li className="hover:text-white transition-all hover:underline underline-offset-4">
-                            <a href="/blog">blog</a>
+                            <a
+                                href="/blog"
+                                className={`${
+                                    active == 'blog'
+                                        ? 'text-white underline'
+                                        : ''
+                                }`}
+                            >
+                                blog
+                            </a>
                         </li>
                     </ul>
 
@@ -89,13 +120,40 @@ export default function Header() {
                             </a>
                         </li>
                         <li className="hover:text-white transition-all hover:underline underline-offset-4">
-                            <a href="#about">about me</a>
+                            <a
+                                href="#about"
+                                className={`${
+                                    active == 'about'
+                                        ? 'text-white underline'
+                                        : ''
+                                }`}
+                            >
+                                about me
+                            </a>
                         </li>
                         <li className="hover:text-white transition-all hover:underline underline-offset-4">
-                            <a href="#projects">projects</a>
+                            <a
+                                href="#projects"
+                                className={`${
+                                    active == 'projects'
+                                        ? 'text-white underline'
+                                        : ''
+                                }`}
+                            >
+                                projects
+                            </a>
                         </li>
                         <li className="hover:text-white transition-all hover:underline underline-offset-4">
-                            <a href="/blog">blog</a>
+                            <a
+                                href="/blog"
+                                className={`${
+                                    active == 'blog'
+                                        ? 'text-white underline'
+                                        : ''
+                                }`}
+                            >
+                                blog
+                            </a>
                         </li>
                     </ul>
                 </nav>
