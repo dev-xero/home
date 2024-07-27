@@ -4,7 +4,7 @@ import { GithubIcon, LinkSquare02Icon, Download04Icon } from 'hugeicons-react';
 
 export default function Projects() {
     return (
-        <main className="mt-8 min:mt-20" id="projects">
+        <main className="mt-8" id="projects">
             <SubHeading text="PROJECTS" />
             <section className="text-grey-050 mt-4">
                 <p>

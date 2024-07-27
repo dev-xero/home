@@ -2,7 +2,7 @@ import SubHeading from "./ui/SubHeading";
 
 export default function About() {
     return (
-        <main className="mt-24 min:mt-20" id="about">
+        <main className="mt-24" id="about">
             <SubHeading text="ABOUT ME" />
             <section className="text-grey-050 mt-4">
                 <p className="leading-[26px]">
