@@ -19,7 +19,7 @@ export const metadata: Metadata = {
         url: 'https://home-xero.netlify.app',
         images: [
             {
-                url: 'https://home-xero.netlify.app/favicon.svg',
+                url: 'https://home-xero.netlify.app/og-img.png',
                 width: 600,
                 height: 600,
             },
