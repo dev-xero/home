@@ -14,7 +14,7 @@ export default function Skills() {
                 </p>
                 <section className="mt-8 grid gap-8 grid-cols-3 sm:grid-cols-4 md:grid-cols-8 justify-items-center">
                     {skillData.map((skill, id) => (
-                        <div key={id} className="group cursor-pointer flex flex-col gap-4 items-center justify-center text-center transition-all">
+                        <div key={id} className="group cursor-pointer flex flex-col gap-4 items-center justify-center text-center transition-all select-none">
                             <Image
                                 src={skill.img}
                                 width={64}
