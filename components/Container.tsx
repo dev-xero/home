@@ -6,7 +6,7 @@ interface ContainerProps {
 
 export default function Container({ children }: ContainerProps) {
     return (
-        <main className="m-auto max-w-screen-lg w-screen-md p-8">
+        <main className="m-auto max-w-screen-lg w-screen-md p-4 sm:p-8">
             {children}
         </main>
     )
