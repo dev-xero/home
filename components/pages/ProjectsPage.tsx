@@ -11,8 +11,10 @@ import ProjectCard from '../ui/ProjectCard';
 export default function ProjectsPage() {
     const [search, updateSearch] = useState('');
     const [selectedFilter, updateSelectedFilter] = useState(TAGS.ALL);
-    const filteredProjects = osProjects.filter((project) =>
-        project.tags.includes(selectedFilter)
+    const filteredProjects = osProjects.filter(
+        (project) =>
+            project.tags.includes(selectedFilter) &&
+            project.name.toLowerCase().includes(search.toLowerCase())
     );
 
     const onUpdateSearch = (e: ChangeEvent<HTMLInputElement>) => {
