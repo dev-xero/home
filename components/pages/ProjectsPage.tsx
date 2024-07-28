@@ -63,7 +63,7 @@ export default function ProjectsPage() {
             <section>
                 <header className="my-8 pb-4 border-b-2 border-light-dark">
                     <h3 className="font-bold text-xl">
-                        {selectedFilter} Projects
+                        {selectedFilter} Projects ({filteredProjects.length})
                     </h3>
                 </header>
                 <section>
