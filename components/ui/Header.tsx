@@ -135,7 +135,7 @@ export default function Header({ active, aboutRedirect, projectRedirect }: Heade
                         </li>
                         <li className="hover:text-white transition-all hover:underline underline-offset-4 decoration-grey-050">
                             <a
-                                href={projectRedirect ? projectRedirect : '#project'}
+                                href={projectRedirect ? projectRedirect : '#projects'}
                                 className={`${
                                     active == 'projects'
                                         ? 'text-white underline'
