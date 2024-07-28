@@ -80,7 +80,7 @@ export default function ProjectsPage() {
                             />
                         ))
                     ) : (
-                        <h3 className="text-grey-050 font-bold text-xl">
+                        <h3 className="text-grey-050 text-lg">
                             No projects matching this filter yet.
                         </h3>
                     )}
