@@ -160,7 +160,7 @@ const osProjects: Array<IProject> = [
     {
         id: 19,
         name: 'Paper',
-        desc: 'Designed and developed an clean, minimal note taking app.',
+        desc: 'Designed and developed an aesthetic, minimal note taking app.',
         langs: [langMap[5]],
         tags: [TAGS.ALL, TAGS.ANDROID],
         source: 'https://github.com/dev-xero/paper-app',
