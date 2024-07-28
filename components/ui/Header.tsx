@@ -31,7 +31,7 @@ export default function Header({ active, aboutRedirect, projectRedirect }: Heade
 
                     {/* Navigation Links: Desktop */}
                     <ul className="hidden justify-between items-center gap-4 text-grey-050 transition-colors text-base sm:flex">
-                        <li className="hover:text-white transition-all hover:underline underline-offset-4">
+                        <li className="hover:text-white transition-all hover:underline underline-offset-4 decoration-grey-050">
                             <a
                                 href="https://github.com/dev-xero/home"
                                 target="_blank"
@@ -39,7 +39,7 @@ export default function Header({ active, aboutRedirect, projectRedirect }: Heade
                                 source code
                             </a>
                         </li>
-                        <li className="hover:text-white transition-all hover:underline underline-offset-4">
+                        <li className="hover:text-white transition-all hover:underline underline-offset-4 decoration-grey-050">
                             <a
                                 href={aboutRedirect ? aboutRedirect : '#about'}
                                 className={`${
@@ -51,7 +51,7 @@ export default function Header({ active, aboutRedirect, projectRedirect }: Heade
                                 about me
                             </a>
                         </li>
-                        <li className="hover:text-white transition-all hover:underline underline-offset-4">
+                        <li className="hover:text-white transition-all hover:underline underline-offset-4 decoration-grey-050">
                             <a
                                 href={projectRedirect ? projectRedirect : '#projects'}
                                 className={`${
@@ -63,7 +63,7 @@ export default function Header({ active, aboutRedirect, projectRedirect }: Heade
                                 projects
                             </a>
                         </li>
-                        <li className="hover:text-white transition-all hover:underline underline-offset-4">
+                        <li className="hover:text-white transition-all hover:underline underline-offset-4 decoration-grey-050">
                             <a
                                 href="/blog"
                                 className={`${
@@ -113,7 +113,7 @@ export default function Header({ active, aboutRedirect, projectRedirect }: Heade
                     } transition-all overflow-hidden select-none border-l-2 border-l-green pl-4 sm:hidden block`}
                 >
                     <ul className="flex flex-col gap-1 text-grey-050 transition-colors text-base">
-                        <li className="hover:text-white transition-all hover:underline underline-offset-4">
+                        <li className="hover:text-white transition-all hover:underline underline-offset-4 decoration-grey-050">
                             <a
                                 href="https://github.com/dev-xero/home"
                                 target="_blank"
@@ -121,7 +121,7 @@ export default function Header({ active, aboutRedirect, projectRedirect }: Heade
                                 source code
                             </a>
                         </li>
-                        <li className="hover:text-white transition-all hover:underline underline-offset-4">
+                        <li className="hover:text-white transition-all hover:underline underline-offset-4 decoration-grey-050">
                             <a
                                 href={aboutRedirect ? aboutRedirect : '#about'}
                                 className={`${
@@ -133,7 +133,7 @@ export default function Header({ active, aboutRedirect, projectRedirect }: Heade
                                 about me
                             </a>
                         </li>
-                        <li className="hover:text-white transition-all hover:underline underline-offset-4">
+                        <li className="hover:text-white transition-all hover:underline underline-offset-4 decoration-grey-050">
                             <a
                                 href={projectRedirect ? projectRedirect : '#project'}
                                 className={`${
@@ -145,7 +145,7 @@ export default function Header({ active, aboutRedirect, projectRedirect }: Heade
                                 projects
                             </a>
                         </li>
-                        <li className="hover:text-white transition-all hover:underline underline-offset-4">
+                        <li className="hover:text-white transition-all hover:underline underline-offset-4 decoration-grey-050">
                             <a
                                 href="/blog"
                                 className={`${
