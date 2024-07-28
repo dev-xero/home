@@ -39,7 +39,7 @@ export default function ProjectsPage() {
                     onChange={(e) => onUpdateSearch(e)}
                 />
             </div>
-            {/* Filters */}
+            {/* Filter Chips */}
             <ul className="mt-8 flex gap-4 flex-wrap">
                 {filters.map((filter, id) => (
                     <li key={id}>
@@ -52,6 +52,12 @@ export default function ProjectsPage() {
                     </li>
                 ))}
             </ul>
+            {/* Filtered Projects */}
+            <section>
+                <header className="mt-8 pb-4 border-b-2 border-light-dark">
+                    <h3 className="font-bold text-xl">{selectedFilter} Projects</h3>
+                </header>
+            </section>
         </main>
     );
 }
