@@ -2,7 +2,7 @@ import { LinkSquare02Icon } from 'hugeicons-react';
 import SubHeading from '../ui/SubHeading';
 import personal from '@/data/personal';
 
-export default function About() {
+export default function AboutPage() {
     return (
         <main className="mt-24" id="about">
             <SubHeading text="HEY I'M XERO" />
@@ -22,7 +22,7 @@ export default function About() {
                     .
                 </p>
                 <p className="leading-[26px] mt-4">
-                    Another of many technical skill sets is Fullstack Development (Web + Android), creating impressive, performant and scalable software systems, some even integrated with machine learning.
+                    My many technical skill sets is include fullstack development (web + android), creating impressive, performant and scalable software systems, some even integrated with machine learning.
                 </p>
                 <p className="leading-[26px] mt-4">
                     Anime nerd (otaku) and low-level programming enthusiast.
