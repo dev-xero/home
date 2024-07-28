@@ -73,7 +73,7 @@ const osProjects: Array<IProject> = [
         id: 8,
         name: 'NoteRepo',
         desc: "I'm developing — along with some friends, a centralized study / lecture materials repository to help make organizing school work easier.",
-        langs: [langMap[4]],
+        langs: [langMap[7], langMap[8], langMap[9]],
         tags: [TAGS.ALL, TAGS.FULLSTACK, TAGS.FRONTEND],
         source: 'https://github.com/NoteRepoLabs/noterepo-web-client',
     },
