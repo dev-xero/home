@@ -11,7 +11,7 @@ enum LANG {
     PYTHON = '#6A85E5',
     KOTLIN = '#C256F4',
     JAVA = '#DA8E56',
-    TS = '#7C97F6',
+    TS = '#3B94FC',
     JS = '#FCF773',
     NODE = '#6FF78D',
     JUPYTER = '#FA983E',

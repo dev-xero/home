@@ -5,10 +5,15 @@ import SubHeading from '../ui/SubHeading';
 import { ChangeEvent, useState } from 'react';
 import FilterChip from '../ui/FilterChip';
 import { TAGS, filters } from '@/data/filters';
+import osProjects from '@/data/osprojects';
+import ProjectCard from '../ui/ProjectCard';
 
 export default function ProjectsPage() {
     const [search, updateSearch] = useState('');
     const [selectedFilter, updateSelectedFilter] = useState(TAGS.ALL);
+    const filteredProjects = osProjects.filter((project) =>
+        project.tags.includes(selectedFilter)
+    );
 
     const onUpdateSearch = (e: ChangeEvent<HTMLInputElement>) => {
         updateSearch(e.target.value);
@@ -54,9 +59,30 @@ export default function ProjectsPage() {
             </ul>
             {/* Filtered Projects */}
             <section>
-                <header className="mt-8 pb-4 border-b-2 border-light-dark">
-                    <h3 className="font-bold text-xl">{selectedFilter} Projects</h3>
+                <header className="my-8 pb-4 border-b-2 border-light-dark">
+                    <h3 className="font-bold text-xl">
+                        {selectedFilter} Projects
+                    </h3>
                 </header>
+                <section>
+                    {filteredProjects.length > 0 ? (
+                        filteredProjects.map((project, id) => (
+                            <ProjectCard
+                                key={id}
+                                id={id}
+                                name={project.name}
+                                desc={project.desc}
+                                langs={project.langs}
+                                source={project.source}
+                                preview={project.preview}
+                            />
+                        ))
+                    ) : (
+                        <h3 className="text-grey-050 font-bold text-xl">
+                            No projects matching this filter yet.
+                        </h3>
+                    )}
+                </section>
             </section>
         </main>
     );
