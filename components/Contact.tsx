@@ -5,6 +5,7 @@ import {
     NewTwitterIcon,
 } from 'hugeicons-react';
 import SubHeading from './ui/SubHeading';
+import personal from '@/data/personal';
 
 export default function Contact() {
     return (
@@ -13,8 +14,8 @@ export default function Contact() {
             <section className="text-grey-050 mt-4">
                 <p>
                     You want to contact me about something? Cool, just shoot me
-                    an email at <span className="green">xerodev@</span><span className="text-grey-100">gmail.com</span>, 
-                    or <span className="blue">@_xerodev</span> on Discord, 
+                    an email at <span className="green">{personal.public_email}@</span><span className="text-grey-100">gmail.com</span>, 
+                    or <span className="blue">@{personal.public_discord}</span> on Discord, 
                     and I promise to get back to
                     you within this century ;) (lol)
                 </p>

@@ -1,6 +1,7 @@
 import skillData from '@/data/skills';
 import SubHeading from './ui/SubHeading';
 import Image from 'next/image';
+import personal from '@/data/personal';
 
 export default function Skills() {
     return (
@@ -9,7 +10,7 @@ export default function Skills() {
             <section className="text-grey-050 mt-4">
                 <p>
                     I&apos;ve been programming for almost{' '}
-                    <span className="green">6 years</span> now, here&apos;s some
+                    <span className="green">{personal.years_programming} years</span> now, here&apos;s some
                     of the languages and frameworks I work with regularly.
                 </p>
                 <section className="mt-8 grid gap-8 grid-cols-3 sm:grid-cols-4 md:grid-cols-8 justify-items-center">
