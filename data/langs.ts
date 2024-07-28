@@ -9,7 +9,7 @@ enum LANG {
     RUST = '#F7886F',
     GO = '#6FC6F7',
     PYTHON = '#6A85E5',
-    KOTLIN = '#C256F4',
+    KOTLIN = '#BA73F2',
     JAVA = '#DA8E56',
     TS = '#3B94FC',
     JS = '#FCF773',
