@@ -10,7 +10,7 @@ const config: Config = {
     extend: {
       colors: {
         'bg-dark': '#090C12',
-        'white': '#FFFFFF',
+        'white': '#F4F9FB',
         'grey-000': '#ECEFF3',
         'grey-050': '#B5C3D8',
         'grey-100': '#7A879A',
