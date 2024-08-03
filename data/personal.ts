@@ -1,6 +1,6 @@
 const personal = {
     school_year: "2nd year",
-    public_email: "xerodev",
+    public_email: "ssh.xero",
     public_discord: "_xerodev",
     years_programming: 6
 }
