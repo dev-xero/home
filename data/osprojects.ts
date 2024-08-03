@@ -184,7 +184,7 @@ const osProjects: Array<IProject> = [
     {
         id: 22,
         name: 'Parse Tree',
-        desc: 'Implemented an abstract syntax tree for expression parsing.',
+        desc: 'Abstract syntax tree for playful mathematical expression parsing.',
         langs: [langMap[4]],
         tags: [TAGS.ALL, TAGS.LIBS, TAGS.DSA],
         source: 'https://github.com/dev-xero/python-parse-tree',
