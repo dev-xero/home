@@ -6,12 +6,12 @@ export default function Intro() {
             <SubHeading text="ABOUT ME" />
             <section className="text-grey-050 mt-4">
                 <p className="leading-[26px]">
-                    Hey there (おはよう), I&apos;m a CS student and aspiring
+                    Hey there (おはよう), I&apos;m currently a CS student and aspiring
                     software engineer. I go by Xero online; nice to meet you. I
-                    primarily do backend programming with{' '}
+                    specialize in backend engineering with{' '}
                     <span className="blue">Go</span> and{' '}
-                    <span className="blue">Typescript</span>, but also dabble
-                    with low-level <span className="blue">C</span> stuff and
+                    <span className="blue">Typescript</span>, and also dabble
+                    with low-level <span className="blue">C</span> programming  and
                     Android development occasionally.
                 </p>
                 <p className="leading-[26px]">
@@ -30,7 +30,7 @@ export default function Intro() {
                         href="/about"
                         className="decoration-dashed hover:underline underline-offset-4 hover:text-blue transition-colors"
                     >
-                        Hmm, more?
+                        More!
                     </a>
                 </p>
             </section>

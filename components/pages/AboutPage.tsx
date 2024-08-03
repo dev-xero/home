@@ -29,7 +29,7 @@ export default function AboutPage() {
                 </p>
             </section>
             <p className="mt-8">
-                <a href="/projects" className="decoration-dashed underline-4 hover:underline text-grey-050 flex gap-2 items-center transition-colors hover:text-blue">
+                <a href="/projects" className="decoration-dashed underline-offset-4 hover:underline text-grey-050 flex gap-2 items-center transition-colors hover:text-blue">
                     <span>My Projects</span>
                     <LinkSquare02Icon size={16} />
                 </a>

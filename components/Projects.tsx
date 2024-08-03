@@ -8,7 +8,7 @@ export default function Projects() {
             <SubHeading text="PROJECTS" />
             <section className="text-grey-050 mt-4">
                 <p>
-                    Some notable? (open source) stuff I&apos;ve worked on
+                    Some notable open source projects I&apos;ve worked on
                     recently, more on my{' '}
                     <span className="blue">
                         <a href="https://github.com/dev-xero" target="_blank">
@@ -62,7 +62,7 @@ export default function Projects() {
                 <p className="mt-8">
                     <a
                         href="/projects"
-                        className="decoration-dashed underline-4 hover:underline text-grey-050 flex gap-2 items-center transition-colors hover:text-blue"
+                        className="decoration-dashed underline-offset-4 hover:underline text-grey-050 flex gap-2 items-center transition-colors hover:text-blue"
                     >
                         <span>More</span>
                         <LinkSquare02Icon size={16} />

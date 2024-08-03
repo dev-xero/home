@@ -17,7 +17,7 @@ export default function Contact() {
                     an email at <span className="green">{personal.public_email}@</span><span className="text-grey-100">gmail.com</span>, 
                     or <span className="blue">@{personal.public_discord}</span> on Discord, 
                     and I promise to get back to
-                    you within this century ;) (lol)
+                    you within this century ;) (jokes aside, I respond pretty quickly)
                 </p>
                 <p>In the mean time, here are some other cool links!</p>
                 <ul className="flex flex-col sm:flex-row gap-4 sm:items-center mt-8">
