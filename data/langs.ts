@@ -8,7 +8,7 @@ enum LANG {
     CPP = '#E6656D',
     RUST = '#F7886F',
     GO = '#6FC6F7',
-    PYTHON = '#6A85E5',
+    PYTHON = '#5377EA',
     KOTLIN = '#BA73F2',
     JAVA = '#DA8E56',
     TS = '#3B94FC',

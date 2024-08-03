@@ -48,10 +48,10 @@ const osProjects: Array<IProject> = [
     {
         id: 5,
         name: 'JSON Parser',
-        desc: 'My implementation of the JSON file format recursive descent parser.',
-        langs: [langMap[4]],
+        desc: 'Fast & memory efficient implementation of the JSON file format parser, using recursive descent.',
+        langs: [langMap[2]],
         tags: [TAGS.ALL, TAGS.LIBS],
-        source: 'https://github.com/dev-xero/json-parser',
+        source: 'https://github.com/dev-xero/rd-json-parser',
     },
     {
         id: 6,
