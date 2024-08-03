@@ -24,7 +24,7 @@ export default function Skills() {
                                 priority={true}
                                 className="group-hover:opacity-100 opacity-80 transition-opacity"
                              />
-                             <label className="text-sm transition-colors group-hover:text-green">{skill.name}</label>
+                             <label className="text-sm transition-colors group-hover:text-blue">{skill.name}</label>
                         </div>
                     ))}
                 </section>
