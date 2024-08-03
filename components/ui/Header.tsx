@@ -26,7 +26,7 @@ export default function Header({ active, aboutRedirect, projectRedirect }: Heade
                 <header className="flex justify-between items-center bg-bg-dark select-none">
                     {/* Escaping '/' with &#47; */}
                     <h3 className="text-lg font-bold tracking-wide select-none">
-                        <a href="/">&#47;&#47; XERO</a>
+                        <a href="/"><span className="green">&#47;&#47;</span> XERO</a>
                     </h3>
 
                     {/* Navigation Links: Desktop */}

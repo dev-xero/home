@@ -4,9 +4,9 @@ interface SubHeadingProps {
 
 export default function SubHeading({ text }: SubHeadingProps) {
     return (
-        <section className="inline-block">
-            <h3 className="font-bold text-xl">{text}</h3>
-            <div className="max-w-[30%] h-1 bg-green mt-2"></div>
+        <section className="flex flex-col sm:flex-row gap-4 sm:items-center mt-2">
+            <h3 className="font-bold text-lg min-w-[120px]">{text}</h3>
+            <div className="w-full h-[2px] bg-light-dark opacity-50"></div>
         </section>
     )
 }
