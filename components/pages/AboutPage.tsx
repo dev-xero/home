@@ -12,7 +12,7 @@ export default function AboutPage() {
                     Computer Science with a focus on applying Machine Learning on the web.
                 </p>
                 <p className="leading-[26px] mt-4">
-                    Currently, I mainly work with scalable backend systems
+                    Currently, I work with scalable backend systems
                     (API/MicroServices/DB). Huge fan of Open Source development,
                     I&apos;ve built several tools, libraries, web applications and
                     all open sourced on{' '}
@@ -22,7 +22,7 @@ export default function AboutPage() {
                     .
                 </p>
                 <p className="leading-[26px] mt-4">
-                    My many technical skill sets is include fullstack development (web + android), creating impressive, performant and scalable software systems, some even integrated with machine learning.
+                    My many technical skills include fullstack development (web + android), UI design, creating fast, efficient applications some even integrated with machine learning.
                 </p>
                 <p className="leading-[26px] mt-4">
                     Anime nerd (otaku) and low-level programming enthusiast.

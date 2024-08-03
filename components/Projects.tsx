@@ -25,11 +25,11 @@ export default function Projects() {
                                 className="cursor-pointer hover:text-white transition-colors flex sm:flex-row flex-col gap-4 sm:gap-8 sm:items-center"
                             >
                                 <div className="flex gap-4 items-center">
-                                    <a href={project.source} target="_blank">
+                                    <a href={project.source} target="_blank" className="hover:text-blue transition-all flex gap-2 items-center">
                                         <GithubIcon
                                             size={16}
-                                            className="hover:text-blue transition-all"
-                                        />
+                                            />
+                                            {/* <span className="text-sm">code</span> */}
                                     </a>
                                     {project.external &&
                                     project.type == 'app' ? (
@@ -52,6 +52,7 @@ export default function Projects() {
                                                 className="hover:text-green transition-colors"
                                             />
                                         </a>
+                                        
                                     )}
                                 </div>
                                 <span>{project.title}</span>
@@ -64,7 +65,7 @@ export default function Projects() {
                         href="/projects"
                         className="decoration-dashed underline-offset-4 hover:underline text-grey-050 flex gap-2 items-center transition-colors hover:text-blue"
                     >
-                        <span>More</span>
+                        <span>All Projects</span>
                         <LinkSquare02Icon size={16} />
                     </a>
                 </p>

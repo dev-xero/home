@@ -1,3 +1,4 @@
+import { LinkSquare02Icon } from 'hugeicons-react';
 import SubHeading from './ui/SubHeading';
 
 export default function Intro() {
@@ -28,9 +29,10 @@ export default function Intro() {
                 <p className="mt-4">
                     <a
                         href="/about"
-                        className="decoration-dashed hover:underline underline-offset-4 hover:text-blue transition-colors"
+                        className="decoration-dashed underline-offset-4 hover:underline text-grey-050 flex gap-2 items-center transition-colors hover:text-blue"
                     >
-                        More!
+                        <span>More</span>
+                        <LinkSquare02Icon size={16} />
                     </a>
                 </p>
             </section>

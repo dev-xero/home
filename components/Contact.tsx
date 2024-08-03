@@ -14,12 +14,15 @@ export default function Contact() {
             <section className="text-grey-050 mt-4">
                 <p>
                     You want to contact me about something? Cool, just shoot me
-                    an email at <span className="green">{personal.public_email}@</span><span className="text-grey-100">gmail.com</span>, 
-                    or <span className="blue">@{personal.public_discord}</span> on Discord, 
-                    and I promise to get back to
-                    you within this century ;) (jokes aside, I respond pretty quickly)
+                    an email at{' '}
+                    <span className="text-white">{personal.public_email}@</span>
+                    <span className="text-grey-100">gmail.com</span>, or{' '}
+                    <span className="blue">@{personal.public_discord}</span> on
+                    Discord.
                 </p>
-                <p>In the mean time, here are some other cool links!</p>
+                <p className="mt-2">
+                    In the mean time, here are some other cool links!
+                </p>
                 <ul className="flex flex-col sm:flex-row gap-4 sm:items-center mt-8">
                     <li>
                         <a
