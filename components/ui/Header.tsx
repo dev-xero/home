@@ -100,7 +100,7 @@ export default function Header({ active, aboutRedirect, projectRedirect }: Heade
                     {/* Navigation System: Mobile */}
                     <section className="block sm:hidden select-none">
                         <Menu09Icon
-                            className="text-grey-050 hover:text-white transition-colors cursor-pointer"
+                            className={`text-grey-050 hover:text-white cursor-pointer transition-all ${isNavExpanded ? 'rotate-90' : 'rotate-0' }`}
                             size={24}
                             onClick={() => toggleNavigation()}
                         />
