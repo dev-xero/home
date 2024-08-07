@@ -7,6 +7,8 @@ import FilterChip from '../ui/FilterChip';
 import { TAGS, filters } from '@/data/filters';
 import osProjects from '@/data/osprojects';
 import ProjectCard from '../ui/ProjectCard';
+import PageTransition from '@/layouts/PageTransition';
+import { slideUpVariants } from '@/animated/slideup';
 
 export default function ProjectsPage() {
     const [search, updateSearch] = useState('');
@@ -69,15 +71,20 @@ export default function ProjectsPage() {
                 <section>
                     {filteredProjects.length > 0 ? (
                         filteredProjects.map((project, id) => (
-                            <ProjectCard
+                            <PageTransition
+                                animationVariants={slideUpVariants}
                                 key={id}
-                                id={id}
-                                name={project.name}
-                                desc={project.desc}
-                                langs={project.langs}
-                                source={project.source}
-                                preview={project.preview}
-                            />
+                            >
+                                <ProjectCard
+                                    key={id}
+                                    id={id}
+                                    name={project.name}
+                                    desc={project.desc}
+                                    langs={project.langs}
+                                    source={project.source}
+                                    preview={project.preview}
+                                />
+                            </PageTransition>
                         ))
                     ) : (
                         <h3 className="text-grey-050 text-lg">
