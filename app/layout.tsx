@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
-import { Space_Grotesk } from 'next/font/google';
+import { Roboto_Flex } from 'next/font/google';
 import './globals.css';
 
-const space = Space_Grotesk({ subsets: ['latin'] });
+const sans = Roboto_Flex({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
     title: 'ゼロ Xero',
@@ -35,7 +35,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body className={space.className}>{children}</body>
+            <body className={sans.className}>{children}</body>
         </html>
     );
 }
