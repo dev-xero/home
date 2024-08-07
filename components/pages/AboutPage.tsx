@@ -1,4 +1,3 @@
-import { LinkSquare02Icon } from 'hugeicons-react';
 import SubHeading from '../ui/SubHeading';
 import personal from '@/data/personal';
 import ExternalLink from '../ui/ExternalLink';
@@ -9,7 +8,7 @@ export default function AboutPage() {
             <SubHeading text="HEY I'M XERO" />
             <section className="text-grey-050 mt-4">
                 <p className="leading-[26px]">
-                    I am a software engineer with a strong background in
+                    I am a versatile software engineer with a strong background in
                     Computer Science fundamentals such as data structures and
                     algorithms. I&apos;m currently a{' '}
                     <span className="text-white">{personal.school_year} </span>{' '}
@@ -21,14 +20,14 @@ export default function AboutPage() {
                     Currently, I work with scalable backend systems
                     (API/MicroServices/DB). Huge fan of Open Source development,
                     I&apos;ve built several tools, libraries, web applications
-                    and all open sourced on{' '}
+                    and are all open sourced on{' '}
                     <ExternalLink
                         text="GitHub."
                         hyperlink="https://github.com/dev-xero"
                     />
                 </p>
                 <p className="leading-[26px] mt-4">
-                    My many technical skills include fullstack development (web
+                    My many technical skill sets include fullstack development (web
                     + android), UI design, creating fast, efficient applications
                     some even integrated with machine learning.
                 </p>
