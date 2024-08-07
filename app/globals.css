@@ -34,6 +34,7 @@ html {
 body {
     color: rgb(var(--foreground-rgb));
     background: rgb(var(--background-rgb));
+    padding-top: 16px;
 }
 
 @layer utilities {
