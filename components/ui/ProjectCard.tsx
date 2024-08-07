@@ -1,6 +1,6 @@
 import { ILangMap } from '@/data/langs';
 import LangChip from './LangChip';
-import { LinkSquare02Icon } from 'hugeicons-react';
+import { ArrowUpRight01Icon } from 'hugeicons-react';
 
 interface ProjectCardProps {
     id: number;
@@ -28,14 +28,14 @@ export default function ProjectCard(props: ProjectCardProps) {
                     <li>
                         <a href={props.source} className="text-sm text-grey-050 flex gap-2 items-center underline underline-offset-4 transition-colors hover:text-white">
                             <span>source code</span>
-                            <LinkSquare02Icon size={16} />
+                            <ArrowUpRight01Icon size={16} />
                         </a>
                     </li>
                     {props.preview && (
                         <li>
                         <a href={props.preview} className="text-sm text-grey-050 flex gap-2 items-center underline underline-offset-4 transition-colors hover:text-white">
                             <span>preview</span>
-                            <LinkSquare02Icon size={16} />
+                            <ArrowUpRight01Icon size={16} />
                         </a>
                     </li>
                     )}

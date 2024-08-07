@@ -11,8 +11,7 @@ export default function LangChip({ details, key }: LangChipProps) {
             <div
                 className={`w-2 h-2 rounded-lg`}
                 style={{ backgroundColor: details.spec }}
-            ></div>
-            <span className="text-sm text-grey-050">{details.name}</span>
+            ></div>            <span className="text-sm text-grey-050">{details.name}</span>
         </div>
     );
 }

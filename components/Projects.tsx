@@ -1,6 +1,7 @@
 import projectsData from '@/data/projects';
 import SubHeading from './ui/SubHeading';
-import { GithubIcon, LinkSquare02Icon, Download04Icon } from 'hugeicons-react';
+import { GithubIcon, Download04Icon, ArrowUpRight01Icon, Globe02Icon } from 'hugeicons-react';
+import ExternalLink from './ui/ExternalLink';
 
 export default function Projects() {
     return (
@@ -10,12 +11,7 @@ export default function Projects() {
                 <p>
                     Some notable open source projects I&apos;ve worked on
                     recently, more on my{' '}
-                    <span className="blue">
-                        <a href="https://github.com/dev-xero" target="_blank">
-                            GitHub
-                        </a>
-                    </span>
-                    .
+                    <ExternalLink hyperlink="https://github.com/dev-xero" text="GitHub." />
                 </p>
                 <section className="mt-4">
                     <ul className="flex flex-col gap-8 sm:gap-4 px-6">
@@ -29,7 +25,6 @@ export default function Projects() {
                                         <GithubIcon
                                             size={16}
                                             />
-                                            {/* <span className="text-sm">code</span> */}
                                     </a>
                                     {project.external &&
                                     project.type == 'app' ? (
@@ -47,7 +42,7 @@ export default function Projects() {
                                             href={project.external}
                                             target="_blank"
                                         >
-                                            <LinkSquare02Icon
+                                            <Globe02Icon
                                                 size={16}
                                                 className="hover:text-green transition-colors"
                                             />
@@ -61,13 +56,7 @@ export default function Projects() {
                     </ul>
                 </section>
                 <p className="mt-8">
-                    <a
-                        href="/projects"
-                        className="decoration-dashed underline-offset-4 hover:underline text-grey-050 flex gap-2 items-center transition-colors hover:text-blue"
-                    >
-                        <span>All Projects</span>
-                        <LinkSquare02Icon size={16} />
-                    </a>
+                    <ExternalLink text="All Projects" hyperlink="/projects" />
                 </p>
             </section>
         </main>
