@@ -1,92 +1,54 @@
-// import { MDXProvider } from '@mdx-js/react';
-import { notFound } from 'next/navigation';
+import MDXRenderer from '@/components/mdx/MDXRenderer';
 import personal from '@/data/personal';
-import { getBlogs } from '@/lib/getblogs';
-import { getDateTime } from '@/util/get-date-time';
-import type { Metadata } from 'next';
+import { getBlog } from '@/lib/getblogs';
+import { notFound } from 'next/navigation';
 
-export async function generateMetadata({
-    params,
-}: {
-    params: any;
-}): Promise<Metadata | undefined> {
-    const blog = getBlogs().find((post) => post.slug === params.slug);
+// Metadata optimizations
+export async function generateMetadata({ params }: any) {
+    const blog = await getBlog(params.slug);
 
     if (!blog) {
-        return notFound();
+        return {
+            title: 'Page not found.',
+            description: 'This page does not exist.',
+            type: 'article',
+            url: `${personal.url}/blog/${params.slug}`,
+            icons: {
+                shortcut: 'favicon.svg',
+            },
+            // TODO: Change to blog img later
+            images: [
+                {
+                    url: 'https://home-xero.netlify.app/og-img.png',
+                    width: 600,
+                    height: 600,
+                },
+            ]
+        };
     }
 
-    let {
-        title,
-        publishedOn: publishedOn,
-        summary: description,
-        image,
-        tags,
-    } = blog.metadata;
-    let ogImage = 'https://home-xero.netlify.app/og-img.png';
-
     return {
-        title,
-        description,
-        keywords: tags ? tags : [],
-        openGraph: {
-            title,
-            description,
-            type: 'article',
-            publishedTime: publishedOn,
-            url: `${personal.url}/blog/${blog.slug}`,
-            images: [{ url: ogImage }],
-        },
-        twitter: {
-            card: 'summary_large_image',
-            title,
-            description,
-            images: [ogImage],
+        title: blog.metadata.title,
+        description: blog.metadata.summary,
+        icons: {
+            shortcut: 'favicon.svg',
         },
     };
 }
 
-export default function BlogPage({ params }: any) {
-    const blog = getBlogs().find((post) => post.slug === params.slug);
+// Blog page content
+export default async function SingleBlogPage({ params }: { params: any }) {
+    const blog = await getBlog(params.slug);
 
     if (!blog) {
         return notFound();
     }
 
     return (
-        <section>
-            <script>
-                {/* Optimizations */}
-                <script
-                    type="application/ld+json"
-                    suppressHydrationWarning
-                    dangerouslySetInnerHTML={{
-                        __html: JSON.stringify({
-                            '@context': 'https://schema.org',
-                            '@type': 'BlogPosting',
-                            headline: blog.metadata.title,
-                            datePublished: getDateTime(
-                                blog.metadata.publishedOn
-                            ),
-                            dateModified: getDateTime(
-                                blog.metadata.publishedOn
-                            ),
-                            description: blog.metadata.summary!,
-                            image: 'https://home-xero.netlify.app/og-img.png', // change to blog img later
-                            url: `${personal.url}/blog/${blog.slug}`,
-                            author: {
-                                '@type': 'Person',
-                                name: 'Xero',
-                                url: `${personal.url}`,
-                            },
-                        }),
-                    }}
-                />
-            </script>
-            {/* Content */}
-            <article>
-                <div>{blog.content}</div>
-            </article>
-        </section>
+        <div>
+            <h1>{blog.metadata.title}</h1>
+            <p>{blog.metadata.summary}</p>
+            <MDXRenderer source={blog.source} />
+        </div>
     );
 }

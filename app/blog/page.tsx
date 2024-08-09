@@ -5,8 +5,8 @@ import Header from '@/components/ui/Header';
 import PageTransition from '@/layouts/PageTransition';
 import { IBlog, getBlogs } from '@/lib/getblogs';
 
-export default function Page() {
-    let allBlogs: IBlog[] = getBlogs();
+export default async function Page() {
+    let allBlogs: IBlog[] = await getBlogs();
     allBlogs = allBlogs.filter((blog) => blog.metadata.published);
 
     // sort by date

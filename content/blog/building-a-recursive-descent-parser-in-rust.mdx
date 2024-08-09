@@ -11,3 +11,21 @@ published: true
 # Introduction
 
 Parsers are crucial in so much of the technology we use daily as software engineers. From code linting and syntax analysis to interpreters and compilers. It's no doubt understanding (to a certain extent) the intricacies of how they work can provide valuable insights and overall help you level up as a programmer.
+
+## Test code
+
+```rust title="HELP"
+use std::{fs, io::Error};
+
+// Read a json file from path string
+pub fn read_json(path: String) -> String {
+let read_result: Result<String, Error> = fs::read_to_string(path);
+
+let content: String = match read_result {
+    Ok(file ) => file,
+    Err(_) => panic!("Invalid file path or file does not exist.")
+};
+
+return content;
+}
+```
