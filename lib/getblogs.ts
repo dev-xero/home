@@ -28,7 +28,7 @@ type Metadata = {
     publishedOn: string;
     tags: string[];
     published: boolean;
-    image?: string;
+    image: string;
 };
 
 function getBlogFiles(dir: string) {

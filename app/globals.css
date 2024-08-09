@@ -141,14 +141,9 @@ figure[data-rehype-pretty-code-figure]:has(> [data-rehype-pretty-code-title])
 figure {
     @apply mb-6 mt-1;
 }
+
 pre,
 code,
 figure {
     @apply overflow-x-auto;
-}
-p {
-    @apply text-xl;
-}
-article p {
-    @apply leading-9;
 }

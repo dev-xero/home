@@ -1,6 +1,6 @@
 import { IBlog } from '@/lib/getblogs';
 import SubHeading from '../ui/SubHeading';
-import BlogPost from '../BlogCard';
+import BlogCard from '../BlogCard';
 
 interface IBlogPageProps {
     allBlogs: Array<IBlog>;
@@ -18,17 +18,10 @@ export default function BlogPage({ allBlogs }: IBlogPageProps) {
             {/* Render each blog listing */}
             <section className="mt-8">
                 <SubHeading text="All Blogs" />
-                <section className="mt-4">
+                <section className="mt-8">
                     {allBlogs.length > 0 ? (
-                        allBlogs.map((blog) => (
-                            <div key={blog.slug}>
-                                <BlogPost
-                                    key={blog.slug}
-                                    title={blog.metadata.title}
-                                    summary={blog.metadata.summary}
-                                />
-                                <span>{blog.slug}</span>
-                            </div>
+                        allBlogs.map((blog, id) => (
+                            <BlogCard key={id} blog={blog} />
                         ))
                     ) : (
                         <h3>No blogs here yet, brewing...</h3>

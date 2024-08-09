@@ -12,27 +12,33 @@ export async function generateMetadata({ params }: any) {
             title: 'Page not found.',
             description: 'This page does not exist.',
             type: 'article',
-            url: `${personal.url}/blog/${params.slug}`,
             icons: {
-                shortcut: 'favicon.svg',
+                shortcut: `/public/favicon.svg`,
             },
-            // TODO: Change to blog img later
             images: [
                 {
-                    url: 'https://home-xero.netlify.app/og-img.png',
+                    url: blog!.metadata.image,
                     width: 600,
                     height: 600,
                 },
-            ]
+            ],
         };
     }
 
     return {
         title: blog.metadata.title,
         description: blog.metadata.summary,
+        type: 'article',
         icons: {
-            shortcut: 'favicon.svg',
+            shortcut: `/public/favicon.svg`,
         },
+        images: [
+            {
+                url: blog!.metadata.image,
+                width: 600,
+                height: 600,
+            },
+        ],
     };
 }
 

@@ -2,30 +2,41 @@
 title: Building a Recursive Descent Parser for JSON (in Rust)
 summary: JSON is cool, I've always wondered how programs read json files and convert them into some more useful data structure, so why don't we build one from the ground up?
 slug: building-a-recursive-descent-parser-in-rust
-image: 'cat.png'
+image: 'https://res.cloudinary.com/dnkbrrrld/image/upload/v1723240412/01_osbi96.webp'
 tags: ['Rust', 'JSON', 'Parsers']
 publishedOn: 2nd August, 2024
 published: true
 ---
 
+# Table Of Content
+
+1. What are parsers and how do they work?
+2. How does parsing work?
+3. Environment setup
+4. Project setup
+5. Writing the tokenizer (lexer)
+6. Context-Free Grammar
+7. Writing the parser
+
 # Introduction
 
 Parsers are crucial in so much of the technology we use daily as software engineers. From code linting and syntax analysis to interpreters and compilers. It's no doubt understanding (to a certain extent) the intricacies of how they work can provide valuable insights and overall help you level up as a programmer.
 
+In this blog, we'll build a flavor of parsers known as "Recursive Descent Parsers", which use recursion (if it wasn't obvious already) to elegantly parse any valid JSON string, in theory. We're gonna write it from the ground up using Rust, so while you technically don't need to know Rust to follow along, it'd be very helpful if you've done some programming in the past. So you might wanna turn on your favorite Spotify playlist since this post is going to be pretty long (and rather technical), I got you every step of the way. 😎
+
 ## Test code
 
-```rust showLineNumbers title="HELP" {4}
-use std::{fs, io::Error};
+```js showLineNumbers title="src/test.js" {4}
+import { useFloating } from '@floating-ui/react';
 
-// Read a json file from path string
-pub fn read_json(path: String) -> String {
-let read_result: Result<String, Error> = fs::read_to_string(path);
+function MyComponent() {
+    const { refs, floatingStyles } = useFloating();
 
-let content: String = match read_result {
-    Ok(file ) => file,
-    Err(_) => panic!("Invalid file path or file does not exist.")
-};
-
-return content;
+    return (
+        <>
+            <div ref={refs.setReference} />
+            <div ref={refs.setFloating} style={floatingStyles} />
+        </>
+    );
 }
 ```
