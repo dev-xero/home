@@ -3,8 +3,10 @@ import fs from 'fs';
 import { cache } from 'react';
 import matter from 'gray-matter';
 import getReadingTime from '@/util/get-reading-time';
+import { serialize } from 'next-mdx-remote/serialize';
+import rehypePrettyCode from 'rehype-pretty-code';
 
-const BLOGS_FOLDER = path.join(process.cwd(), 'content', 'blogs');
+const BLOG_DIR = path.join(process.cwd(), 'content', 'blog');
 
 type Metadata = {
     title: string;
@@ -24,37 +26,52 @@ export interface IBlog {
     readingTime: string;
     content: string;
     slug: string;
+    source: any;
 }
 
 // Read each blog post and return them
-function fetchBlogs() {
-    const posts = getBlogFiles(BLOGS_FOLDER);
+async function fetchBlogs() {
+    const posts = getBlogFiles(BLOG_DIR);
 
-    return posts.map((post) => {
-        const filePath = path.join(BLOGS_FOLDER, post);
-        const fileContent = fs.readFileSync(filePath, 'utf-8');
-        const { data, content } = matter(fileContent);
-        const readingTime = getReadingTime(content);
+    const blogPosts = await Promise.all(
+        posts.map(async (post) => {
+            const filePath = path.join(BLOG_DIR, post);
+            const fileContent = fs.readFileSync(filePath, 'utf-8');
+            const { data, content } = matter(fileContent);
+            const readingTime = getReadingTime(content);
 
-        return {
-            metadata: data as Metadata,
-            readingTime: readingTime,
-            content: content,
-            slug: post.replace(/\.mdx?$/, ''),
-        };
-    });
-}
+            const mdxSource = await serialize(content, {
+                mdxOptions: {
+                    rehypePlugins: [
+                        [rehypePrettyCode, { theme: 'github-dark-dimmed' }],
+                    ],
+                },
+            });
 
-export function getBlog(slug: string) {
-    let blogs = getBlogs();
-    if (process.env.APP_ENV !== 'development') {
-        blogs = blogs.filter(
-            (blog) => blog.metadata && blog.metadata.published === true
-        );
-    }
-    const blog = blogs.find((blog) => blog.slug === slug);
-    return blog;
+            return {
+                metadata: data as Metadata,
+                readingTime: readingTime,
+                content: content,
+                slug: post.replace(/\.mdx?$/, ''),
+                source: mdxSource,
+            };
+        })
+    );
+
+    return blogPosts;
 }
 
 // Cache retrieval
 export const getBlogs = cache(fetchBlogs);
+
+export async function getBlog(slug: string) {
+    let blogs = await getBlogs();
+    if (process.env.APP_ENV != 'development') {
+        blogs = blogs.filter(
+            (blog) => blog.metadata && blog.metadata.published == true
+        );
+    }
+
+    const blog = blogs.find((blog) => blog.slug === slug);
+    return blog;
+}

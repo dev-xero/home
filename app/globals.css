@@ -2,17 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+/* styles/globals.css */
+@import url('https://unpkg.com/rehype-pretty-code@latest/themes/github-dark-dimmed.css');
+
 ::-moz-selection {
-    background: #577FBC;
-    color: #FFFFFF;
+    background: #577fbc;
+    color: #ffffff;
 }
 ::-webkit-selection {
-    background: #577FBC;
-    color: #FFFFFF;
+    background: #577fbc;
+    color: #ffffff;
 }
 ::selection {
-    background: #577FBC;
-    color: #FFFFFF;
+    background: #577fbc;
+    color: #ffffff;
 }
 
 :root {
@@ -44,9 +47,9 @@ body {
 }
 
 span.blue {
-    color: #8EB8F8 !important;
+    color: #8eb8f8 !important;
 }
 
 span.green {
-    color: #5EF6A4 !important;
+    color: #5ef6a4 !important;
 }

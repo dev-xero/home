@@ -1,4 +1,3 @@
-import { ArrowUpRight01Icon } from 'hugeicons-react';
 import SubHeading from './ui/SubHeading';
 import ExternalLink from './ui/ExternalLink';
 

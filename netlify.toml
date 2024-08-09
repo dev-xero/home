@@ -1,0 +1,30 @@
+[[headers]]
+for = "/*"
+
+[headers.values]
+X-Frame-Options = "DENY"
+X-XSS-Protection = "1; mode=block"
+Content-Security-Policy = '''
+    default-src 'self';
+    script-src 'self' 'unsafe-eval' 'unsafe-inline';
+    child-src codesandbox.io;
+    style-src 'self' 'unsafe-inline';
+    img-src 'self' blob: data: *.cloudinary.com pbs.twimg.com i.scdn.co;
+    media-src 'none';
+    connect-src *;
+    font-src 'self';'''
+Referrer-Policy = "no-referrer"
+X-Content-Type-Options = "nosniff"
+X-DNS-Prefetch-Control = "off"
+Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+[[headers]]
+for = "/fonts/*"
+[headers.values]
+cache-control = 'public, max-age=31536000, immutable'
+
+[[headers]]
+for = "/_next/static/*"
+[headers.values]
+cache-control = 'public, max-age=31536000, immutable'
