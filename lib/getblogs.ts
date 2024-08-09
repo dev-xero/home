@@ -6,6 +6,20 @@ import getReadingTime from '@/util/get-reading-time';
 import { serialize } from 'next-mdx-remote/serialize';
 import rehypePrettyCode from 'rehype-pretty-code';
 
+import moonlightTheme from '../shiki/moonlight-ii.json' assert { type: 'json' };
+
+const rehypeOptions = {
+    theme: moonlightTheme,
+    // onVisitLine(node: any) {
+    //     if (node.children.length === 0) {
+    //         node.children = [{ type: 'text', value: ' ' }];
+    //     }
+    // },
+    // onVisitHighlightedLine(node: any) {
+    //     node.properties.className.push('highlighted');
+    // },
+};
+
 const BLOG_DIR = path.join(process.cwd(), 'content', 'blog');
 
 type Metadata = {
@@ -42,9 +56,7 @@ async function fetchBlogs() {
 
             const mdxSource = await serialize(content, {
                 mdxOptions: {
-                    rehypePlugins: [
-                        [rehypePrettyCode, { theme: 'github-dark-dimmed' }],
-                    ],
+                    rehypePlugins: [[rehypePrettyCode, rehypeOptions]],
                 },
             });
 
