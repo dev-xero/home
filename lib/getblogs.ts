@@ -45,5 +45,16 @@ function fetchBlogs() {
     });
 }
 
+export function getBlog(slug: string) {
+    let blogs = getBlogs();
+    if (process.env.APP_ENV !== 'development') {
+        blogs = blogs.filter(
+            (blog) => blog.metadata && blog.metadata.published === true
+        );
+    }
+    const blog = blogs.find((blog) => blog.slug === slug);
+    return blog;
+}
+
 // Cache retrieval
 export const getBlogs = cache(fetchBlogs);
