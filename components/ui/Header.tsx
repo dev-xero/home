@@ -33,10 +33,10 @@ export default function Header({ active, aboutRedirect, projectRedirect }: Heade
                     <ul className="hidden justify-between items-center gap-4 text-grey-050 transition-colors text-base sm:flex">
                         <li className="hover:text-white transition-all hover:underline underline-offset-4 decoration-grey-050">
                             <a
-                                href="https://github.com/dev-xero/home"
+                                href="/"
                                 target="_blank"
                             >
-                                source code
+                                home
                             </a>
                         </li>
                         <li className="hover:text-white transition-all hover:underline underline-offset-4 decoration-grey-050">
@@ -81,7 +81,7 @@ export default function Header({ active, aboutRedirect, projectRedirect }: Heade
                     <ul className="flex items-center gap-4 text-grey-050">
                         <li className="hover:text-white transition-colors select-none">
                             <a
-                                href="https://github.com/dev-xero"
+                                href="https://github.com/dev-xero/home"
                                 target="_blank"
                             >
                                 <GithubIcon size={24} />
@@ -115,10 +115,10 @@ export default function Header({ active, aboutRedirect, projectRedirect }: Heade
                     <ul className="flex flex-col gap-1 text-grey-050 transition-colors text-base">
                         <li className="hover:text-white transition-all hover:underline underline-offset-4 decoration-grey-050">
                             <a
-                                href="https://github.com/dev-xero/home"
+                                href="/"
                                 target="_blank"
                             >
-                                source code
+                                home
                             </a>
                         </li>
                         <li className="hover:text-white transition-all hover:underline underline-offset-4 decoration-grey-050">
