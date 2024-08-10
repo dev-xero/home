@@ -1,3 +1,4 @@
+import { Analytics } from '@vercel/analytics/react';
 import type { Metadata } from 'next';
 import { Roboto_Flex } from 'next/font/google';
 import './globals.css';
@@ -23,9 +24,9 @@ export const metadata: Metadata = {
                 width: 600,
                 height: 600,
             },
-        ]
+        ],
     },
-    metadataBase: new URL("https://home-xero.netlify.app")
+    metadataBase: new URL('https://home-xero.netlify.app'),
 };
 
 export default function RootLayout({
@@ -35,7 +36,10 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body className={sans.className}>{children}</body>
+            <body className={sans.className}>
+                {children}
+                <Analytics />
+            </body>
         </html>
     );
 }
