@@ -9,18 +9,27 @@ import rehypeAutoLinkHeadings from 'rehype-autolink-headings';
 import rehypeSlug from 'rehype-slug';
 import rehypeToc from 'rehype-toc';
 
+function copyCode(textElement: HTMLElement) {
+    const codeElement = textElement.nextElementSibling;
+    if (codeElement && codeElement.tagName === 'CODE') {
+        const textarea = document.createElement('textarea');
+        textarea.value = codeElement.textContent!;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        textElement.textContent = 'Copied!';
+        setTimeout(() => (textElement.textContent = 'Copy'), 1500);
+    }
+}
+
 import moonlightTheme from '../shiki/moonlight-ii.json' assert { type: 'json' };
+
+import { visit } from 'unist-util-visit';
+import { h } from 'hastscript';
 
 const rehypePrettyCodeOptions = {
     theme: moonlightTheme,
-    // onVisitLine(node: any) {
-    //     if (node.children.length === 0) {
-    //         node.children = [{ type: 'text', value: ' ' }];
-    //     }
-    // },
-    // onVisitHighlightedLine(node: any) {
-    //     node.properties.className.push('highlighted');
-    // },
 };
 
 const BLOG_DIR = path.join(process.cwd(), 'content/blog');
@@ -60,6 +69,43 @@ async function fetchBlogs() {
             const mdxSource = await serialize(content, {
                 mdxOptions: {
                     rehypePlugins: [
+                        () => (tree) => {
+                            visit(tree, (node) => {
+                                if (
+                                    node?.type === 'element' &&
+                                    node?.tagName === 'pre'
+                                ) {
+                                    const [codeEl] = node.children;
+
+                                    if (codeEl.tagName !== 'code') return;
+
+                                    node.raw = codeEl.children?.[0].value;
+                                }
+                            });
+                        },
+                        () => (tree) => {
+                            visit(tree, (node) => {
+                                if (
+                                    node?.type === 'element' &&
+                                    node?.tagName === 'div'
+                                ) {
+                                    if (
+                                        !(
+                                            'data-rehype-pretty-code-fragment' in
+                                            node.properties
+                                        )
+                                    ) {
+                                        return;
+                                    }
+
+                                    for (const child of node.children) {
+                                        if (child.tagName === 'pre') {
+                                            child.properties['raw'] = node.raw;
+                                        }
+                                    }
+                                }
+                            });
+                        },
                         [rehypePrettyCode, rehypePrettyCodeOptions],
                         rehypeAutoLinkHeadings,
                         rehypeSlug,

@@ -64,8 +64,20 @@ h6 {
     scroll-margin-top: 100px !important;
 }
 
+h1 > a,
+h2 > a,
+h3 > a,
+h4 > a,
+h5 > a,
+h6 > a {
+    color: #f4f9fb !important;
+    text-decoration: none !important;
+}
+
 pre {
     @apply !px-0 rounded-lg;
+    background-color: #282f40;
+    position: relative;
 }
 
 code {
@@ -99,7 +111,8 @@ pre [data-line] {
 
 [data-highlighted-line] {
     background: rgba(200, 200, 255, 0.1);
-    @apply border-l-gray-400;
+    border-left: 2px solid #577fbc !important;
+    /* @apply border-l-gray-400; */
 }
 
 [data-highlighted-chars] {
@@ -166,4 +179,19 @@ blockquote {
 
 figcaption {
     background-color: #282f40 !important;
+}
+
+.copy-button {
+    position: absolute;
+    color: #b5c3d8;
+    border: none;
+    cursor: pointer;
+    right: 0px;
+    top: 0px;
+    padding: 8px 16px;
+    background-color: #0f131a !important;
+}
+
+.copy-button:hover {
+    color: #f4f9fb;
 }

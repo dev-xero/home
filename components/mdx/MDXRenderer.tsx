@@ -7,6 +7,8 @@ import Ol from './elements/Ol';
 import P from './elements/P';
 import Spacer from './Spacer';
 import H3 from './elements/H3';
+import A from './elements/A';
+import Pre from './elements/Pre';
 
 export default function MDXRenderer({ source }: { source: any }) {
     return (
@@ -19,8 +21,10 @@ export default function MDXRenderer({ source }: { source: any }) {
                     Spacer,
                     h1: H1,
                     h3: H3,
+                    a: A,
                     ol: Ol,
                     p: P,
+                    pre: Pre
                 }}
             />
         </article>

@@ -58,7 +58,7 @@ This is the process of classifying bits of the string as tokens (or lexemes) so 
 }
 ```
 
-There are several tokens present here, for example those braces "\{" and "\}", so our program will have tokens corresponding to the left and right braces. There's also a couple of strings in there, so we'd have a 'string' token too. Notice the colon (:) and commas (,) so these would have their corresponding tokens. You get the idea; things like whitespace are generally ignored.
+There are several tokens present here, for example those braces "\{" and "\}", so our program will have tokens corresponding to the **left** and **right** braces. There's also a couple of strings in there, so we'd have a 'string' token too. Notice the colon (:) and commas (,) so these would have their corresponding tokens. You get the idea; things like whitespace are generally ignored.
 
 ### Parsing:
 
@@ -66,11 +66,22 @@ This is where the actual magic happens, our parser takes a list of the tokens we
 
 # [Environment setup](#environment-setup)
 
-Env setup
+We're writing the parser in Rust so I assume you have the binaries installed on your system. If not, you can head over to their [docs](https://www.rust-lang.org/tools/install) and follow the instructions for your OS. I'm using a Linux build so installing is fairly simple:
+
+```sh
+curl --proto '=https' --tlsv1.2 -sSf <https://sh.rustup.rs> | sh
+rustup --version
+```
 
 # [Project setup](#project-setup)
 
-Project setup
+Let's setup a new Rust project using cargo and open it up.
+
+```sh
+cargo new json-parser
+cd json-parser
+code .
+```
 
 # [Writing the tokenizer (lexer)](#writing-the-tokenizer-lexer)
 

@@ -8,7 +8,7 @@ export default function H1({ children, className = '', ...props }: IH1Props) {
     return (
         <h1
             {...props}
-            className={`text-2xl font-bold my-4 text-white ${className}`}
+            className={`text-2xl font-bold my-4 !text-white !no-underline ${className}`}
         >
             {children}
         </h1>
