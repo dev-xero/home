@@ -1,4 +1,5 @@
 import BlogContent from '@/components/BlogContent';
+import personal from '@/data/personal';
 import { getBlog, getBlogs } from '@/lib/getblogs';
 import { notFound } from 'next/navigation';
 
@@ -17,7 +18,7 @@ export async function generateMetadata({ params }: any) {
             },
             images: [
                 {
-                    url: 'https://home-xero.netlify.app/og-img.png',
+                    url: `${personal.url}/og-img.png`,
                     width: 600,
                     height: 600,
                 },

@@ -2,6 +2,7 @@ import { Analytics } from '@vercel/analytics/react';
 import type { Metadata } from 'next';
 import { Roboto_Flex } from 'next/font/google';
 import './globals.css';
+import personal from '@/data/personal';
 
 const sans = Roboto_Flex({ subsets: ['latin'] });
 
@@ -17,16 +18,16 @@ export const metadata: Metadata = {
         siteName: 'ゼロ Xero',
         description: "Xero's space on the internet.",
         type: 'website',
-        url: 'https://home-xero.netlify.app',
+        url: `${personal.url}`,
         images: [
             {
-                url: 'https://home-xero.netlify.app/og-img.png',
+                url: `${personal.url}/og-img.png`,
                 width: 600,
                 height: 600,
             },
         ],
     },
-    metadataBase: new URL('https://home-xero.netlify.app'),
+    metadataBase: new URL(`${personal.url}`),
 };
 
 export default function RootLayout({

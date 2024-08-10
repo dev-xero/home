@@ -1,3 +1,5 @@
+import personal from '@/data/personal';
+
 export default function robots() {
     return {
         rules: [
@@ -6,6 +8,6 @@ export default function robots() {
                 allow: '/',
             },
         ],
-        sitemap: 'https://home-xero.netlify.app/sitemap.xml',
+        sitemap: `${personal.url}/sitemap.xml`,
     };
 }
