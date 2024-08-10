@@ -37,7 +37,7 @@ export default function ProjectsPage() {
             </section>
             {/* Search bar */}
             <div className="bg-bg-dark border-light-dark transition-colors border-2 focus-within:border-white mt-4 w-full mx-auto p-3 flex items-center gap-2 ">
-                <Search01Icon size={24} />
+                <Search01Icon size={24} color="#F4F9FB" />
                 <input
                     type="text"
                     name="project-search"
