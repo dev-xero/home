@@ -74,7 +74,7 @@ async function fetchBlogs() {
 }
 
 // Cache retrieval
-export const getBlogs = cache(fetchBlogs);
+export const getBlogs = fetchBlogs;
 
 export async function getBlog(slug: string) {
     let blogs = await getBlogs();
