@@ -5,10 +5,13 @@ import matter from 'gray-matter';
 import getReadingTime from '@/util/get-reading-time';
 import { serialize } from 'next-mdx-remote/serialize';
 import rehypePrettyCode from 'rehype-pretty-code';
+import rehypeAutoLinkHeadings from 'rehype-autolink-headings';
+import rehypeSlug from 'rehype-slug';
+import rehypeToc from 'rehype-toc';
 
 import moonlightTheme from '../shiki/moonlight-ii.json' assert { type: 'json' };
 
-const rehypeOptions = {
+const rehypePrettyCodeOptions = {
     theme: moonlightTheme,
     // onVisitLine(node: any) {
     //     if (node.children.length === 0) {
@@ -56,7 +59,22 @@ async function fetchBlogs() {
 
             const mdxSource = await serialize(content, {
                 mdxOptions: {
-                    rehypePlugins: [[rehypePrettyCode, rehypeOptions]],
+                    rehypePlugins: [
+                        [rehypePrettyCode, rehypePrettyCodeOptions],
+                        rehypeAutoLinkHeadings,
+                        rehypeSlug,
+                        // [
+                        //     rehypeToc,
+                        //     {
+                        //         headings: ['h1'],
+                        //         position: 'afterbegin',
+                        //         cssClasses: {
+                        //             toc: 'toc not-prose',
+                        //             link: 'toc-link',
+                        //         },
+                        //     },
+                        // ],
+                    ],
                 },
             });
 
@@ -74,7 +92,7 @@ async function fetchBlogs() {
 }
 
 // Cache retrieval
-export const getBlogs = fetchBlogs;
+export const getBlogs = cache(fetchBlogs);
 
 export async function getBlog(slug: string) {
     let blogs = await getBlogs();
