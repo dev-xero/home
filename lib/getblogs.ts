@@ -78,11 +78,11 @@ export const getBlogs = fetchBlogs;
 
 export async function getBlog(slug: string) {
     let blogs = await getBlogs();
-    if (process.env.APP_ENV != 'development') {
-        blogs = blogs.filter(
-            (blog) => blog.metadata && blog.metadata.published == true
-        );
-    }
+    // if (process.env.APP_ENV != 'development') {
+    //     blogs = blogs.filter(
+    //         (blog) => blog.metadata && blog.metadata.published == true
+    //     );
+    // }
 
     const blog = blogs.find((blog) => blog.slug === slug);
     return blog;
