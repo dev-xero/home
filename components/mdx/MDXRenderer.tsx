@@ -6,6 +6,7 @@ import HeroImage from './HeroImage';
 export default function MDXRenderer({ source }: { source: any }) {
     return (
         <MDXRemote
+            suppressHydrationWarning
             {...source}
             components={{
                 HeroImage,
