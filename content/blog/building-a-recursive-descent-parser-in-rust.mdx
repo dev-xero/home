@@ -180,10 +180,28 @@ clear
 cargo run
 ```
 
+This is my ouput! Everything's working perfectly. We can finally begin writing our parser now :)
+
 <RoundedImage
     src="https://res.cloudinary.com/dnkbrrrld/image/upload/v1723330849/01_tetjn9.png"
     alt="output-1"
 />
+
+### The Token Struct
+
+In this section, we'll implement our tokenizer to handle all the tokens currently recognized by the JSON standard.
+
+Our token is composed of two parts, a “kind” and an optional “value”. The kind of a token can be any of string, number, boolean, left brace, right brace, etc as per the official JSON specification. Here's a list of all the tokens our parser will handle.
+
+1. Left brace
+2. Right brace
+3. Colon,
+4. Comma,
+5. String,
+6. Number,
+7. Object,
+8. Boolean,
+9. Null
 
 # [Context-Free Grammar](#context-free-grammar)
 
