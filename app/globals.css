@@ -55,6 +55,19 @@ h3 code {
     @apply !text-lg md:!text-xl;
 }
 
+article ol > li {
+    margin-bottom: 8px !important;
+}
+
+article li > a {
+    text-underline-offset: 4px;
+    text-decoration: none !important;
+}
+
+article li > a:hover {
+    text-decoration: underline !important;
+}
+
 h1,
 h2,
 h3,
@@ -70,8 +83,56 @@ h3 > a,
 h4 > a,
 h5 > a,
 h6 > a {
+    position: relative;
     color: #f4f9fb !important;
     text-decoration: none !important;
+}
+
+h1 > a::before,
+h2 > a::before,
+h3 > a::before,
+h4 > a::before,
+h5 > a::before,
+h6 > a::before {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    content: '#';
+    opacity: 0;
+    transition: all ease-in;
+}
+
+h1 > a:hover::before,
+h2 > a:hover::before,
+h3 > a:hover::before,
+h4 > a:hover::before,
+h5 > a:hover::before,
+h6 > a:hover::before {
+    position: absolute;
+    left: -24px;
+    top: 0px;
+    content: '#';
+    opacity: 0.5;
+}
+
+@media screen and (max-width: 640px) {
+    h1 > a:hover,
+    h2 > a:hover,
+    h3 > a:hover,
+    h4 > a:hover,
+    h5 > a:hover,
+    h6 > a:hover {
+        padding-left: 24px;
+    }
+
+    h1 > a:hover::before,
+    h2 > a:hover::before,
+    h3 > a:hover::before,
+    h4 > a:hover::before,
+    h5 > a:hover::before,
+    h6 > a:hover::before {
+        left: 0px;
+    }
 }
 
 pre {
@@ -81,7 +142,9 @@ pre {
 }
 
 code {
-    @apply text-sm md:text-base !leading-loose;
+    @apply text-sm md:text-base !leading-loose rounded-sm;
+    background-color: #282f40;
+    padding: 1px 2px;
 }
 
 pre > code {
@@ -110,7 +173,7 @@ pre [data-line] {
 }
 
 [data-highlighted-line] {
-    background: rgba(200, 200, 255, 0.1);
+    background: #282f40af;
     border-left: 2px solid #577fbc !important;
     /* @apply border-l-gray-400; */
 }
@@ -150,7 +213,7 @@ figure[data-rehype-pretty-code-figure]:has(> [data-rehype-pretty-code-title])
 }
 
 figure {
-    @apply mb-6 mt-1;
+    @apply my-6;
 }
 
 pre,

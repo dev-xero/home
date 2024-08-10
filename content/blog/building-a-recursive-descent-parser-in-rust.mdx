@@ -3,7 +3,7 @@ title: Building a Recursive Descent Parser for JSON (in Rust)
 summary: JSON is cool, I've always wondered how parsers read json files and convert them into some more useful data structures, so why don't we build one from the ground up?
 slug: building-a-recursive-descent-parser-in-rust
 image: https://res.cloudinary.com/dnkbrrrld/image/upload/v1723249551/cover-8-edit_emfaja.png
-tags: ['Rust', 'JSON', 'Syntatic Analysis']
+tags: ['Rust', 'JSON', 'Technical']
 publishedOn: 2nd August, 2024
 published: true
 ---
@@ -28,7 +28,9 @@ published: true
 
 Parsers are crucial in so much of the technology we use daily as software engineers. From code linting and syntax analysis to interpreters and compilers. It's no doubt understanding (to a certain extent) the intricacies of how they work can provide valuable insights and overall help you level up as a programmer.
 
-We'll a flavor of parsers known as "Recursive Descent Parsers", which use recursion to elegantly parse any valid JSON string. We're gonna write it from the ground up, soa plus if you've done some programming in the past.
+We'll build a flavor of parsers known as "Recursive Descent Parsers", which use recursion to elegantly parse any valid JSON string. We're gonna write it from the ground up, soa plus if you've done some programming in the past.
+
+Official JSON specification as a [guide](https://www.json.org/json-en.html)
 
 # [Hm, so what exactly is parsing?](#hm-so-what-exactly-is-parsing)
 
@@ -38,7 +40,7 @@ So, what is parsing? Well, doing a quick Google search:
 
 Note the keyword "formal grammar". It's the instructions that tell our parser how to deal with each token it encounters. In recursive descent parsing, each "non-terminal" is defined as its own function that yields a result; starting from the root non-terminal, all others are called recursively. Don't worry if you don't know what a "non-terminal" is, we'll go over that soon.
 
-Alright, alright, that sounds cool and all, but why should I bother writing my _own_ parser? When there're tons out there already? Good question! If you're like me who's very curious about what makes these tools tick, then I'm sure you're going to really enjoy learning about them and implementing your own! Plus, if you're going to write your own programming language (or compiler), you can't escape string parsing ;)
+Alright, alright, that sounds cool and all, but why should I bother writing my _own_ parser? When there're tons out there already? Good question! If you're like me who's very curious about what make these tools tick, then I'm sure you're going to really enjoy learning about them and implementing your own! Plus, if you're going to write your own programming language (or compiler), you can't escape string parsing ;)
 
 # [How does parsing work?](#how-does-parsing-work)
 
@@ -66,7 +68,7 @@ This is where the actual magic happens, our parser takes a list of the tokens we
 
 # [Environment setup](#environment-setup)
 
-We're writing the parser in Rust so I assume you have the binaries installed on your system. If not, you can head over to their [docs](https://www.rust-lang.org/tools/install) and follow the instructions for your OS. I'm using a Linux build so installing is fairly simple:
+We're writing the parser in Rust so I assume you have the binaries installed on your system. If not, you can head over to their [docs](https://www.rust-lang.org/tools/install) and follow the instructions for your OS. I'm on a Linux build so installing is fairly simple:
 
 ```sh
 curl --proto '=https' --tlsv1.2 -sSf <https://sh.rustup.rs> | sh
@@ -85,29 +87,110 @@ code .
 
 # [Writing the tokenizer (lexer)](#writing-the-tokenizer-lexer)
 
-Tokenizer!
+I'll quickly change the classic "Hello World" to "JSON Parser"
+
+```rust showLineNumbers title="src/main.rs"
+fn main() {
+    println!("JSON Parser");
+}
+```
+
+Compiling this with **cargo run** you should get "JSON Parser", alright. Everything works fine.
+
+Let's start by getting user input. You can delete the println macro.
+
+```rust showLineNumbers title="src/main.rs"
+use std::io::{self, Write};
+
+fn main() {
+    let mut json_path: String = String::new();
+
+    print!("> JSON File Path: ");
+    io::stdout().flush().unwrap();
+    io::stdin()
+        .read_line(&mut json_path)
+        .expect("Could not read file path.");
+
+    let json_path: String = json_path.trim().to_string();
+
+    println!("\n{json_path}");
+}
+```
+
+Let's break down this chunk. First we're creating a mutable string reference to hold our json file path. Then we flush the input buffer before reading the path. We're using `trim()` to remove any leading or trailing whitespace that might be present and finally we print the result. Running this, we get prompted for a path and it gets printed!
+
+So, there's not much we can do with just a string, we want to actually read the contents of the file the path points to (if it exists), to do this, let's create a `reader` module. It'll be in charge of reading and processing any paths we pass to it.
+
+```rust showLineNumbers title="src/main.rs" {1}
+mod reader;
+
+use std::io::{self, Write};
+
+fn main() {
+   // rest of main
+}
+```
+
+```sh
+touch src/reader.rs
+code src/reader.rs
+```
+
+```rust showLineNumbers title="src/reader.rs"
+use std::{fs, io::Error};
+
+// Read a json file from path
+pub fn read_json(path: String) -> String {
+    if !path.contains(".json") {
+        panic!("File path: '{}' does not contain a json file.", path);
+    }
+
+    let read_result: Result<String, Error> = fs::read_to_string(path);
+
+    let content: String = match read_result {
+        Ok(file ) => file,
+        Err(_) => panic!("Invalid file path or file does not exist.")
+    };
+
+    return content;
+}
+```
+
+That's all we need for our reader module. We receive a file path and first of all check if there's a `.json` extension to it. After that, we simply read the file using the `fs` standard library function, then return the contents as a string result.
+
+Let's update `main.rs` to use the reader now.
+
+```rust showLineNumbers title="src/main.rs" {9}
+mod reader;
+
+use std::io::{self, Write};
+
+fn main() {
+    // previous code
+    let json_path: String = json_path.trim().to_string();
+    let mut content: String = reader::read_json(json_path);
+    println!("\n{content}");
+}
+```
+
+And just like that, we can read files now. Pretty cool if you as me. I'll create a test folder and add a file `one.json` to see what our program prints.
+
+```sh
+clear
+cargo run
+```
+
+<RoundedImage
+    src="https://res.cloudinary.com/dnkbrrrld/image/upload/v1723330849/01_tetjn9.png"
+    alt="output-1"
+/>
 
 # [Context-Free Grammar](#context-free-grammar)
 
-CFGs
+CFGs WIP
 
-# [Writing the parser](#context-free-grammar)
+# [Writing the parser](#writing-the-parser)
 
 Writing parser
 
-## Test code
-
-```js showLineNumbers title="src/test.js" {4}
-import { useFloating } from '@floating-ui/react';
-
-function MyComponent() {
-    const { refs, floatingStyles } = useFloating();
-
-    return (
-        <>
-            <div ref={refs.setReference} />
-            <div ref={refs.setFloating} style={floatingStyles} />
-        </>
-    );
-}
-```
+Parser WIP

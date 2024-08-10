@@ -15,6 +15,7 @@ export default function HeroImage({ src, alt }: IHeroImgProps) {
                 alt={alt}
                 width={1080}
                 height={608}
+                priority={true}
                 className="rounded-lg mb-8"
             />
         </>

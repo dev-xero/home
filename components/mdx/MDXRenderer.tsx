@@ -2,6 +2,7 @@
 
 import { MDXRemote } from 'next-mdx-remote';
 import HeroImage from './HeroImage';
+import RoundedImage from './RoundedImage';
 import H1 from './elements/H1';
 import Ol from './elements/Ol';
 import P from './elements/P';
@@ -19,6 +20,7 @@ export default function MDXRenderer({ source }: { source: any }) {
                 components={{
                     HeroImage,
                     Spacer,
+                    RoundedImage,
                     h1: H1,
                     h3: H3,
                     a: A,
