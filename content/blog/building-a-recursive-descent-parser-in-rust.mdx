@@ -16,12 +16,73 @@ published: true
 # Table of Content
 
 1. [Introduction](#introduction)
+2. [Hmm, so what exactly is parsing?](#hm-so-what-exactly-is-parsing)
+3. [How does parsing work?](#how-does-parsing-work)
+4. [Environment setup](#environment-setup)
+5. [Project setup](#project-setup)
+6. [Writing the tokenizer (lexer)](#writing-the-tokenizer-lexer)
+7. [Context-Free Grammar](#context-free-grammar)
+8. [Writing the parser](#writing-the-parser)
 
-# Introduction
+# [Introduction](#introduction)
 
 Parsers are crucial in so much of the technology we use daily as software engineers. From code linting and syntax analysis to interpreters and compilers. It's no doubt understanding (to a certain extent) the intricacies of how they work can provide valuable insights and overall help you level up as a programmer.
 
-In this blog, we'll build a flavor of parsers known as "Recursive Descent Parsers", which use recursion (if it wasn't obvious already) to elegantly parse any valid JSON string, in theory. We're gonna write it from the ground up using Rust, so while you technically don't need to know Rust to follow along, it'd be very helpful if you've done some programming in the past. So you might wanna turn on your favorite Spotify playlist since this post is going to be pretty long (and rather technical), I got you every step of the way. 😎
+We'll a flavor of parsers known as "Recursive Descent Parsers", which use recursion to elegantly parse any valid JSON string. We're gonna write it from the ground up, soa plus if you've done some programming in the past.
+
+# [Hm, so what exactly is parsing?](#hm-so-what-exactly-is-parsing)
+
+So, what is parsing? Well, doing a quick Google search:
+
+> Parsing, syntax analysis, or syntactic analysis is the process of analyzing a string of symbols, either in natural language, computer languages or data structures, conforming to the rules of a **formal grammar**.
+
+Note the keyword "formal grammar". It's the instructions that tell our parser how to deal with each token it encounters. In recursive descent parsing, each "non-terminal" is defined as its own function that yields a result; starting from the root non-terminal, all others are called recursively. Don't worry if you don't know what a "non-terminal" is, we'll go over that soon.
+
+Alright, alright, that sounds cool and all, but why should I bother writing my _own_ parser? When there're tons out there already? Good question! If you're like me who's very curious about what makes these tools tick, then I'm sure you're going to really enjoy learning about them and implementing your own! Plus, if you're going to write your own programming language (or compiler), you can't escape string parsing ;)
+
+# [How does parsing work?](#how-does-parsing-work)
+
+Parsing is broadly divided into two stages:
+
+1. Tokenization (lexical analysis), and
+2. Parsing (actual parsing)
+
+### Tokenization:
+
+This is the process of classifying bits of the string as tokens (or lexemes) so that the parser can work with them. For instance, let's look at this JSON file content:
+
+```json showLineNumbers
+{
+    "name": "Rust",
+    "version": 1
+}
+```
+
+There are several tokens present here, for example those braces "\{" and "\}", so our program will have tokens corresponding to the left and right braces. There's also a couple of strings in there, so we'd have a 'string' token too. Notice the colon (:) and commas (,) so these would have their corresponding tokens. You get the idea; things like whitespace are generally ignored.
+
+### Parsing:
+
+This is where the actual magic happens, our parser takes a list of the tokens we extracted earlier and convert them into some useful data structure. JSON looks a lot like a standard hash map but with some tweaks, so we'd be converting our JSON string into a Rust hash map.
+
+# [Environment setup](#environment-setup)
+
+Env setup
+
+# [Project setup](#project-setup)
+
+Project setup
+
+# [Writing the tokenizer (lexer)](#writing-the-tokenizer-lexer)
+
+Tokenizer!
+
+# [Context-Free Grammar](#context-free-grammar)
+
+CFGs
+
+# [Writing the parser](#context-free-grammar)
+
+Writing parser
 
 ## Test code
 
