@@ -9,13 +9,17 @@ interface IBlogCardProps {
 export default function BlogCard(props: IBlogCardProps) {
     return (
         <div className="transition-all hover:scale-105 group">
-            <a href={`./blog/${props.blog.slug}`} className="flex">
+            <a
+                href={`./blog/${props.blog.slug}`}
+                className="flex flex-col sm:flex-row"
+            >
                 <Image
                     width={270}
                     height={168}
                     priority={true}
                     src={props.blog.metadata.image}
                     alt={props.blog.metadata.summary}
+                    className="w-full sm:max-w-[270px]"
                 />
                 <section className="bg-[#0F131A] p-6">
                     <h2 className="text-xl font-bold mb-2">

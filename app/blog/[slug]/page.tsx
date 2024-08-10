@@ -1,5 +1,6 @@
+import Container from '@/components/Container';
 import MDXRenderer from '@/components/mdx/MDXRenderer';
-import personal from '@/data/personal';
+import Header from '@/components/ui/Header';
 import { getBlog } from '@/lib/getblogs';
 import { notFound } from 'next/navigation';
 
@@ -13,7 +14,8 @@ export async function generateMetadata({ params }: any) {
             description: 'This page does not exist.',
             type: 'article',
             icons: {
-                shortcut: `/public/favicon.svg`,
+                shortcut: '/favicon.svg',
+                icon: '/favicon.svg',
             },
             images: [
                 {
@@ -30,7 +32,8 @@ export async function generateMetadata({ params }: any) {
         description: blog.metadata.summary,
         type: 'article',
         icons: {
-            shortcut: `/public/favicon.svg`,
+            shortcut: '/favicon.svg',
+            icon: '/favicon.svg',
         },
         images: [
             {
@@ -51,10 +54,24 @@ export default async function SingleBlogPage({ params }: { params: any }) {
     }
 
     return (
-        <div>
-            <h1>{blog.metadata.title}</h1>
-            <p>{blog.metadata.summary}</p>
-            <MDXRenderer source={blog.source} />
-        </div>
+        <Container>
+            <>
+                <Header
+                    active="blog"
+                    aboutRedirect="/about"
+                    projectRedirect="/projects"
+                />
+
+                <main className="mt-24">
+                    <h1 className="mt-12 font-bold text-3xl mb-4">
+                        {blog.metadata.title}
+                    </h1>
+                    <p className="text-grey-050 leading-[26px] mb-8">
+                        {blog.metadata.summary}
+                    </p>
+                    <MDXRenderer source={blog.source} />
+                </main>
+            </>
+        </Container>
     );
 }
