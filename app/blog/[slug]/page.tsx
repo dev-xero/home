@@ -1,5 +1,5 @@
 import BlogContent from '@/components/BlogContent';
-import { getBlog } from '@/lib/getblogs';
+import { getBlog, getBlogs } from '@/lib/getblogs';
 import { notFound } from 'next/navigation';
 
 // Metadata optimizations
@@ -43,6 +43,17 @@ export async function generateMetadata({ params }: any) {
     };
 }
 
+// Static Params
+export async function generateStaticParams() {
+    const blogFiles = await getBlogs();
+
+    const slugs = blogFiles.map((file) => ({
+        slug: file.slug,
+    }));
+
+    return slugs;
+}
+
 // Blog page content
 export default async function SingleBlogPage({ params }: { params: any }) {
     const blog = await getBlog(params.slug);
@@ -51,5 +62,5 @@ export default async function SingleBlogPage({ params }: { params: any }) {
         return notFound();
     }
 
-    return <BlogContent blog={blog} />
+    return <BlogContent blog={blog} />;
 }
