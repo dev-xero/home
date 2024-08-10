@@ -1,3 +1,4 @@
+import BlogContent from '@/components/BlogContent';
 import Container from '@/components/Container';
 import MDXRenderer from '@/components/mdx/MDXRenderer';
 import Header from '@/components/ui/Header';
@@ -53,25 +54,5 @@ export default async function SingleBlogPage({ params }: { params: any }) {
         return notFound();
     }
 
-    return (
-        <Container>
-            <>
-                <Header
-                    active="blog"
-                    aboutRedirect="/about"
-                    projectRedirect="/projects"
-                />
-
-                <main className="mt-24">
-                    <h1 className="mt-12 font-bold text-3xl mb-4">
-                        {blog.metadata.title}
-                    </h1>
-                    <p className="text-grey-050 leading-[26px] mb-8">
-                        {blog.metadata.summary}
-                    </p>
-                    <MDXRenderer source={blog.source} />
-                </main>
-            </>
-        </Container>
-    );
+    return <BlogContent blog={blog} />
 }
