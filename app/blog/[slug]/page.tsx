@@ -12,14 +12,14 @@ export async function generateMetadata({ params }: any) {
         return {
             title: 'Page not found.',
             description: 'This page does not exist.',
-            type: 'article',
+            type: 'website',
             icons: {
                 shortcut: '/favicon.svg',
                 icon: '/favicon.svg',
             },
             images: [
                 {
-                    url: blog!.metadata.image,
+                    url: 'https://home-xero.netlify.app/og-img.png',
                     width: 600,
                     height: 600,
                 },
@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: any) {
         },
         images: [
             {
-                url: blog!.metadata.image,
+                url: blog.metadata.image,
                 width: 600,
                 height: 600,
             },
