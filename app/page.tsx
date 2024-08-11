@@ -12,7 +12,7 @@ export default function Home() {
     return (
         <Container>
             <>
-                <Header active="none" />
+                <Header active="home" />
                 <PageTransition animationVariants={slideUpVariants}>
                     <Intro />
                 </PageTransition>

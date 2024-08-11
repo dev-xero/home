@@ -5,7 +5,7 @@ import { useState } from 'react';
 import NavOverlay from './NavOverlay';
 
 interface HeaderProps {
-    active: 'about' | 'blog' | 'projects' | 'none';
+    active: 'home' | 'about' | 'blog' | 'projects' | 'none';
     aboutRedirect?: string;
     projectRedirect?: string;
 }
@@ -41,7 +41,16 @@ export default function Header({
                     {/* Navigation Links: Desktop */}
                     <ul className="hidden justify-between items-center gap-4 text-grey-050 transition-colors text-base sm:flex">
                         <li className="hover:text-white transition-all hover:underline underline-offset-4 decoration-grey-050">
-                            <a href="/">home</a>
+                            <a
+                                href="/"
+                                className={`${
+                                    active == 'home'
+                                        ? 'text-white underline'
+                                        : ''
+                                }`}
+                            >
+                                home
+                            </a>
                         </li>
                         <li className="hover:text-white transition-all hover:underline underline-offset-4 decoration-grey-050">
                             <a
@@ -124,7 +133,16 @@ export default function Header({
                 >
                     <ul className="flex flex-col gap-1 text-grey-050 transition-colors text-base">
                         <li className="hover:text-white transition-all hover:underline underline-offset-4 decoration-grey-050">
-                            <a href="/">home</a>
+                            <a
+                                href="/"
+                                className={`${
+                                    active == 'home'
+                                        ? 'text-white underline'
+                                        : ''
+                                }`}
+                            >
+                                home
+                            </a>
                         </li>
                         <li className="hover:text-white transition-all hover:underline underline-offset-4 decoration-grey-050">
                             <a
