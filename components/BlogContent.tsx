@@ -21,7 +21,7 @@ export default function BlogContent({ blog }: IBlogContentProps) {
                 />
 
                 <main className="mt-24">
-                    <a href="./blog" className="flex gap-2 items-center text-grey-050 hover:text-white underline-offset-4 hover:underline">
+                    <a href="/blog" className="flex gap-2 items-center text-grey-050 hover:text-white underline-offset-4 hover:underline">
                         <ArrowLeft02Icon />
                         <span>Back</span>
                     </a>

@@ -10,7 +10,11 @@ interface HeaderProps {
     projectRedirect?: string;
 }
 
-export default function Header({ active, aboutRedirect, projectRedirect }: HeaderProps) {
+export default function Header({
+    active,
+    aboutRedirect,
+    projectRedirect,
+}: HeaderProps) {
     const [isNavExpanded, setIsNavExpanded] = useState(false);
 
     const toggleNavigation = () => {
@@ -26,18 +30,18 @@ export default function Header({ active, aboutRedirect, projectRedirect }: Heade
                 <header className="flex justify-between items-center bg-bg-dark select-none py-4">
                     {/* Escaping '/' with &#47; */}
                     <h3 className="text-lg font-bold tracking-wide select-none">
-                        <a href="/"><span className="light-dark opacity-50">&#47;&#47;</span> XERO</a>
+                        <a href="/">
+                            <span className="light-dark opacity-50">
+                                &#47;&#47;
+                            </span>{' '}
+                            XERO
+                        </a>
                     </h3>
 
                     {/* Navigation Links: Desktop */}
                     <ul className="hidden justify-between items-center gap-4 text-grey-050 transition-colors text-base sm:flex">
                         <li className="hover:text-white transition-all hover:underline underline-offset-4 decoration-grey-050">
-                            <a
-                                href="/"
-                                target="_blank"
-                            >
-                                home
-                            </a>
+                            <a href="/">home</a>
                         </li>
                         <li className="hover:text-white transition-all hover:underline underline-offset-4 decoration-grey-050">
                             <a
@@ -53,7 +57,11 @@ export default function Header({ active, aboutRedirect, projectRedirect }: Heade
                         </li>
                         <li className="hover:text-white transition-all hover:underline underline-offset-4 decoration-grey-050">
                             <a
-                                href={projectRedirect ? projectRedirect : '#projects'}
+                                href={
+                                    projectRedirect
+                                        ? projectRedirect
+                                        : '#projects'
+                                }
                                 className={`${
                                     active == 'projects'
                                         ? 'text-white underline'
@@ -100,7 +108,9 @@ export default function Header({ active, aboutRedirect, projectRedirect }: Heade
                     {/* Navigation System: Mobile */}
                     <section className="block sm:hidden select-none">
                         <Menu09Icon
-                            className={`text-grey-050 hover:text-white cursor-pointer transition-all ${isNavExpanded ? 'rotate-90' : 'rotate-0' }`}
+                            className={`text-grey-050 hover:text-white cursor-pointer transition-all ${
+                                isNavExpanded ? 'rotate-90' : 'rotate-0'
+                            }`}
                             size={24}
                             onClick={() => toggleNavigation()}
                         />
@@ -114,12 +124,7 @@ export default function Header({ active, aboutRedirect, projectRedirect }: Heade
                 >
                     <ul className="flex flex-col gap-1 text-grey-050 transition-colors text-base">
                         <li className="hover:text-white transition-all hover:underline underline-offset-4 decoration-grey-050">
-                            <a
-                                href="/"
-                                target="_blank"
-                            >
-                                home
-                            </a>
+                            <a href="/">home</a>
                         </li>
                         <li className="hover:text-white transition-all hover:underline underline-offset-4 decoration-grey-050">
                             <a
@@ -135,7 +140,11 @@ export default function Header({ active, aboutRedirect, projectRedirect }: Heade
                         </li>
                         <li className="hover:text-white transition-all hover:underline underline-offset-4 decoration-grey-050">
                             <a
-                                href={projectRedirect ? projectRedirect : '#projects'}
+                                href={
+                                    projectRedirect
+                                        ? projectRedirect
+                                        : '#projects'
+                                }
                                 className={`${
                                     active == 'projects'
                                         ? 'text-white underline'

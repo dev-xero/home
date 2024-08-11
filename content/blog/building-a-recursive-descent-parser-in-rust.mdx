@@ -26,9 +26,9 @@ published: true
 
 # [Introduction](#introduction)
 
-Parsers are crucial in so much of the technology we use daily as software engineers. From code linting and syntax analysis to interpreters and compilers. It's no doubt understanding (to a certain extent) the intricacies of how they work can provide valuable insights and overall help you level up as a programmer.
+Parsers are crucial in so much of the technology we use daily as software engineers. From code linting and syntax analysis to interpreters and compilers. It's no doubt understanding (to a certain extent) the intricacies of how they work can give valuable insights and help you level up as a programmer.
 
-We'll build a flavor of parsers known as "Recursive Descent Parsers", which use recursion to elegantly parse any valid JSON string. We're gonna write it from the ground up, soa plus if you've done some programming in the past.
+We'll build a flavor of parsers known as "Recursive Descent Parsers", which use recursion to elegantly parse any valid JSON string.
 
 Official JSON specification as a [guide](https://www.json.org/json-en.html)
 
@@ -40,7 +40,7 @@ So, what is parsing? Well, doing a quick Google search:
 
 Note the keyword "formal grammar". It's the instructions that tell our parser how to deal with each token it encounters. In recursive descent parsing, each "non-terminal" is defined as its own function that yields a result; starting from the root non-terminal, all others are called recursively. Don't worry if you don't know what a "non-terminal" is, we'll go over that soon.
 
-Alright, alright, that sounds cool and all, but why should I bother writing my _own_ parser? When there're tons out there already? Good question! If you're like me who's very curious about what make these tools tick, then I'm sure you're going to really enjoy learning about them and implementing your own! Plus, if you're going to write your own programming language (or compiler), you can't escape string parsing ;)
+Alright, alright, that sounds cool and all, but why should I bother writing my _own_ parser? When there're tons out there already? Good question! If you're like me who's curious about what make these tools tick, then I'm sure you're going to really enjoy learning about them and implementing your own! Plus, if you're going to write your own programming language (or compiler), you can't escape string parsing ;)
 
 # [How does parsing work?](#how-does-parsing-work)
 
@@ -60,7 +60,7 @@ This is the process of classifying bits of the string as tokens (or lexemes) so 
 }
 ```
 
-There are several tokens present here, for example those braces "\{" and "\}", so our program will have tokens corresponding to the **left** and **right** braces. There's also a couple of strings in there, so we'd have a 'string' token too. Notice the colon (:) and commas (,) so these would have their corresponding tokens. You get the idea; things like whitespace are generally ignored.
+Several tokens are present here, for example those braces "\{" and "\}", so our program will have tokens corresponding to the **left** and **right** braces. There's also a couple of strings in there, so we'd have a 'string' token too. Notice the colon (:) and commas (,) so these would have their corresponding tokens. You get the idea; things like whitespace are generally ignored.
 
 ### Parsing:
 
@@ -166,14 +166,14 @@ mod reader;
 use std::io::{self, Write};
 
 fn main() {
-    // previous code
+    // earlier code
     let json_path: String = json_path.trim().to_string();
     let mut content: String = reader::read_json(json_path);
     println!("\n{content}");
 }
 ```
 
-And just like that, we can read files now. Pretty cool if you as me. I'll create a test folder and add a file `one.json` to see what our program prints.
+And just like that, we can read files now. Pretty cool if you ask me. I'll create a test folder and add a file `one.json` to see what our program prints.
 
 ```sh
 clear
@@ -189,7 +189,7 @@ This is my ouput! Everything's working perfectly. We can finally begin writing o
 
 ### The Token Struct
 
-In this section, we'll implement our tokenizer to handle all the tokens currently recognized by the JSON standard.
+In this section, we'll implement our tokenizer to handle all the tokens recognized by the JSON standard.
 
 Our token is composed of two parts, a “kind” and an optional “value”. The kind of a token can be any of string, number, boolean, left brace, right brace, etc as per the official JSON specification. Here's a list of all the tokens our parser will handle.
 

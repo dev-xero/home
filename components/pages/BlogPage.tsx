@@ -11,7 +11,7 @@ export default function BlogPage({ allBlogs }: IBlogPageProps) {
         <main className="mt-24" id="blog">
             <section className="text-grey-050 mt-4">
                 Oh hey, seems you found my blog. My ramblings range from hard
-                technical concepts to unhinged anime memes I put down from time to time
+                technical topics to unhinged anime memes from time to time
                 when I&apos;m bored. Opinions are my own. Enjoy :)
             </section>
 
