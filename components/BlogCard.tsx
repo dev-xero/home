@@ -25,7 +25,7 @@ export default function BlogCard(props: IBlogCardProps) {
                     <h2 className="text-xl font-bold mb-2 group-hover:underline">
                         {props.blog.metadata.title}
                     </h2>
-                    <p className="text-md text-grey-050 mb-2">
+                    <p className="text-md text-grey-050 mb-4">
                         {props.blog.metadata.summary}
                     </p>
                     {/* TAGS */}

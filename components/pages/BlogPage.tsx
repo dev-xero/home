@@ -10,9 +10,9 @@ export default function BlogPage({ allBlogs }: IBlogPageProps) {
     return (
         <main className="mt-24" id="blog">
             <section className="text-grey-050 mt-4">
-                Oh hey, seems you found my blog. My ramblings range from hard
-                technical topics to unhinged anime memes from time to time
-                when I&apos;m bored. Opinions are my own. Enjoy :)
+                Oh hey, so you found my blog. My ramblings range from hard
+                technical topics to unhinged anime memes when I&apos;m bored.
+                Opinions are mine. Enjoy.
             </section>
 
             {/* Render each blog listing */}

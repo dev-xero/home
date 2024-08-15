@@ -1,10 +1,10 @@
 ---
 title: Building a Recursive Descent Parser for JSON (in Rust)
-summary: JSON is cool, I've always wondered how parsers read json files and convert them into some more useful data structures, so why don't we build one from the ground up?
+summary: JSON is cool, I've always wondered how parsers read json files and convert them into native data structures, so I thought to myself, why don't I try building one from the ground up?
 slug: building-a-recursive-descent-parser-in-rust
 image: https://res.cloudinary.com/dnkbrrrld/image/upload/v1723249551/cover-8-edit_emfaja.png
 tags: ['Rust', 'JSON', 'Technical']
-publishedOn: 2nd August, 2024
+publishedOn: 15th August, 2024
 published: true
 ---
 
@@ -28,19 +28,21 @@ published: true
 
 Parsers are crucial in so much of the technology we use daily as software engineers. From code linting and syntax analysis to interpreters and compilers. It's no doubt understanding (to a certain extent) the intricacies of how they work can give valuable insights and help you level up as a programmer.
 
-We'll build a flavor of parsers known as "Recursive Descent Parsers", which use recursion to elegantly parse any valid JSON string.
+We'll build a flavor of parsers known as "Recursive Descent Parsers", which use a set of mutally recursive functions to elegantly parse any valid JSON string.
 
-Official JSON specification as a [guide](https://www.json.org/json-en.html)
+So, even if you don't like Rust (like @anu ¬‿¬), you can always follow along in your fav programming language.
+
+The official JSON specification as a [guide.](https://www.json.org/json-en.html)
 
 # [Hm, so what exactly is parsing?](#hm-so-what-exactly-is-parsing)
 
-So, what is parsing? Well, doing a quick Google search:
+Doing a quick Google search, we have:
 
 > Parsing, syntax analysis, or syntactic analysis is the process of analyzing a string of symbols, either in natural language, computer languages or data structures, conforming to the rules of a **formal grammar**.
 
-Note the keyword "formal grammar". It's the instructions that tell our parser how to deal with each token it encounters. In recursive descent parsing, each "non-terminal" is defined as its own function that yields a result; starting from the root non-terminal, all others are called recursively. Don't worry if you don't know what a "non-terminal" is, we'll go over that soon.
+Note the keyword "formal grammar". It's the instructions that tell our parser how to deal with each token it encounters. In recursive descent parsing, each "non-terminal" is defined as its own _recursive_ function that yields a result; starting from the root non-terminal, all others are called recursively. Don't worry if you don't know what a "non-terminal" is, we'll go over that soon.
 
-Alright, alright, that sounds cool and all, but why should I bother writing my _own_ parser? When there're tons out there already? Good question! If you're like me who's curious about what make these tools tick, then I'm sure you're going to really enjoy learning about them and implementing your own! Plus, if you're going to write your own programming language (or compiler), you can't escape string parsing ;)
+Alright, alright, that sounds cool and all, but why should I bother writing _my own_ parser you ask? When there're tons out there already? Good question! If you're like me who's curious about what make these tools tick, then I'm sure you're going to really enjoy learning about them and implementing your own from scratch! Plus, if you're going to write your own programming language (or compiler), you can't escape string parsing ;)
 
 # [How does parsing work?](#how-does-parsing-work)
 
@@ -60,11 +62,11 @@ This is the process of classifying bits of the string as tokens (or lexemes) so 
 }
 ```
 
-Several tokens are present here, for example those braces "\{" and "\}", so our program will have tokens corresponding to the **left** and **right** braces. There's also a couple of strings in there, so we'd have a 'string' token too. Notice the colon (:) and commas (,) so these would have their corresponding tokens. You get the idea; things like whitespace are generally ignored.
+Several tokens are present here, for example those braces "\{" and "\}", so our program will have tokens corresponding to the **left** and **right** braces. There's also a couple of strings in there, so we'd have a 'string' token too. Notice the colon (:) and commas (,), these would have their corresponding tokens. You get the idea; things like whitespace are generally ignored.
 
 ### Parsing:
 
-This is where the actual magic happens, our parser takes a list of the tokens we extracted earlier and convert them into some useful data structure. JSON looks a lot like a standard hash map but with some tweaks, so we'd be converting our JSON string into a Rust hash map.
+This is where the actual magic happens, our parser takes a list of the tokens we extract from the tokenization stage and convert them into something useful. JSON looks a lot like a standard computer science hash map (but with some tweaks), so we'll convert our JSON string into a Rust hash map.
 
 # [Environment setup](#environment-setup)
 
@@ -87,7 +89,7 @@ code .
 
 # [Writing the tokenizer (lexer)](#writing-the-tokenizer-lexer)
 
-I'll quickly change the classic "Hello World" to "JSON Parser"
+I'll change the classic "Hello World" to "JSON Parser"
 
 ```rust showLineNumbers title="src/main.rs"
 fn main() {
@@ -95,7 +97,7 @@ fn main() {
 }
 ```
 
-Compiling this with **cargo run** you should get "JSON Parser", alright. Everything works fine.
+Compiling this with **cargo run** you should get "JSON Parser", alright. We're good to go.
 
 Let's start by getting user input. You can delete the println macro.
 
@@ -117,9 +119,9 @@ fn main() {
 }
 ```
 
-Let's break down this chunk. First we're creating a mutable string reference to hold our json file path. Then we flush the input buffer before reading the path. We're using `trim()` to remove any leading or trailing whitespace that might be present and finally we print the result. Running this, we get prompted for a path and it gets printed!
+Let's break down this chunk. First we're creating a mutable string reference, `json_path` to hold our json file path. Then we flush the input buffer before reading it. We're going to use `trim()` to remove any leading or trailing whitespace that might be present and, finally we print the result. Running this, we get prompted for a path and it gets printed!
 
-So, there's not much we can do with just a string, we want to actually read the contents of the file the path points to (if it exists), to do this, let's create a `reader` module. It'll be in charge of reading and processing any paths we pass to it.
+Ok but staring at a string isn't really interesting, we want to actually read the contents of the file it points to (if it exists), to do this, let's create a `reader` module. It'll be in charge of reading and processing any paths we pass to it.
 
 ```rust showLineNumbers title="src/main.rs" {1}
 mod reader;
@@ -166,7 +168,7 @@ mod reader;
 use std::io::{self, Write};
 
 fn main() {
-    // earlier code
+    // Earlier code
     let json_path: String = json_path.trim().to_string();
     let mut content: String = reader::read_json(json_path);
     println!("\n{content}");
@@ -180,7 +182,7 @@ clear
 cargo run
 ```
 
-This is my ouput! Everything's working perfectly. We can finally begin writing our parser now :)
+This is my ouput! Working perfectly so far. Let's get started with the tokenizer.
 
 <RoundedImage
     src="https://res.cloudinary.com/dnkbrrrld/image/upload/v1723330849/01_tetjn9.png"
@@ -189,9 +191,9 @@ This is my ouput! Everything's working perfectly. We can finally begin writing o
 
 ### The Token Struct
 
-In this section, we'll implement our tokenizer to handle all the tokens recognized by the JSON standard.
+In this section, we'll implement our tokenizer to handle most of the tokens recognized by the JSON standard.
 
-Our token is composed of two parts, a “kind” and an optional “value”. The kind of a token can be any of string, number, boolean, left brace, right brace, etc as per the official JSON specification. Here's a list of all the tokens our parser will handle.
+Our token struct is composed of two parts, a “kind” and an optional “value”. The kind of a token can be any of: string, number, boolean, left brace, right brace, etc as per the official JSON specs. Here's a list of all the tokens our parser will handle.
 
 1. Left brace
 2. Right brace
@@ -202,6 +204,51 @@ Our token is composed of two parts, a “kind” and an optional “value”. Th
 7. Object,
 8. Boolean,
 9. Null
+
+I've gone ahead and created a new file, `token.rs`. We'll represent JSON tokens as structs with their kinds as enums.
+
+```rust showLineNumbers title="src/token.rs"
+// Token kind
+#[derive(Debug)]
+pub enum TokenKind {
+    LBRACE,
+    RBRACE,
+    COLON,
+    COMMA,
+    STRING,
+    NUMBER,
+    BOOLEAN,
+    NULL
+}
+
+// Formatting for display: token kind
+impl TokenKind {
+    pub fn debug(&self) {
+        println!("{:?}", self);
+    }
+}
+```
+
+Each enum entry corresponds to a token we'll handle in the parser. For the actual token struct:
+
+```rust showLineNumbers title="src/token.rs"
+// Earlier code
+// Token struct, each token has a 'kind' and value
+#[derive(Debug)]
+pub struct Token {
+    pub kind: TokenKind,
+    pub value: Option<String>
+}
+
+// Formatting for display: token
+impl Token {
+    pub fn debug(&self) {
+        println!("kind: {:?}, value: {:?}", self.kind, self.value);
+    }
+}
+```
+
+So each token will have the `kind` attribute. Some tokens can have a `value`, like strings and numbers. Everything else won't.
 
 # [Context-Free Grammar](#context-free-grammar)
 
