@@ -16,13 +16,13 @@ published: true
 # Table of Content
 
 1. [Introduction](#introduction)
-2. [Hmm, so what exactly is parsing?](#hm-so-what-exactly-is-parsing)
-3. [How does parsing work?](#how-does-parsing-work)
-4. [Environment setup](#environment-setup)
-5. [Project setup](#project-setup)
-6. [Writing the tokenizer (lexer)](#writing-the-tokenizer-lexer)
+2. [Hmm, So What Exactly Is Parsing?](#hm-so-what-exactly-is-parsing)
+3. [How Does Parsing Work?](#how-does-parsing-work)
+4. [Environment Setup](#environment-setup)
+5. [Project Setup](#project-setup)
+6. [Writing The Tokenizer (Lexer)](#writing-the-tokenizer-lexer)
 7. [Context-Free Grammar](#context-free-grammar)
-8. [Writing the parser](#writing-the-parser)
+8. [Writing The Parser](#writing-the-parser)
 
 # [Introduction](#introduction)
 
@@ -34,7 +34,7 @@ So, even if you don't like Rust (like @anu ¬‿¬), you can always follow along
 
 The official JSON specification as a [guide.](https://www.json.org/json-en.html)
 
-# [Hm, so what exactly is parsing?](#hm-so-what-exactly-is-parsing)
+# [Hm, So What Exactly Is Parsing?](#hm-so-what-exactly-is-parsing)
 
 Doing a quick Google search, we have:
 
@@ -44,7 +44,7 @@ Note the keyword "formal grammar". It's the instructions that tell our parser ho
 
 Alright, alright, that sounds cool and all, but why should I bother writing _my own_ parser you ask? When there're tons out there already? Good question! If you're like me who's curious about what make these tools tick, then I'm sure you're going to really enjoy learning about them and implementing your own from scratch! Plus, if you're going to write your own programming language (or compiler), you can't escape string parsing ;)
 
-# [How does parsing work?](#how-does-parsing-work)
+# [How Does Parsing Work?](#how-does-parsing-work)
 
 Parsing is broadly divided into two stages:
 
@@ -68,7 +68,7 @@ Several tokens are present here, for example those braces "\{" and "\}", so our 
 
 This is where the actual magic happens, our parser takes a list of the tokens we extract from the tokenization stage and convert them into something useful. JSON looks a lot like a standard computer science hash map (but with some tweaks), so we'll convert our JSON string into a Rust hash map.
 
-# [Environment setup](#environment-setup)
+# [Environment Setup](#environment-setup)
 
 We're writing the parser in Rust so I assume you have the binaries installed on your system. If not, you can head over to their [docs](https://www.rust-lang.org/tools/install) and follow the instructions for your OS. I'm on a Linux build so installing is fairly simple:
 
@@ -77,7 +77,7 @@ curl --proto '=https' --tlsv1.2 -sSf <https://sh.rustup.rs> | sh
 rustup --version
 ```
 
-# [Project setup](#project-setup)
+# [Project Setup](#project-setup)
 
 Let's setup a new Rust project using cargo and open it up.
 
@@ -87,7 +87,7 @@ cd json-parser
 code .
 ```
 
-# [Writing the tokenizer (lexer)](#writing-the-tokenizer-lexer)
+# [Writing The Tokenizer (Lexer)](#writing-the-tokenizer-lexer)
 
 I'll change the classic "Hello World" to "JSON Parser"
 
@@ -98,7 +98,6 @@ fn main() {
 ```
 
 Compiling this with **cargo run** you should get "JSON Parser", alright. We're good to go.
-
 Let's start by getting user input. You can delete the println macro.
 
 ```rust showLineNumbers title="src/main.rs"
@@ -119,7 +118,7 @@ fn main() {
 }
 ```
 
-Let's break down this chunk. First we're creating a mutable string reference, `json_path` to hold our json file path. Then we flush the input buffer before reading it. We're going to use `trim()` to remove any leading or trailing whitespace that might be present and, finally we print the result. Running this, we get prompted for a path and it gets printed!
+I'll break down this chunk. First we're creating a mutable string reference, `json_path` to hold our json file path. Then we flush the input buffer before reading it. We're going to use `trim()` to remove any leading or trailing whitespace that might be present and, finally we print the result. Running this, we get prompted for a path and it gets printed!
 
 Ok but staring at a string isn't really interesting, we want to actually read the contents of the file it points to (if it exists), to do this, let's create a `reader` module. It'll be in charge of reading and processing any paths we pass to it.
 
@@ -160,7 +159,7 @@ pub fn read_json(path: String) -> String {
 
 That's all we need for our reader module. We receive a file path and first of all check if there's a `.json` extension to it. After that, we simply read the file using the `fs` standard library function, then return the contents as a string result.
 
-Let's update `main.rs` to use the reader now.
+I've updated `main.rs` to use the reader now.
 
 ```rust showLineNumbers title="src/main.rs" {9}
 mod reader;
@@ -182,7 +181,7 @@ clear
 cargo run
 ```
 
-This is my ouput! Working perfectly so far. Let's get started with the tokenizer.
+This is my ouput! Everything is working perfectly so far, super nice. Let's get started with the tokenizer.
 
 <RoundedImage
     src="https://res.cloudinary.com/dnkbrrrld/image/upload/v1723330849/01_tetjn9.png"
@@ -193,7 +192,7 @@ This is my ouput! Working perfectly so far. Let's get started with the tokenizer
 
 In this section, we'll implement our tokenizer to handle most of the tokens recognized by the JSON standard.
 
-Our token struct is composed of two parts, a “kind” and an optional “value”. The kind of a token can be any of: string, number, boolean, left brace, right brace, etc as per the official JSON specs. Here's a list of all the tokens our parser will handle.
+Before that tho, we need to understand the structure of a token. Our token is composed of two parts, a “kind” and an optional “value”. The kind of a token can be any of: string, number, boolean, left brace, right brace, etc as per the official JSON specs. Here's a list of all the tokens our parser will handle.
 
 1. Left brace
 2. Right brace
@@ -232,7 +231,8 @@ impl TokenKind {
 Each enum entry corresponds to a token we'll handle in the parser. For the actual token struct:
 
 ```rust showLineNumbers title="src/token.rs"
-// Earlier code
+// Earlier token kind code
+
 // Token struct, each token has a 'kind' and value
 #[derive(Debug)]
 pub struct Token {
@@ -248,7 +248,182 @@ impl Token {
 }
 ```
 
-So each token will have the `kind` attribute. Some tokens can have a `value`, like strings and numbers. Everything else won't.
+So each token will have the `kind` attribute. Some tokens can have a `value`, like strings and numbers. Everything else won't. I've decided to keep the tokenizer separate from the token file since I feel it's cleaner that way.
+
+I've created a new file for the tokenizer and start with handling braces.
+
+```bash
+touch src/tokenizer.rs
+code src/tokenizer.rs
+```
+
+```rust showLineNumbers title="src/tokenizer.rs"
+use crate::token::{Token, TokenKind};
+
+// Tokenizer struct
+pub struct Tokenizer {
+    pub pos: usize,
+    pub source: String,
+}
+```
+
+These are the state we'll track. the `pos` attribute holds our current position in the string. The `source` attribute is the actual string content.
+
+```rust showLineNumbers title="src/tokenizer.rs" {9-16}
+use crate::token::{Token, TokenKind};
+
+// Tokenizer struct
+pub struct Tokenizer {
+    pub pos: usize,
+    pub source: String,
+}
+
+// Methods
+impl Tokenizer {
+    // Tokenize a valid JSON string
+    pub fn scan(&mut self) -> Vec<Token> {
+        println!("{}", self.source);
+        let mut tokens: Vec<Token> = Vec::new();
+        let char_vect: Vec<char> = self.source.chars().collect()
+
+        // Panic on trailing chars
+        let trailing: char = char_vect[char_vect.len() - 2];
+        if !trailing.is_alphanumeric() && trailing != '{' && trailing != '}' {
+            panic!(
+                "Unexpected trailing character: '{}'",
+                char_vect[char_vect.len() - 2]
+            );
+        }
+    }
+}
+```
+
+The tokenizer starts off with the `scan()` method. First of all, we need a way to work with the individual characters in our string; that's where the `char_vect` comes in. It's a vector of UTF-8 characters. Our tokenizer will work through each character; ignoring whitespaces; and add them to the `tokens` vector. You can think of a Rust vector as a regular array found in most programming languages.
+
+The check in the last few lines ensure that our string ends with a proper alphanumeric character or brace.
+
+Handling braces is simply a matter of checking whether the character matches "\{" or "\}". While we're at it, let's also handle commas (,) and colons (:).
+
+```rust showLineNumbers title="src/tokenizer.rs"
+// Earlier code inside scan()
+
+// Iterate till the end
+while self.pos < self.source.len() {
+    let lexeme: char = char_vect[self.pos];
+
+    match lexeme {
+        '{' => tokens.push(Token {
+            kind: TokenKind::LBRACE,
+            value: None,
+        }),
+        '}' => tokens.push(Token {
+            kind: TokenKind::RBRACE,
+            value: None,
+        }),
+        ':' => tokens.push(Token {
+            kind: TokenKind::COLON,
+            value: None,
+        }),
+        ',' => tokens.push(Token {
+            kind: TokenKind::COMMA,
+            value: None,
+        }),
+    }
+}
+
+return tokens;
+```
+
+This code iterates through our source string till we run of characters to look at. The `lexeme` variable keeps track of the current one, then inside our `match` expression, we push the right type of token to our token vector.
+
+Nice. This handles pushing the proper tokens efficiently. Doing good.
+
+So far, we've only looked at tokens that don't have a value. How do we handle things like strings? Are we going to create match expressions for every possible combination of strings there are in the universe?!
+
+And no, of course we won't do that, that's horrible. What we _will do_ tho, is track when a string starts and ends. In JSON, strings are enclosed in double quotes ("), so a smarter approach is to just switch to "string scanning mode" whenever we see a quote and exit when we encounter its closing quote.
+
+So let's start by tracking when we're in a string:
+
+```rust showLineNumbers title="src/tokenizer.rs"
+// Earlier code inside match
+
+'"' => {
+    self.advance(); // consume '"'
+    if let Some(res) = self.scan_str() {
+        tokens.push(Token {
+            kind: TokenKind::STRING,
+            value: Some(res),
+        })
+    }
+}
+```
+
+Running this, you'd get screamed at by Rust because we haven't defined the `advance()` or `scan_str()` function yet. Let's start with advance, outside our scan function.
+
+```rust showLineNumbers title="scr/tokenizer.rs"
+// Advance one character forward
+fn advance(&mut self) -> Option<char> {
+    if self.pos < self.source.len() {
+        self.pos += 1;
+        return self.source.chars().nth(self.pos - 1);
+    }
+    return None;
+}
+```
+
+The objective is simple. Move the pointer forward and return the character right before it. This function will only return something as long as we've not exceeded the source string length.
+
+For scanning strings here's the approach:
+
+```rust showLineNumbers title="src/tokenizer.rs"
+// Tokenize string values
+fn scan_str(&mut self) -> Option<String> {
+    let start_pos: usize = self.pos;
+
+    // Iterate till closing quote or EOF
+    while (self.pos + 1) < self.source.len() {
+        if self.peek().unwrap() == '\0' {
+            panic!("Unexpected EOF at pos: {}", self.pos);
+        }
+
+        if self.peek().unwrap() == '"' {
+            self.advance();
+            return Some(self.source[start_pos..self.pos].to_string());
+        }
+
+        self.advance();
+    }
+
+    return None;
+}
+```
+
+So, what have we here? The string scanning works by keeping track of the start position (right after the quotes) and the possible right before the ending quote.
+
+I'm first checking for an `EOF` character which is how we tell programs where the **END OF a FILE** is, and throw an error if we encounter one before the closing quote.
+
+Most of the action is just "peeking" at which character comes next and while it's not a quote, we update our current position. If it is, we simply consume that quote, and then return a slice from our **start** to **end** positions.
+
+Here's a diagram explaining what I mean:
+
+<RoundedImage
+    src="https://res.cloudinary.com/dnkbrrrld/image/upload/v1723759099/diagram-1_qwew7q.png"
+    alt="diagram-1"
+/>
+
+But there's an issue, Rust has no idea where to find the `peek()` function. It's just like our advance function but it doesn't update the pointer. So let's implement that.
+
+```rust showLineNumbers title="src/tokenizer.rs"
+// Inside the impl block
+
+// Peek one character forward
+fn peek(&self) -> Option<char> {
+    if self.pos + 1 < self.source.len() {
+        return self.source.chars().nth(self.pos + 1);
+    }
+    return None;
+}
+```
 
 # [Context-Free Grammar](#context-free-grammar)
 

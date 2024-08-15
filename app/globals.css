@@ -173,7 +173,7 @@ pre [data-line] {
 }
 
 [data-highlighted-line] {
-    background: #282f40af;
+    background: #1b212faf !important;
     border-left: 2px solid #5ef6a4 !important;
     /* @apply border-l-gray-400; */
 }
