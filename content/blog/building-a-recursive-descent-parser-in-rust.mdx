@@ -398,7 +398,7 @@ fn scan_str(&mut self) -> Option<String> {
 }
 ```
 
-So, what have we here? The string scanning works by keeping track of the start position (right after the quotes) and the possible right before the ending quote.
+So, what have we here? The string scanning works by keeping track of the start position (right after the quotes) and the end right before the ending quote.
 
 I'm first checking for an `EOF` character which is how we tell programs where the **END OF a FILE** is, and throw an error if we encounter one before the closing quote.
 

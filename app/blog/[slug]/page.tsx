@@ -4,7 +4,7 @@ import { getBlog, getBlogs } from '@/lib/getblogs';
 import { notFound } from 'next/navigation';
 
 // Metadata optimizations
-export async function generateMetadata({ params }: any) {
+export async function generateMetadata({ params }: { params: any }) {
     const blog = await getBlog(params.slug);
 
     if (!blog) {
@@ -41,6 +41,18 @@ export async function generateMetadata({ params }: any) {
                 height: 600,
             },
         ],
+        openGraph: {
+            title: blog.metadata.title,
+            description: blog.metadata.summary,
+            url: `${personal.url}/blog/${params.slug}`,
+            images: [
+                {
+                    url: blog.metadata.image,
+                    width: 600,
+                    height: 600,
+                },
+            ],
+        },
     };
 }
 
