@@ -269,7 +269,7 @@ pub struct Tokenizer {
 
 These are the state we'll track. the `pos` attribute holds our current position in the string. The `source` attribute is the actual string content.
 
-```rust showLineNumbers title="src/tokenizer.rs" {9-16}
+```rust showLineNumbers title="src/tokenizer.rs" {9-25}
 use crate::token::{Token, TokenKind};
 
 // Tokenizer struct
@@ -424,6 +424,92 @@ fn peek(&self) -> Option<char> {
     return None;
 }
 ```
+
+Our parser should be able to handle strings now. In the mean time, let's add a catch-all to panic whenever we encounter unknown tokens:
+
+```rust showLineNumbers title="src/tokenizer.rs" {33-39}
+// Earlier code inside scan()
+
+// Iterate till the end
+while self.pos < self.source.len() {
+    let lexeme: char = char_vect[self.pos];
+
+    match lexeme {
+        '{' => tokens.push(Token {
+            kind: TokenKind::LBRACE,
+            value: None,
+        }),
+        '}' => tokens.push(Token {
+            kind: TokenKind::RBRACE,
+            value: None,
+        }),
+        ':' => tokens.push(Token {
+            kind: TokenKind::COLON,
+            value: None,
+        }),
+        ',' => tokens.push(Token {
+            kind: TokenKind::COMMA,
+            value: None,
+        }),
+        '"' => {
+            self.advance(); // consume '"'
+            if let Some(res) = self.scan_str() {
+                tokens.push(Token {
+                    kind: TokenKind::STRING,
+                    value: Some(res),
+                })
+            }
+        },
+        _ => {
+            panic!(
+                "Unexpected character '{}' encountered at pos: {}",
+                lexeme, self.pos
+            );
+        }
+    }
+}
+
+return tokens;
+```
+
+Finally, I'll update the `main.rs` file to use these modules.
+
+```rust title="src/main.rs" showLineNumbers
+mod reader;
+mod token;
+mod tokenizer;
+
+use std::io::{self, Write};
+
+use token::Token;
+use tokenizer::Tokenizer;
+
+fn main() {
+    // previous code
+
+    // Read file and return contents
+    let mut content: String = reader::read_json(json_path);
+    let mut lexer: Tokenizer = tokenizer::Tokenizer {
+        pos: 0,
+        source: content.trim().to_string(),
+    };
+
+    let tokens: Vec<Token> = lexer.scan();
+    for i in 0..tokens.len() {
+        println!("{:?}", tokens[i]);
+    }
+}
+```
+
+You can try it on this JSON string, everything should still be working.
+
+```json
+{
+    "name": "json-parser"
+}
+```
+
+Sweet, we can theoretically handle any string now, let's crack numbers next!
 
 # [Context-Free Grammar](#context-free-grammar)
 
