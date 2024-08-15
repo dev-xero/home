@@ -29,7 +29,7 @@ export default function Header({
             <div className="transition-all fixed top-0 left-[50%] translate-x-[-50%] z-[1000] max-w-screen-lg w-full px-4 sm:px-8 py-4 bg-bg-dark">
                 <header className="flex justify-between items-center bg-bg-dark select-none py-4">
                     {/* Escaping '/' with &#47; */}
-                    <h3 className="text-lg font-bold tracking-wide select-none">
+                    <h3 className="text-lg font-bold tracking-wide select-none" id="nav-header">
                         <a href="/">
                             <span className="light-dark opacity-50">
                                 &#47;&#47;

@@ -115,6 +115,14 @@ h6 > a:hover::before {
     opacity: 0.5;
 }
 
+h3#nav-header > a::before {
+    content: '' !important;
+}
+
+h3#nav-header > a:hover::before {
+    content: '' !important;
+}
+
 @media screen and (max-width: 640px) {
     h1 > a:hover,
     h2 > a:hover,
