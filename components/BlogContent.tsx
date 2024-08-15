@@ -20,7 +20,7 @@ export default function BlogContent({ blog }: IBlogContentProps) {
                     projectRedirect="/projects"
                 />
 
-                <main className="mt-24">
+                <main className="mt-16">
                     <a href="/blog" className="flex gap-2 items-center text-grey-050 hover:text-white underline-offset-4 hover:underline">
                         <ArrowLeft02Icon />
                         <span>Back</span>

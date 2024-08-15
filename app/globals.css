@@ -241,7 +241,7 @@ blockquote {
 }
 
 figcaption {
-    background-color: #282f40 !important;
+    background-color: #151a24 !important;
 }
 
 .copy-button {
@@ -253,8 +253,13 @@ figcaption {
     top: 0px;
     padding: 8px 16px;
     background-color: #0f131a !important;
+    opacity: 0;
 }
 
 .copy-button:hover {
     color: #f4f9fb;
+}
+
+pre:hover .copy-button {
+    opacity: 1 !important;
 }

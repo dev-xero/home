@@ -22,7 +22,7 @@ export default function BlogCard(props: IBlogCardProps) {
                     className="w-full sm:max-w-[270px]"
                 />
                 <section className="bg-[#0F131A] p-6">
-                    <h2 className="text-xl font-bold mb-2">
+                    <h2 className="text-xl font-bold mb-2 group-hover:underline">
                         {props.blog.metadata.title}
                     </h2>
                     <p className="text-md text-grey-050 mb-2">
