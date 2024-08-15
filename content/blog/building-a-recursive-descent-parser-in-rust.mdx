@@ -300,7 +300,7 @@ impl Tokenizer {
 
 The tokenizer starts off with the `scan()` method. First of all, we need a way to work with the individual characters in our string; that's where the `char_vect` comes in. It's a vector of UTF-8 characters. Our tokenizer will work through each character; ignoring whitespaces; and add them to the `tokens` vector. You can think of a Rust vector as a regular array found in most programming languages.
 
-The check in the last few lines ensure that our string ends with a proper alphanumeric character or brace.
+The code in the last few lines ensure that our string ends with a proper alphanumeric character or brace.
 
 Handling braces is simply a matter of checking whether the character matches "\{" or "\}". While we're at it, let's also handle commas (,) and colons (:).
 
@@ -429,8 +429,6 @@ fn peek(&self) -> Option<char> {
 
 CFGs WIP
 
-# [Writing the parser](#writing-the-parser)
-
-Writing parser
+# [Writing The parser](#writing-the-parser)
 
 Parser WIP
