@@ -41,10 +41,16 @@ export default function BlogCard(props: IBlogCardProps) {
                               ))
                             : ''}
                     </div>
-                    <span className="flex gap-2 items-center text-grey-100 mt-2 text-sm">
-                        <Calendar04Icon size={16} />
-                        {props.blog.metadata.publishedOn}
-                    </span>
+                    <section className="flex gap-2 items-center">
+                        <span className="flex gap-2 items-center text-grey-100 mt-2 text-sm">
+                            <Calendar04Icon size={16} />
+                            {props.blog.metadata.publishedOn}
+                        </span>
+                        <span className="flex gap-2 items-center text-grey-100 mt-2 text-sm">
+                            <span>•</span>
+                            {props.blog.readingTime}
+                        </span>
+                    </section>
                 </section>
             </a>
         </div>
