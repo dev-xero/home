@@ -4,8 +4,8 @@ summary: JSON is cool, I've always wondered how parsers read json files and conv
 slug: building-a-recursive-descent-parser-in-rust
 image: https://res.cloudinary.com/dnkbrrrld/image/upload/v1723249551/cover-8-edit_emfaja.png
 tags: ['Rust', 'JSON', 'Technical']
-publishedOn: 10th August, 2024
-jsDate: 10 Aug 2024
+publishedOn: 18th August, 2024
+jsDate: 18 Aug 2024
 published: true
 ---
 
@@ -22,7 +22,7 @@ published: true
 4. [Environment Setup](#environment-setup)
 5. [Project Setup](#project-setup)
 6. [Writing The Tokenizer (Lexer)](#writing-the-tokenizer-lexer)
-7. [Context-Free Grammar (CFGs)](#context-free-grammar)
+7. [Context-Free Grammar (CFGs)](#context-free-grammar-cfgs)
 8. [Writing The Parser](#writing-the-parser)
 
 # [Introduction](#introduction)
@@ -641,7 +641,7 @@ Yay! Our tokenizer is done and ready now. You can throw in any well formatted JS
 
 _The tokenizer is the time consuming part of the system, I promise the parser module will be easier lol._
 
-# [Context-Free Grammar (CFGs)](#context-free-grammar)
+# [Context-Free Grammar (CFGs)](#context-free-grammar-cfgs)
 
 Before that tho, you need to know what a context-free grammar is. Remember how we said we need a formal grammer in order to parse strings? That's where CFGs come in. CFGs give us a formal way to mathematically model smaller units of a grammar into composable forms. There's a lot of factors that come into choosing a grammar; things like avoiding `left recursion` or `infinite recursions`.
 
@@ -664,7 +664,7 @@ Values can be any of: **string**, **number**, **object**, **boolean**, or, **nul
 
 Defining our grammar in this way ensures we can create recursive functions that call themselves in just the right way to build a complex, yet effective heirarchy of tokens.
 
-CFGs can get rather complex, if you're interested in learning more I strongly recommend you check out the [wiki.](https://en.wikipedia.org/wiki/Context-free_grammar)
+CFGs can quickly become rather complex, if you're interested in learning, more I strongly recommend you check out the [wiki.](https://en.wikipedia.org/wiki/Context-free_grammar)
 
 # [Writing The parser](#writing-the-parser)
 

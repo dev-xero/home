@@ -32,7 +32,7 @@ export default function ProjectsPage() {
             <SubHeading text="Projects" />
             <section className="text-grey-050 mt-4">
                 <p className="leading-[26px]">
-                    Some Open Source projects I&apos;ve worked on recently.
+                    Some Open Source projects I&apos;ve worked on recently (2023 - present).
                 </p>
             </section>
             {/* Search bar */}
