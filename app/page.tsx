@@ -23,10 +23,10 @@ export default function Home() {
                     <Projects />
                 </PageTransition>
                 <PageTransition animationVariants={slideUpVariants}>
-                    <Contact /> 
-                </PageTransition>
-                <PageTransition animationVariants={slideUpVariants}>
-                    <Footer />
+                    <>
+                        <Contact />
+                        <Footer />
+                    </>
                 </PageTransition>
             </>
         </Container>

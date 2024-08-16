@@ -9,7 +9,7 @@ export default function AboutPage() {
             <section className="text-grey-050 mt-4">
                 <p className="leading-[26px]">
                     I am a versatile software engineer with a strong background in
-                    Computer Science fundamentals such as data structures and
+                    Computer Science concepts such as data structures and
                     algorithms. I&apos;m currently a{' '}
                     <span className="text-white">{personal.school_year} </span>{' '}
                     undergraduate student, pursuing a Bachelor&apos;s degree in
