@@ -22,7 +22,7 @@ published: true
 4. [Environment Setup](#environment-setup)
 5. [Project Setup](#project-setup)
 6. [Writing The Tokenizer (Lexer)](#writing-the-tokenizer-lexer)
-7. [Context-Free Grammar](#context-free-grammar)
+7. [Context-Free Grammar (CFGs)](#context-free-grammar)
 8. [Writing The Parser](#writing-the-parser)
 
 # [Introduction](#introduction)
@@ -426,7 +426,7 @@ fn peek(&self) -> Option<char> {
 }
 ```
 
-Our parser should be able to handle strings now. In the mean time, let's add a catch-all to panic whenever we encounter unknown tokens:
+Looks good. In the mean time, let's add a catch-all to panic whenever we encounter unknown tokens:
 
 ```rust showLineNumbers title="src/tokenizer.rs" {33-39}
 // Earlier code inside scan()
@@ -512,9 +512,159 @@ You can try it on this JSON string, everything should still be working.
 
 Sweet, we can theoretically handle any string now, let's crack numbers next!
 
-# [Context-Free Grammar](#context-free-grammar)
+We can handle numbers just like how we did for strings. We can just track when we encounter a numeric character and increment our pointer until we see another kind of character. Our JSON parser should be able to identify negative numbers, so let's keep that in mind.
 
-CFGs WIP
+```rust showLineNumbers title="src/tokenizer.rs"
+// Earlier code inside match
+
+'0'..='9' | '-' => {
+    let mut num: String = String::new();
+    if lexeme == '-' {
+        num.push('-');
+        self.advance(); // consume "-"
+    }
+    if let Some(res) = self.scan_num() {
+        num += &res;
+        tokens.push(Token {
+            kind: TokenKind::NUMBER,
+            value: Some(num),
+        })
+    }
+    self.pos -= 1; // reset cursor
+}
+```
+
+What this code does is checking whether the current lexeme is a number, i.e. between 0 to 9, or starts with a minus sign. If it's a minus sign, we consume it and move forward. Since we're in numbers domain now, we'll delege scanning the number to another function: `scan_num()`, then push the result to our token vector.
+
+We have to reset our pointer at this point since after scanning we'd be an extra character ahead.
+
+My implementation of scan num is similar to scan str:
+
+```rust showLineNumbers title="src/tokenizer.rs"
+// Inside impl block
+
+// Tokenize number values
+fn scan_num(&mut self) -> Option<String> {
+    let start_pos: usize = self.pos;
+    let mut has_decimal: bool = false;
+
+    while (self.pos + 1) < self.source.len() {
+        let next: char = self.peek().unwrap();
+        if !next.is_numeric() && next == '.' && !has_decimal {
+            has_decimal = true;
+            self.advance();
+        } else if next.is_numeric() {
+            self.advance();
+        } else {
+            self.advance();
+            return Some(self.source[start_pos..self.pos].to_string());
+        }
+    }
+    return None;
+}
+```
+
+Notice how I'm tracking whether the number has decimal points. All that's going on here is checking the next character is still numeric, then updating our pointer if it is. If it isn't, we consume that last numeric then return a slice up until that point.
+
+This is 80% of the tokenizer done. Finally we have to handle things like booleans and null, that aren't exactly strings.
+
+```rust showLineNumbers title="src/tokenizer.rs"
+// Impl block, just before scan()
+
+// Tokenize identifiers (true/false/null)
+fn scan_identifier(&mut self) -> Option<String> {
+    let start_pos: usize = self.pos;
+
+    // The longest identifier is "false" of length 5
+    // So let's track the next four characters
+    if (self.pos + 4) <= self.source.len() {
+        let next_four: String = self.source[start_pos..(self.pos + 4)].to_string();
+        if next_four == "null" || next_four == "true" {
+            self.pos += 4;
+            return Some(next_four);
+        } else if (self.pos + 5) <= self.source.len() {
+            // If the next five is "false" instead
+            let next_five: String = self.source[start_pos..(self.pos + 5)].to_string();
+            if next_five == "false" {
+                self.pos += 5;
+                return Some(next_five);
+            }
+        }
+    }
+
+    // An invalid token, panic()
+    panic!(
+        "Unexpected identifier: '{}' at pos: {}",
+        self.source[start_pos..self.pos].to_string(),
+        self.pos
+    );
+}
+```
+
+The logic for scanning identifiers is simple: We know an identifier won't exceed 5 characters, so I'll move the pointer 4 characters ahead to see if it matches "true" or "null" then return the appropriate string.
+
+Else, check the next five characters if it matches "false" and return that instead. If we have whatever garbage value that isn't **true**, **false** or **null**, panic on execution.
+
+_Panics_ in Rust are similar to throwing errors in other programming languages.
+
+We're really close to finishing our tokenizer, all that's left is to use the `scan_identifier()` function.
+
+```rust showLineNumbers title="src/tokenizer.rs" {2-17}
+_ => {
+if lexeme.is_alphabetic() {
+    if let Some(res) = self.scan_identifier() {
+        if res == "true" || res == "false" {
+            tokens.push(Token {
+                kind: TokenKind::BOOLEAN,
+                value: Some(res),
+            })
+        } else {
+            tokens.push(Token {
+                kind: TokenKind::NULL,
+                value: None,
+            })
+        }
+        self.pos -= 1;
+    }
+} else {
+    panic!(
+        "Unexpected character '{}' encountered at pos: {}",
+        lexeme, self.pos
+    );
+}
+}
+```
+
+We swtich to identifier scanning mode when we encounter an alphabetic character that isn't one of our earlier matched expressions, and push their tokens to our vector.
+
+Yay! Our tokenizer is done and ready now. You can throw in any well formatted JSON string and the tokenizer will spit out a vector of tokens and values. In the next section, we'll tackle the parser module. 
+
+_The tokenizer is the time consuming part of the system, I promise the parser module will be easier lol._
+
+# [Context-Free Grammar (CFGs)](#context-free-grammar)
+
+Before that tho, you need to know what a context-free grammar is. Remember how we said we need a formal grammer in order to parse strings? That's where CFGs come in. CFGs give us a formal way to mathematically model smaller units of a grammar into composable forms. There's a lot of factors that come into choosing a grammar; things like avoiding `left recursion` or `infinite recursions`.
+
+This is what ours will look like:
+
+```bash
+object ::= '{' members '}'
+members ::= pair(',' pair)*
+pair ::= string ':' value
+value ::= string | number | object | boolean | null
+```
+
+Each `object` starts with a **left brace** literal, a `member` and then a **right brace** literal.
+
+Members contain what we call `pairs`. The `pair(, pair)*` syntax means a pair can contain other pairs or comma separated pairs. That asterisk (*) means it can also repeat indefinitely.
+
+Pairs are composed of a `string` and a `value` separated by **colons**.
+
+Values can be any of: **string**, **number**, **object**, **boolean**, or, **null**.
+
+Defining our grammar in this way ensures we can create recursive functions that call themselves in just the right way to build a complex, yet effective heirarchy of tokens.
+
+CFGs can get rather complex, if you're interested in learning more I strongly recommend you check out the [wiki.](https://en.wikipedia.org/wiki/Context-free_grammar)
 
 # [Writing The parser](#writing-the-parser)
 
