@@ -11,8 +11,8 @@ export default async function Page() {
 
     // sort by date
     allBlogs = allBlogs.sort((a, b) => {
-        const dateA = new Date(a.metadata.publishedOn);
-        const dateB = new Date(b.metadata.publishedOn);
+        const dateA = new Date(a.metadata.jsDate);
+        const dateB = new Date(b.metadata.jsDate);
 
         return dateB.getTime() - dateA.getTime();
     });

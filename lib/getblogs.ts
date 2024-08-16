@@ -37,6 +37,7 @@ const BLOG_DIR = path.join(process.cwd(), 'content/blog');
 type Metadata = {
     title: string;
     summary: string;
+    jsDate: string;
     publishedOn: string;
     tags: string[];
     published: boolean;
