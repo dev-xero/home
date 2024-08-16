@@ -10,6 +10,7 @@ import Spacer from './Spacer';
 import H3 from './elements/H3';
 import A from './elements/A';
 import Pre from './elements/Pre';
+import AnimeRatingCard from '../ui/AnimeRatingCard';
 
 export default function MDXRenderer({ source }: { source: any }) {
     return (
@@ -21,12 +22,13 @@ export default function MDXRenderer({ source }: { source: any }) {
                     HeroImage,
                     Spacer,
                     RoundedImage,
+                    AnimeRatingCard,
                     h1: H1,
                     h3: H3,
                     a: A,
                     ol: Ol,
                     p: P,
-                    pre: Pre
+                    pre: Pre,
                 }}
             />
         </article>

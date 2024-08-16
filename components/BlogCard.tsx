@@ -21,7 +21,7 @@ export default function BlogCard(props: IBlogCardProps) {
                     alt={props.blog.metadata.summary}
                     className="w-full sm:max-w-[280px] object-cover"
                 />
-                <section className="p-4 sm:p-6 flex-1 max-w-[600px]">
+                <section className="p-4 sm:p-6 flex-1 max-w-[600px] overflow-hidden">
                     <h2 className="text-xl font-bold mb-2 group-hover:underline truncate">
                         {props.blog.metadata.title}
                     </h2>
