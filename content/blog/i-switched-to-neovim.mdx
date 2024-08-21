@@ -22,7 +22,7 @@ published: true
 
 Alas, after lots frustrations with VS Code, I've finally decided to switch to Neovim (at least for now). You might be wondering what a "Neovim" is. For the uninitiated:
 
-> Neovim is an terminal-based, light-weight, code editor engineered for speed and versatility. 
+> Neovim is a terminal-based, light-weight, code editor engineered for speed and versatility. 
 
 Which basically means you write code straight from your terminal, instead of using some proprietary, resource-intensive, electron-based bloatware (aka VS Code).
 
@@ -40,8 +40,26 @@ A lot of people, especially beginners, turn away from Neovim because of the keyb
 
 # [Code Renaissance](#code-renaissance)
 
-Neovim is insanely customizable, you could customize the life out of it. And some folks certainly configure everything (I mean _everything_) from the ground up (the kind of guys you find using Arch Linux, btw). But I found that to be a bit too extreme, I just wanted to spin something up and get grinding.
+Neovim is insanely customizable, you could customize the life out of it. And some folks certainly configure everything (I mean _everything_) themselves from the ground up (the kind of guys you find using Arch Linux, btw). But I found that to be a bit too extreme, I just wanted to spin something up and get grinding.
 
 There's quite a few popular Neovim "distros" that come pre-packaged with just enough plugins for you do develop almost instantly. Some worth mentioning are LunarVim, LazyVim and [NvChad](https://nvchad.com/), which is what I ended up using. Seriously, it comes with a lot of good stuff, I didn't even need to do much customizing.
 
-<RoundedImage src="https://res.cloudinary.com/dnkbrrrld/image/upload/v1724196314/display_rnboee.png" alt="nvchad-based" context="NvChad without any customizations" />
+<RoundedImage src="https://res.cloudinary.com/dnkbrrrld/image/upload/v1724196314/display_rnboee.png" alt="nvchad-based" context="NvChad out of the box" />
+
+# [The Not-so Pretty Parts](#the-not-so-pretty-parts)
+
+No tool comes without it's own fair share of problems, and Neovim certainly wasn't excluded.
+
+One of the biggest turn-offs for me was the fact that you can't copy code directly to you clipboard, a must have for any sane programmer out there (So you're telling me I have to type out my error messages line by line on StackOverflow like an actual lunatic?!). Fortunately, after hours of searching I came across a nice solution for this.
+
+In Neovim, since you're writing in the terminal, you're essentially working with buffers. Which is why normal control+C control+V won't work. Instead you need to use what they call a "special register command". On Linux it's `"+y`, which is weird, not gonna lie. Only one problem tho, I'm using Linux through WSL on my Windows machine, so a bit of hand-waving was required. I needed to download the `win32yank` binaries to my `usr/bin` directory and then give execution privileges. Then configure Neovim to interact with the binary when I use the copy command. Less than stellar, I know, but it works.
+
+If you're interested in the configs you can check them out on my GitHub [here](https://github.com/dev-xero/neovim-configs/blob/main/init.lua#L23-L34)
+
+Another issue with Neovim is the fact that it's super customizable (I know I said this is a strength, bear with me lol). I think I've actually spent more time tweaking and customizing plugins than actually coding with it at this point. It's easy to fall into a rabbit hole of plugin customizations, "just one more tweak and I'll get back to coding", then your whole afternoon is gone (sound familiar?).
+
+# [Closing Thoughts](#closing-thoughts)
+
+Neovim is great, and really fast. And I really enjoy working with it. But it isn't for everyone. Most people won't want to leave their comfort zones for unmapped terrains, so it isn't something I can recommend to everyone (unless you're that kind of guy, yes I'm talking about you Linux ricing fanatics).
+
+While I don't see myself going back to VS Code, unless I _really_ need to, I encourage you to give it a go if you're feeling especially adventurous, and who knows, you might come to love it and become a part of the renaissance. 
