@@ -11,7 +11,7 @@ import H3 from "./elements/H3";
 import A from "./elements/A";
 import Pre from "./elements/Pre";
 import AnimeRatingCard from "../ui/AnimeRatingCard";
-import Closing from "./Closing.tsx";
+import Closing from "./Closing";
 
 export default function MDXRenderer({ source }: { source: any }) {
   return (
