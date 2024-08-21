@@ -16,7 +16,7 @@ export default function BreadCrumbs({ page, url }: IBreadCrumbsProps) {
                         <a href="/blog">Blog</a>
                     </li>
                     <span>/</span>
-                    <li className="transition-colors hover:text-white">
+                    <li className="transition-colors hover:text-white truncate">
                         <a href={`/blog/${url}`}>{page}</a>
                     </li>
                 </ul>
