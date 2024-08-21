@@ -9,6 +9,7 @@ import {
     BookOpen01Icon,
     Calendar03Icon,
 } from 'hugeicons-react';
+import BreadCrumbs from './Breadcrumbs';
 
 interface IBlogContentProps {
     blog: IBlog;
@@ -27,12 +28,13 @@ export default function BlogContent({ blog }: IBlogContentProps) {
                 <main className="mt-16">
                     <a
                         href="/blog"
-                        className="flex gap-2 items-center text-grey-050 hover:text-white underline-offset-4 hover:underline"
+                        className="flex gap-2 items-center text-grey-050 hover:text-white underline-offset-4 hover:underline text-sm"
                     >
-                        <ArrowLeft02Icon />
+                        <ArrowLeft02Icon size={18} />
                         <span>Back</span>
                     </a>
-                    <h1 className="mt-12 font-bold text-3xl mb-4">
+                    <BreadCrumbs page={blog.metadata.title} url={blog.slug} />
+                    <h1 className="mt-6 font-bold text-3xl mb-4">
                         {blog.metadata.title}
                     </h1>
                     <p className="text-grey-050 leading-[26px] mb-8">

@@ -12,6 +12,7 @@ import A from "./elements/A";
 import Pre from "./elements/Pre";
 import AnimeRatingCard from "../ui/AnimeRatingCard";
 import Closing from "./Closing";
+import BreadCrumbs from "../Breadcrumbs";
 
 export default function MDXRenderer({ source }: { source: any }) {
   return (
@@ -25,6 +26,7 @@ export default function MDXRenderer({ source }: { source: any }) {
           RoundedImage,
           AnimeRatingCard,
           Closing,
+          BreadCrumbs,
           h1: H1,
           h3: H3,
           a: A,
