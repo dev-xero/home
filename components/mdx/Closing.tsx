@@ -6,7 +6,7 @@ export default function Closing() {
           Questions, comments or suggestions? Ping me a mail at{" "}
           <span className="text-white">ssh.xero@gmail.com</span> or{" "}
           <span className="text-white">@_xerodev</span>{" "}
-          on Discord, and I'll get back to ya!
+          on Discord, and I&apos;ll get back to ya!
         </p>
       </section>
     </>
