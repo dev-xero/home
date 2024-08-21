@@ -19,7 +19,7 @@ export default function RoundedImage({ src, alt, context }: IRoundedImageProps) 
                 priority={true}
                 className="rounded-md"
             />
-            {context && <span className="my-2 text-grey-050 font-normal w-full text-center">{context}</span>}
+            {context && <span className="my-2 text-grey-100 font-normal w-full text-center">{context}</span>}
         </div>
     );
 }
