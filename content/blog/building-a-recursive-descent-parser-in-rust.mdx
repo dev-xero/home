@@ -27,6 +27,8 @@ published: true
 
 # [Introduction](#introduction)
 
+_This post is long and rather technical, you might wanna grab a coffee for this_
+
 Parsers are crucial in so much of the technology we use daily as software engineers. From code linting and syntax analysis to interpreters and compilers. It's no doubt understanding (to a certain extent) the intricacies of how they work can give valuable insights and help you level up as a programmer.
 
 We'll build a flavor of parsers known as "Recursive Descent Parsers", which use a set of mutually recursive functions to elegantly parse any valid JSON string.
@@ -405,11 +407,10 @@ I'm first checking for an `EOF` character which is how we tell programs where th
 
 Most of the action is just "peeking" at which character comes next and while it's not a quote, we update our current position. If it is, we simply consume that quote, and then return a slice from our **start** to **end** positions.
 
-Here's a diagram explaining what I mean:
 
 <RoundedImage
     src="https://res.cloudinary.com/dnkbrrrld/image/upload/v1723759099/diagram-1_qwew7q.png"
-    alt="diagram-1"
+    alt="diagram-1" context="This is what we're working with"
 />
 
 But there's an issue, Rust has no idea where to find the `peek()` function. It's just like our advance function but it doesn't update the pointer. So let's implement that.
@@ -669,3 +670,5 @@ CFGs can quickly become rather complex, if you're interested in learning, more I
 # [Writing The parser](#writing-the-parser)
 
 Parser WIP
+
+<Closing />
