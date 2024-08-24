@@ -23,6 +23,7 @@ export default function Book(props: BookProps) {
                 />
                 <section className="ml-2">
                     <p className="text-sm sm:text-base font-normal text-grey-050 mb-4">
+                        <span className="font-bold">Synopsis:</span>{' '}
                         {props.description}
                     </p>
                     <p className="font-bold text-grey-100 mb-4">
