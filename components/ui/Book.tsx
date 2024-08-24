@@ -12,14 +12,14 @@ interface BookProps {
 export default function Book(props: BookProps) {
     return (
         <>
-            <div className="flex gap-2 flex-grow">
+            <div className="flex flex-col sm:flex-row gap-2 flex-grow">
                 <Image
                     width={200}
                     height={300}
                     src={props.src}
                     alt={props.title}
                     priority={true}
-                    className="rounded-md border-2 border-light-dark w-[130px] h-[200px]"
+                    className="rounded-md border-2 border-light-dark w-[200px] h-[300px] sm:w-[130px] sm:h-[200px]"
                 />
                 <section className="ml-2">
                     <p className="text-sm sm:text-base font-normal text-grey-050 mb-4">
