@@ -133,6 +133,10 @@ h3#nav-header > a:hover::before {
         padding-left: 24px;
     }
 
+    h3#nav-header > a:hover {
+        padding-left: 0px !important;
+    }
+
     h1 > a:hover::before,
     h2 > a:hover::before,
     h3 > a:hover::before,

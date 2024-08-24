@@ -13,6 +13,7 @@ import Pre from "./elements/Pre";
 import AnimeRatingCard from "../ui/AnimeRatingCard";
 import Closing from "./Closing";
 import BreadCrumbs from "../Breadcrumbs";
+import Book from "../ui/Book";
 
 export default function MDXRenderer({ source }: { source: any }) {
   return (
@@ -27,6 +28,7 @@ export default function MDXRenderer({ source }: { source: any }) {
           AnimeRatingCard,
           Closing,
           BreadCrumbs,
+          Book,
           h1: H1,
           h3: H3,
           a: A,
