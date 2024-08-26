@@ -2,11 +2,16 @@ import { IBlog } from '@/lib/getblogs';
 import SubHeading from '../ui/SubHeading';
 import BlogCard from '../BlogCard';
 
+interface IViewsMap {
+    slug: string;
+    views: number;
+}
 interface IBlogPageProps {
     allBlogs: Array<IBlog>;
+    viewsMap: IViewsMap[];
 }
 
-export default function BlogPage({ allBlogs }: IBlogPageProps) {
+export default function BlogPage({ allBlogs, viewsMap }: IBlogPageProps) {
     return (
         <main className="mt-24" id="blog">
             <section className="text-grey-050 mt-4">
@@ -20,7 +25,7 @@ export default function BlogPage({ allBlogs }: IBlogPageProps) {
                 <section className="mt-8 px-4 flex flex-col gap-4">
                     {allBlogs.length > 0 ? (
                         allBlogs.map((blog, id) => (
-                            <BlogCard key={id} blog={blog} />
+                            <BlogCard key={id} blog={blog} views={viewsMap.find(view => view.slug == blog.slug)!["views"] ?? 0} />
                         ))
                     ) : (
                         <h3>No blogs here yet, brewing...</h3>

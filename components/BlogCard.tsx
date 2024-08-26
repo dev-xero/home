@@ -4,6 +4,7 @@ import { Calendar04Icon } from 'hugeicons-react';
 
 interface IBlogCardProps {
     blog: IBlog;
+    views: number;
 }
 
 export default function BlogCard(props: IBlogCardProps) {
@@ -49,6 +50,10 @@ export default function BlogCard(props: IBlogCardProps) {
                         <span className="flex gap-2 items-center text-grey-100 mt-2 text-sm">
                             <span>•</span>
                             {props.blog.readingTime}
+                        </span>
+                        <span className="flex gap-2 items-center text-grey-100 mt-2 text-sm">
+                            <span>•</span>
+                            {props.views} views
                         </span>
                     </section>
                 </section>
