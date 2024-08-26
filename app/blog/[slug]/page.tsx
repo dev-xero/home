@@ -1,6 +1,8 @@
 import BlogContent from '@/components/BlogContent';
 import personal from '@/data/personal';
 import { getBlog, getBlogs } from '@/lib/getblogs';
+import constants from '@/shared/constants';
+import axios from 'axios';
 import { notFound } from 'next/navigation';
 
 // Metadata optimizations
@@ -70,10 +72,20 @@ export async function generateStaticParams() {
 // Blog page content
 export default async function SingleBlogPage({ params }: { params: any }) {
     const blog = await getBlog(params.slug);
-
-    if (!blog) {
-        return notFound();
+    // increment and await views
+    let views = 0;
+    try {
+        const res = await axios.post(
+            `${constants.VIEWS_ENDPOINT}/update?slug=${params.slug}`
+        );
+        const data = res.data;
+        // DEBUG: console.log(data);
+        views = data['payload']['views'];
+    } catch (err) {
+        console.error(err);
     }
 
-    return <BlogContent blog={blog} />;
+    if (!blog) return notFound();
+
+    return <BlogContent blog={blog} views={views} />;
 }
