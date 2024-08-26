@@ -60,23 +60,27 @@ export async function generateMetadata({ params }: { params: any }) {
 
 // Static Params
 export async function generateStaticParams() {
-    const blogFiles = await getBlogs();
-
-    const slugs = blogFiles.map((file) => ({
-        slug: file.slug,
-    }));
-
-    return slugs;
+    try {
+        const blogFiles = await getBlogs();
+        return blogFiles.map((file) => ({ slug: file.slug }));
+    } catch (err) {
+        console.error("Failed to generate static params:", err);
+        return [];
+    }
 }
 
 // Blog page content
 export default async function SingleBlogPage({ params }: { params: any }) {
     const blog = await getBlog(params.slug);
+    if (!blog) return notFound();
+
     // increment and await views
     let views = 0;
     try {
         const res = await axios.post(
-            `${constants.VIEWS_ENDPOINT}/update?slug=${params.slug}`
+            `${constants.VIEWS_ENDPOINT}/update?slug=${encodeURIComponent(
+                params.slug
+            )}`
         );
         const data = res.data;
         // DEBUG: console.log(data);
@@ -84,8 +88,6 @@ export default async function SingleBlogPage({ params }: { params: any }) {
     } catch (err) {
         console.error(err);
     }
-
-    if (!blog) return notFound();
 
     return <BlogContent blog={blog} views={views} />;
 }
