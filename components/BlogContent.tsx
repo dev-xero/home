@@ -43,24 +43,30 @@ export default function BlogContent({ blog, views }: IBlogContentProps) {
                         {blog.metadata.summary}
                     </p>
                     <section className="mt-2 mb-6 sm:flex items-center justify-between">
-                        <div className="flex items-center gap-4 sm:mb-0 mb-4">
+                        <div className="flex items-center gap-4 sm:mb-0 mb-4 text-xs sm:!text-sm">
                             {/* VIEWS */}
                             <div className="flex items-center gap-2 cursor-default">
-                                <ViewIcon />
+                                <ViewIcon size={20} className="text-blue" />
                                 <span className="text-grey-050">
                                     {views} {views == 1 ? 'view' : 'views'}
                                 </span>
                             </div>
                             {/* READING TIME */}
                             <div className="flex items-center gap-2 cursor-default">
-                                <BookOpen01Icon />
+                                <BookOpen01Icon
+                                    size={20}
+                                    className="text-blue"
+                                />
                                 <span className="text-grey-050">
                                     {blog.readingTime}
                                 </span>
                             </div>
                             {/* CALENDAR */}
                             <div className="flex items-center gap-2 cursor-default">
-                                <Calendar03Icon />
+                                <Calendar03Icon
+                                    size={20}
+                                    className="text-blue"
+                                />
                                 <span className="text-grey-050">
                                     {blog.metadata.publishedOn}
                                 </span>
