@@ -11,24 +11,30 @@ import { notFound } from 'next/navigation';
 export default async function Page() {
     let allBlogs: IBlog[] = await getBlogs();
     allBlogs = allBlogs.filter((blog) => blog.metadata.published);
-    
+
     // sort by date
     allBlogs = allBlogs.sort((a, b) => {
         const dateA = new Date(a.metadata.jsDate);
         const dateB = new Date(b.metadata.jsDate);
-        
+
         return dateB.getTime() - dateA.getTime();
     });
 
     // Generate views map
-    let viewsMap = [];
-    try {
-        let viewsMapResponse = await axios.get(`${constants.VIEWS_ENDPOINT}/views`);
-        viewsMap = viewsMapResponse.data["payload"];
-    } catch (err) {
-        console.error("Failed to get views map.");
-        notFound();
+    interface IViewsMap {
+        slug: string;
+        views: number;
     }
+    let viewsMap: Array<IViewsMap> = [];
+    await axios
+        .get(`${constants.VIEWS_ENDPOINT}/views`)
+        .then((res) => (viewsMap = res.data['payload']))
+        .catch((err) => {
+            console.error('Failed to generate views map.\nErr:', err);
+            return notFound();
+        });
+
+    console.log(viewsMap);
 
     return (
         <Container>

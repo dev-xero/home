@@ -4,6 +4,7 @@ import { IBlog } from '@/lib/getblogs';
 import Container from './Container';
 import Header from './ui/Header';
 import MDXRenderer from './mdx/MDXRenderer';
+import constants from '@/shared/constants';
 import {
     ArrowLeft02Icon,
     BookOpen01Icon,
@@ -11,13 +12,31 @@ import {
     ViewIcon,
 } from 'hugeicons-react';
 import BreadCrumbs from './Breadcrumbs';
+import { useEffect } from 'react';
+import axios from 'axios';
 
 interface IBlogContentProps {
     blog: IBlog;
     views: number;
+    slug: string;
 }
 
-export default function BlogContent({ blog, views }: IBlogContentProps) {
+export default function BlogContent({ blog, views, slug }: IBlogContentProps) {
+    useEffect(() => {
+        const updateViews = async () => {
+            try {
+                await axios.post(
+                    `${
+                        constants.VIEWS_ENDPOINT
+                    }/update?slug=${encodeURIComponent(slug)}`
+                );
+            } catch (err) {
+                console.error(err);
+            }
+        };
+        updateViews();
+    }, [slug]);
+
     return (
         <Container>
             <>

@@ -7,26 +7,24 @@ import { serialize } from 'next-mdx-remote/serialize';
 import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeAutoLinkHeadings from 'rehype-autolink-headings';
 import rehypeSlug from 'rehype-slug';
-import rehypeToc from 'rehype-toc';
 
-function copyCode(textElement: HTMLElement) {
-    const codeElement = textElement.nextElementSibling;
-    if (codeElement && codeElement.tagName === 'CODE') {
-        const textarea = document.createElement('textarea');
-        textarea.value = codeElement.textContent!;
-        document.body.appendChild(textarea);
-        textarea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textarea);
-        textElement.textContent = 'Copied!';
-        setTimeout(() => (textElement.textContent = 'Copy'), 1500);
-    }
-}
-
+// function copyCode(textElement: HTMLElement) {
+//     const codeElement = textElement.nextElementSibling;
+//     if (codeElement && codeElement.tagName === 'CODE') {
+//         const textarea = document.createElement('textarea');
+//         textarea.value = codeElement.textContent!;
+//         document.body.appendChild(textarea);
+//         textarea.select();
+//         document.execCommand('copy');
+//         document.body.removeChild(textarea);
+//         textElement.textContent = 'Copied!';
+//         setTimeout(() => (textElement.textContent = 'Copy'), 1500);
+//     }
+// }
+//
 import moonlightTheme from '../shiki/moonlight-ii.json' assert { type: 'json' };
 
 import { visit } from 'unist-util-visit';
-import { h } from 'hastscript';
 
 const rehypePrettyCodeOptions = {
     theme: moonlightTheme,
