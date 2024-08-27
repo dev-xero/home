@@ -1,6 +1,6 @@
 import BlogContent from '@/components/BlogContent';
 import personal from '@/data/personal';
-import { IBlog, getBlog, getBlogs } from '@/lib/getblogs';
+import { getBlog, getBlogs } from '@/lib/getblogs';
 import constants from '@/shared/constants';
 import axios from 'axios';
 import { notFound } from 'next/navigation';
@@ -93,3 +93,5 @@ export default async function SingleBlogPage({ params }: { params: any }) {
         />
     );
 }
+
+export const revalidate = 10;
