@@ -19,24 +19,6 @@ interface IBlogContentProps {
 }
 
 export default function BlogContent({ blog, views }: IBlogContentProps) {
-    // useEffect(() => {
-    //     const updateViews = async () => {
-    //         try {
-    //             await fetch(`${constants.VIEWS_ENDPOINT}/update?slug=${encodeURIComponent(slug)}`, {
-    //                 method: 'POST',
-    //                 next: { revalidate: 10 }
-    //             }).then(res => {
-    //                 if (!res.ok) {
-    //                     throw new Error("Not ok.")
-    //                 }
-    //                 return res.json()
-    //             })
-    //         } catch (err) {
-    //             console.error(err);
-    //         }
-    //     };
-    // }
-
     return (
         <Container>
             <>
@@ -47,6 +29,7 @@ export default function BlogContent({ blog, views }: IBlogContentProps) {
                 />
 
                 <main className="mt-16">
+                    <BreadCrumbs page={blog.metadata.title} url={blog.slug} />
                     <a
                         href="/blog"
                         className="flex gap-2 items-center text-grey-050 hover:text-white underline-offset-4 hover:underline text-sm"
@@ -54,7 +37,6 @@ export default function BlogContent({ blog, views }: IBlogContentProps) {
                         <ArrowLeft02Icon size={18} />
                         <span>Back</span>
                     </a>
-                    <BreadCrumbs page={blog.metadata.title} url={blog.slug} />
                     <h1 className="mt-6 font-bold text-3xl mb-4">
                         {blog.metadata.title}
                     </h1>
