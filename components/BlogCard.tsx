@@ -33,28 +33,30 @@ export default function BlogCard(props: IBlogCardProps) {
                     <div className="flex gap-2 mb-4">
                         {props.blog.metadata.tags.length > 0
                             ? props.blog.metadata.tags.map((tag, id) => (
-                                  <span
-                                      key={id}
-                                      className="px-2 bg-green text-bg-dark font-bold text-sm"
-                                  >
-                                      {tag}
-                                  </span>
-                              ))
+                                <span
+                                    key={id}
+                                    className="px-2 bg-green text-bg-dark font-bold text-sm"
+                                >
+                                    {tag}
+                                </span>
+                            ))
                             : ''}
                     </div>
-                    <section className="flex gap-2 items-center">
-                        <span className="flex gap-2 items-center text-grey-100 mt-2 text-xs sm:text-sm">
+                    <section className="flex gap-2 flex-col">
+                        <span className="flex gap-2 items-center text-grey-100 mt-2 text-sm">
                             <Calendar04Icon size={16} />
                             {props.blog.metadata.publishedOn}
                         </span>
-                        <span className="flex gap-2 items-center text-grey-100 mt-2 text-xs sm:text-sm">
-                            <span>•</span>
-                            {props.blog.readingTime}
-                        </span>
-                        <span className="flex gap-2 items-center text-grey-100 mt-2 text-xs sm:text-sm">
-                            <span>•</span>
-                            {props.views} views
-                        </span>
+                        <div className="flex gap-2 items-center">
+                            <span className="flex gap-2 items-center text-grey-100 mt-2 text-sm">
+                                {props.blog.readingTime}
+                            </span>
+                            <span className="flex gap-2 items-center text-grey-100 mt-2 text-sm">
+                                <span>•</span>
+                                {props.views} views
+                            </span>
+
+                        </div>
                     </section>
                 </section>
             </a>
