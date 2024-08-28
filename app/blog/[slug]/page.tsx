@@ -82,7 +82,7 @@ export default async function SingleBlogPage({ params }: { params: any }) {
         next: { revalidate: 300 }
     }).then(res => {
         if (!res.ok) {
-            throw new Error("Response was no ok.");
+            throw new Error("Response was not ok.");
         }
         return res.json();
     }).then(data => {
