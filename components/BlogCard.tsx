@@ -30,7 +30,7 @@ export default function BlogCard(props: IBlogCardProps) {
                         {props.blog.metadata.summary}
                     </p>
                     {/* TAGS */}
-                    <div className="flex gap-2 mb-4">
+                    <div className="flex gap-2 mb-2">
                         {props.blog.metadata.tags.length > 0
                             ? props.blog.metadata.tags.map((tag, id) => (
                                 <span
@@ -42,21 +42,21 @@ export default function BlogCard(props: IBlogCardProps) {
                             ))
                             : ''}
                     </div>
-                    <section className="flex gap-2 flex-col">
-                        <span className="flex gap-2 items-center text-grey-100 mt-2 text-sm">
-                            <Calendar04Icon size={16} />
-                            {props.blog.metadata.publishedOn}
-                        </span>
-                        <div className="flex gap-2 items-center">
-                            <span className="flex gap-2 items-center text-grey-100 mt-2 text-sm">
+                    <section className="flex gap-2 flex-col sm:flex-row sm:items-center">
+                        <div className="flex gap-2 items-center mt-2">
+                            <span className="flex gap-2 items-center text-grey-100 text-sm">
+                                <span className="hidden sm:inline">•</span>
                                 {props.blog.readingTime}
                             </span>
-                            <span className="flex gap-2 items-center text-grey-100 mt-2 text-sm">
+                            <span className="flex gap-2 items-center text-grey-100 text-sm">
                                 <span>•</span>
                                 {props.views} views
                             </span>
-
                         </div>
+                        <span className="flex gap-2 items-center text-grey-100 mt-2 text-sm sm:!order-first">
+                            <Calendar04Icon size={16} />
+                            {props.blog.metadata.publishedOn}
+                        </span>
                     </section>
                 </section>
             </a>
