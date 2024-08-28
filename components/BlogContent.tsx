@@ -25,11 +25,15 @@ export default function BlogContent({ blog, views, slug }: IBlogContentProps) {
     useEffect(() => {
         const updateViews = async () => {
             try {
-                await axios.post(
-                    `${
-                        constants.VIEWS_ENDPOINT
-                    }/update?slug=${encodeURIComponent(slug)}`
-                );
+                await fetch(`${constants.VIEWS_ENDPOINT}/update?slug=${encodeURIComponent(slug)}`, {
+                    method: 'POST',
+                    next: { revalidate: 10 }
+                }).then(res => {
+                    if (!res.ok) {
+                        throw new Error("Not ok.")
+                    }
+                    return res.json()
+                })
             } catch (err) {
                 console.error(err);
             }

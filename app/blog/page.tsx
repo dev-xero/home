@@ -26,9 +26,34 @@ export default async function Page() {
         views: number;
     }
     let viewsMap: Array<IViewsMap> = [];
-    await axios
-        .get(`${constants.VIEWS_ENDPOINT}/views`)
-        .then((res) => (viewsMap = res.data['payload']))
+    allBlogs.map(blog => {
+        viewsMap.push({
+            slug: blog.slug,
+            views: 0
+        })
+    })
+
+    console.log(viewsMap);
+
+    await fetch(`${constants.VIEWS_ENDPOINT}/views`,
+        { next: { revalidate: 300 } })
+        .then(res => {
+            if (!res.ok) {
+                throw new Error("Response failed along the line.");
+            }
+            return res.json();
+        })
+        .then((data) => {
+            const fetchedViewsMap = data["payload"];
+            if (fetchedViewsMap.length != 0) {
+                for (let i = 0; i < viewsMap.length; i++) {
+                    if (viewsMap[i]["slug"] == fetchedViewsMap[i]["slug"]) {
+                        viewsMap[i]["views"] = fetchedViewsMap[i]["views"]
+                    }
+                }
+
+            }
+        })
         .catch((err) => {
             console.error('Failed to generate views map.\nErr:', err);
             return notFound();
