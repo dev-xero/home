@@ -4,7 +4,6 @@ import { IBlog } from '@/lib/getblogs';
 import Container from './Container';
 import Header from './ui/Header';
 import MDXRenderer from './mdx/MDXRenderer';
-import constants from '@/shared/constants';
 import {
     ArrowLeft02Icon,
     BookOpen01Icon,
@@ -12,8 +11,6 @@ import {
     ViewIcon,
 } from 'hugeicons-react';
 import BreadCrumbs from './Breadcrumbs';
-import { useEffect } from 'react';
-import axios from 'axios';
 
 interface IBlogContentProps {
     blog: IBlog;
@@ -21,25 +18,24 @@ interface IBlogContentProps {
     slug: string;
 }
 
-export default function BlogContent({ blog, views, slug }: IBlogContentProps) {
-    useEffect(() => {
-        const updateViews = async () => {
-            try {
-                await fetch(`${constants.VIEWS_ENDPOINT}/update?slug=${encodeURIComponent(slug)}`, {
-                    method: 'POST',
-                    next: { revalidate: 10 }
-                }).then(res => {
-                    if (!res.ok) {
-                        throw new Error("Not ok.")
-                    }
-                    return res.json()
-                })
-            } catch (err) {
-                console.error(err);
-            }
-        };
-        updateViews();
-    }, [slug]);
+export default function BlogContent({ blog, views }: IBlogContentProps) {
+    // useEffect(() => {
+    //     const updateViews = async () => {
+    //         try {
+    //             await fetch(`${constants.VIEWS_ENDPOINT}/update?slug=${encodeURIComponent(slug)}`, {
+    //                 method: 'POST',
+    //                 next: { revalidate: 10 }
+    //             }).then(res => {
+    //                 if (!res.ok) {
+    //                     throw new Error("Not ok.")
+    //                 }
+    //                 return res.json()
+    //             })
+    //         } catch (err) {
+    //             console.error(err);
+    //         }
+    //     };
+    // }
 
     return (
         <Container>

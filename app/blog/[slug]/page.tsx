@@ -2,7 +2,6 @@ import BlogContent from '@/components/BlogContent';
 import personal from '@/data/personal';
 import { getBlog, getBlogs } from '@/lib/getblogs';
 import constants from '@/shared/constants';
-import axios from 'axios';
 import { notFound } from 'next/navigation';
 
 // Static Params
@@ -74,21 +73,30 @@ export async function generateMetadata({ params }: { params: any }) {
 export default async function SingleBlogPage({ params }: { params: any }) {
     const blog = await getBlog(params.slug);
 
-    if (!blog) {
+    if (!blog)
         return notFound();
-    }
 
-    const viewsRes = await axios.post(
-        `${constants.VIEWS_ENDPOINT}/update?slug=${encodeURIComponent(
-            params.slug
-        )}`
-    );
-    const viewsData = viewsRes.data;
+    let views = 0;
+    await fetch(`${constants.VIEWS_ENDPOINT}/update?slug=${encodeURIComponent(params.slug)}`, {
+        method: 'POST',
+        next: { revalidate: 300 }
+    }).then(res => {
+        if (!res.ok) {
+            throw new Error("Response was no ok.");
+        }
+        return res.json();
+    }).then(data => {
+        console.log("Getting...");
+        views = data["payload"]["views"];
+    }).catch(err => {
+        console.error(err);
+        return notFound();
+    });
 
     return (
         <BlogContent
             blog={blog!}
-            views={viewsData['payload']['views']}
+            views={views}
             slug={params.slug}
         />
     );

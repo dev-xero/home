@@ -1,4 +1,4 @@
-import AboutPage from '@/components/pages/AboutPage';
+mport AboutPage from '@/components/pages/AboutPage';
 import Container from '@/components/Container';
 import Header from '@/components/ui/Header';
 import PageTransition from '@/layouts/PageTransition';

@@ -5,8 +5,12 @@ import Header from '@/components/ui/Header';
 import PageTransition from '@/layouts/PageTransition';
 import { IBlog, getBlogs } from '@/lib/getblogs';
 import constants from '@/shared/constants';
-import axios from 'axios';
 import { notFound } from 'next/navigation';
+
+interface IViewsMap {
+    slug: string;
+    views: number;
+}
 
 export default async function Page() {
     let allBlogs: IBlog[] = await getBlogs();
@@ -20,12 +24,9 @@ export default async function Page() {
         return dateB.getTime() - dateA.getTime();
     });
 
-    // Generate views map
-    interface IViewsMap {
-        slug: string;
-        views: number;
-    }
+
     let viewsMap: Array<IViewsMap> = [];
+
     allBlogs.map(blog => {
         viewsMap.push({
             slug: blog.slug,
@@ -33,10 +34,8 @@ export default async function Page() {
         })
     })
 
-    console.log(viewsMap);
-
     await fetch(`${constants.VIEWS_ENDPOINT}/views`,
-        { next: { revalidate: 300 } })
+        { next: { revalidate: 0 } })
         .then(res => {
             if (!res.ok) {
                 throw new Error("Response failed along the line.");
@@ -45,21 +44,18 @@ export default async function Page() {
         })
         .then((data) => {
             const fetchedViewsMap = data["payload"];
-            if (fetchedViewsMap.length != 0) {
-                for (let i = 0; i < viewsMap.length; i++) {
-                    if (viewsMap[i]["slug"] == fetchedViewsMap[i]["slug"]) {
-                        viewsMap[i]["views"] = fetchedViewsMap[i]["views"]
-                    }
+            for (const mapping of fetchedViewsMap) {
+                const idx = viewsMap.findIndex(map => map.slug == mapping.slug);
+                if (idx != -1) {
+                    viewsMap[idx] = mapping;
                 }
-
             }
-        })
-        .catch((err) => {
+        }).catch((err) => {
             console.error('Failed to generate views map.\nErr:', err);
             return notFound();
         });
 
-    console.log(viewsMap);
+    console.log("Generated Maps:", viewsMap);
 
     return (
         <Container>
