@@ -50,12 +50,11 @@ export default async function Page() {
                     viewsMap[idx] = mapping;
                 }
             }
+            console.log("Generated Maps:", viewsMap);
         }).catch((err) => {
             console.error('Failed to generate views map.\nErr:', err);
-            return notFound();
         });
 
-    console.log("Generated Maps:", viewsMap);
 
     return (
         <Container>
