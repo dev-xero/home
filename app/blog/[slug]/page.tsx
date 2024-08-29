@@ -90,7 +90,6 @@ export default async function SingleBlogPage({ params }: { params: any }) {
         views = data["payload"]["views"];
     }).catch(err => {
         console.error(err);
-        return notFound();
     });
 
     return (
