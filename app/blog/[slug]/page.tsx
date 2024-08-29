@@ -79,7 +79,7 @@ export default async function SingleBlogPage({ params }: { params: any }) {
     let views = 0;
     await fetch(`${constants.VIEWS_ENDPOINT}/update?slug=${encodeURIComponent(params.slug)}`, {
         method: 'POST',
-        next: { revalidate: 300 }
+        next: { revalidate: 1200 }
     }).then(res => {
         if (!res.ok) {
             throw new Error("Response was not ok.");
