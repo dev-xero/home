@@ -96,7 +96,7 @@ export default async function SingleBlogPage({ params }: { params: any }) {
             }
 
             const data = await res.json();
-            views = data["payload"]["views"];
+            views = data["payload"]["views"] - 1;
             isSuccessful = true;
             break;
         } catch (err) {
