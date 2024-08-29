@@ -30,7 +30,8 @@ const rehypePrettyCodeOptions = {
     theme: moonlightTheme,
 };
 
-const BLOG_DIR = path.join(process.cwd(), 'public/content/blog');
+const BLOG_DIR = path.join(process.cwd(), 'content/blog');
+
 
 type Metadata = {
     title: string;
@@ -141,6 +142,7 @@ export const getBlogs = cache(fetchBlogs);
 
 export async function getBlog(slug: string) {
     let blogs = await getBlogs();
+
     if (process.env.APP_ENV != 'development') {
         blogs = blogs.filter(
             (blog) => blog.metadata && blog.metadata.published == true

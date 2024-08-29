@@ -35,7 +35,7 @@ export default async function Page() {
     })
 
     await fetch(`${constants.VIEWS_ENDPOINT}/views`,
-        { next: { revalidate: 0 } })
+        { next: { revalidate: 300 } })
         .then(res => {
             if (!res.ok) {
                 throw new Error("Response failed along the line.");
