@@ -34,27 +34,52 @@ export default async function Page() {
         })
     })
 
-    await fetch(`${constants.VIEWS_ENDPOINT}/views`,
-        { next: { revalidate: 1200 } })
-        .then(res => {
+    let attempts = 0;
+    let isSuccessful = false;
+    let DEFAULT_URL = constants.VIEWS_ENDPOINT;
+    let FALLBACK_URL = constants.VIEWS_FALLBACK_ENDPOINT;
+    const retries = 3;
+
+    while (attempts < retries && !isSuccessful) {
+        let url = attempts < retries - 1 ? DEFAULT_URL : FALLBACK_URL;
+
+        try {
+            const res = await fetch(`${url}/views`, { next: { revalidate: 300 } });
+
             if (!res.ok) {
+                attempts += 1;
                 throw new Error("Response failed along the line.");
             }
-            return res.json();
-        })
-        .then((data) => {
+
+            const data = await res.json();
             const fetchedViewsMap = data["payload"];
+
             for (const mapping of fetchedViewsMap) {
                 const idx = viewsMap.findIndex(map => map.slug == mapping.slug);
                 if (idx != -1) {
                     viewsMap[idx] = mapping;
                 }
             }
-            console.log("Generated Maps:", viewsMap);
-        }).catch((err) => {
-            console.error('Failed to generate views map.\nErr:', err);
-        });
 
+            console.log("Generated Maps:", viewsMap);
+            isSuccessful = true;
+            break;
+        } catch (err) {
+            attempts += 1;
+            console.error(`Attempt ${attempts} failed. Error:`, err);
+
+            if (attempts >= retries) {
+                console.error("All attempts failed, exiting loop.");
+                break;
+            } else if (attempts === retries - 1) {
+                console.log("Falling back to other endpoint...");
+            }
+        }
+    }
+
+    if (!isSuccessful) {
+        console.error("Failed to generate view map after retires.");
+    }
 
     return (
         <Container>
