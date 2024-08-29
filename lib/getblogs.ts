@@ -30,7 +30,7 @@ const rehypePrettyCodeOptions = {
     theme: moonlightTheme,
 };
 
-const BLOG_DIR = path.join(process.cwd(), 'content/blog');
+const BLOG_DIR = path.join('content/blog');
 
 
 type Metadata = {
