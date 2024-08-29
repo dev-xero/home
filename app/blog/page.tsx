@@ -5,7 +5,6 @@ import Header from '@/components/ui/Header';
 import PageTransition from '@/layouts/PageTransition';
 import { IBlog, getBlogs } from '@/lib/getblogs';
 import constants from '@/shared/constants';
-import { notFound } from 'next/navigation';
 
 interface IViewsMap {
     slug: string;
