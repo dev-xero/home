@@ -1,7 +1,7 @@
 ---
 title: Building a Recursive Descent Parser for JSON (in Rust), Part 01
 summary: JSON is cool, but parsers are even cooler, so why don't we try building a JSON parser from scratch!
-slug: building-a-recursive-descent-parser-in-rust
+slug: building-a-recursive-descent-parser-in-rust-part-01
 image: "https://res.cloudinary.com/dnkbrrrld/image/upload/v1723249551/cover-8-edit_emfaja.png"
 tags: ['Rust', 'JSON', 'Technical']
 publishedOn: 30th August, 2024
@@ -78,8 +78,8 @@ This is where the actual magic happens, our parser takes a list of the tokens we
 We're writing the parser in Rust so I assume you have the binaries installed on your system. If not, you can head over to their [docs](https://www.rust-lang.org/tools/install) and follow the instructions for your OS. I'm on a Linux build so installation is fairly simple:
 
 ```sh
-curl --proto '=https' --tlsv1.2 -sSf <https://sh.rustup.rs> | sh
-rustup --version
+$ curl --proto '=https' --tlsv1.2 -sSf <https://sh.rustup.rs> | sh
+$ rustup --version
 ```
 
 # [Project Setup](#project-setup)
@@ -87,8 +87,8 @@ rustup --version
 Let's set up a new Rust project using cargo and open it up.
 
 ```sh
-cargo new json-parser
-cd json-parser
+$ cargo new json-parser
+$ cd json-parser
 ```
 
 # [Writing The Tokenizer (Lexer)](#writing-the-tokenizer-lexer)
@@ -214,21 +214,21 @@ I've gone ahead and created a new file, `token.rs`. We'll represent JSON tokens 
 // Token kind
 #[derive(Debug)]
 pub enum TokenKind {
-    LBRACE,
-    RBRACE,
-    COLON,
-    COMMA,
-    STRING,
-    NUMBER,
-    BOOLEAN,
-    NULL
+  LBRACE,
+  RBRACE,
+  COLON,
+  COMMA,
+  STRING,
+  NUMBER,
+  BOOLEAN,
+  NULL
 }
 
 // Formatting for display: token kind
 impl TokenKind {
-    pub fn debug(&self) {
-        println!("{:?}", self);
- }
+    pub fn debug(&self) {
+        println!("{:?}", self);
+    }
 }
 ```
 
@@ -240,15 +240,15 @@ Each enum entry corresponds to a token we'll handle in the parser. For the actua
 // Token struct, each token has a 'kind' and value
 #[derive(Debug)]
 pub struct Token {
-    pub kind: TokenKind,
-    pub value: Option<String>
+    pub kind: TokenKind,
+    pub value: Option<String>
 }
 
 // Formatting for display: token
 impl Token {
-    pub fn debug(&self) {
-        println!("kind: {:?}, value: {:?}", self.kind, self.value);
- }
+    pub fn debug(&self) {
+        println!("kind: {:?}, value: {:?}", self.kind, self.value);
+    }
 }
 ```
 
@@ -257,8 +257,8 @@ So each token will have the `kind` attribute. Some tokens can have a `value`, li
 I've created a new file for the tokenizer and started with handling braces.
 
 ```bash
-touch src/tokenizer.rs
-code src/tokenizer.rs
+$ touch src/tokenizer.rs
+$ code src/tokenizer.rs
 ```
 
 ```rust showLineNumbers title="src/tokenizer.rs"
@@ -266,8 +266,8 @@ use crate::token::{Token, TokenKind};
 
 // Tokenizer struct
 pub struct Tokenizer {
-    pub pos: usize,
-    pub source: String,
+    pub pos: usize,
+    pub source: String,
 }
 ```
 
@@ -278,27 +278,24 @@ use crate::token::{Token, TokenKind};
 
 // Tokenizer struct
 pub struct Tokenizer {
-    pub pos: usize,
-    pub source: String,
+  pub pos: usize,
+  pub source: String,
 }
 
 // Methods
 impl Tokenizer {
- // Tokenize a valid JSON string
-    pub fn scan(&mut self) -> Vec<Token> {
-        println!("{}", self.source);
-        let mut tokens: Vec<Token> = Vec::new();
-        let char_vect: Vec<char> = self.source.chars().collect()
+    // Tokenize a valid JSON string
+    pub fn scan(&mut self) -> Vec<Token> {
+        println!("{}", self.source);
+        let mut tokens: Vec<Token> = Vec::new();
+        let char_vect: Vec<char> = self.source.chars().collect()
 
- // Panic on trailing chars
-        let trailing: char = char_vect[char_vect.len() - 2];
-        if !trailing.is_alphanumeric() && trailing != '{' && trailing != '}' {
-            panic!(
-                "Unexpected trailing character: '{}'",
- char_vect[char_vect.len() - 2]
- );
- }
- }
+        // Panic on trailing chars
+        let trailing: char = char_vect[char_vect.len() - 2];
+        if !trailing.is_alphanumeric() && trailing != '{' && trailing != '}' {
+            panic!("Unexpected trailing character: '{}'", char_vect[char_vect.len() - 2]);
+        }
+    }
 }
 ```
 
@@ -313,26 +310,26 @@ Handling braces is simply a matter of checking whether the character matches "\{
 
 // Iterate till the end
 while self.pos < self.source.len() {
-    let lexeme: char = char_vect[self.pos];
+    let lexeme: char = char_vect[self.pos];
 
-    match lexeme {
-        '{' => tokens.push(Token {
- kind: TokenKind::LBRACE,
- value: None,
- }),
-        '}' => tokens.push(Token {
- kind: TokenKind::RBRACE,
- value: None,
- }),
-        ':' => tokens.push(Token {
- kind: TokenKind::COLON,
- value: None,
- }),
-        ',' => tokens.push(Token {
- kind: TokenKind::COMMA,
- value: None,
- }),
- }
+    match lexeme {
+        '{' => tokens.push(Token {
+                kind: TokenKind::LBRACE,
+                value: None,
+            }),
+        '}' => tokens.push(Token {
+                kind: TokenKind::RBRACE,
+                value: None,
+            }),
+        ':' => tokens.push(Token {
+                kind: TokenKind::COLON,
+                value: None,
+            }),
+        ',' => tokens.push(Token {
+                kind: TokenKind::COMMA,
+                value: None,
+            }),
+        }
 }
 
 return tokens;
@@ -352,13 +349,13 @@ So let's start by tracking when we're in a string:
 // Earlier code inside match
 
 '"' => {
-    self.advance(); // consume '"'
-    if let Some(res) = self.scan_str() {
- tokens.push(Token {
- kind: TokenKind::STRING,
- value: Some(res),
- })
- }
+    self.advance(); // consume '"'
+    if let Some(res) = self.scan_str() {
+        tokens.push(Token {
+            kind: TokenKind::STRING,
+            value: Some(res),
+        })
+    }
 }
 ```
 
@@ -367,11 +364,11 @@ Running this, you'd get screamed at by Rust because we haven't defined the `adva
 ```rust showLineNumbers title="scr/tokenizer.rs"
 // Advance one character forward
 fn advance(&mut self) -> Option<char> {
-    if self.pos < self.source.len() {
-        self.pos += 1;
-        return self.source.chars().nth(self.pos - 1);
- }
-    return None;
+    if self.pos < self.source.len() {
+        self.pos += 1;
+        return self.source.chars().nth(self.pos - 1);
+    }
+    return None;
 }
 ```
 
@@ -382,23 +379,23 @@ For scanning strings here's the approach:
 ```rust showLineNumbers title="src/tokenizer.rs"
 // Tokenize string values
 fn scan_str(&mut self) -> Option<String> {
-    let start_pos: usize = self.pos;
+    let start_pos: usize = self.pos;
 
- // Iterate till closing quote or EOF
-    while (self.pos + 1) < self.source.len() {
-        if self.peek().unwrap() == '\0' {
-            panic!("Unexpected EOF at pos: {}", self.pos);
- }
+    // Iterate till closing quote or EOF
+    while (self.pos + 1) < self.source.len() {
+        if self.peek().unwrap() == '\0' {
+            panic!("Unexpected EOF at pos: {}", self.pos);
+        }
 
-        if self.peek().unwrap() == '"' {
-            self.advance();
-            return Some(self.source[start_pos..self.pos].to_string());
- }
+        if self.peek().unwrap() == '"' {
+            self.advance();
+            return Some(self.source[start_pos..self.pos].to_string());
+        }
 
-        self.advance();
- }
+        self.advance();
+    }
 
-    return None;
+    return None;
 }
 ```
 
@@ -410,8 +407,8 @@ Most of the action is just "peeking" at which character comes next and while it'
 
 
 <RoundedImage
-    src="https://res.cloudinary.com/dnkbrrrld/image/upload/v1723759099/diagram-1_qwew7q.png"
-    alt="diagram-1" context="This is what we're working with"
+  src="https://res.cloudinary.com/dnkbrrrld/image/upload/v1723759099/diagram-1_qwew7q.png"
+  alt="diagram-1" context="This is what we're working with"
 />
 
 But there's an issue, Rust has no idea where to find the `peek()` function. It's just like our `advance` function but it doesn't update the pointer. So let's implement that.
@@ -421,10 +418,10 @@ But there's an issue, Rust has no idea where to find the `peek()` function. It's
 
 // Peek one character forward
 fn peek(&self) -> Option<char> {
-    if self.pos + 1 < self.source.len() {
-        return self.source.chars().nth(self.pos + 1);
- }
-    return None;
+    if self.pos + 1 < self.source.len() {
+        return self.source.chars().nth(self.pos + 1);
+    }
+    return None;
 }
 ```
 
@@ -435,41 +432,38 @@ Looks good. In the meantime, let's add a catch-all to panic whenever we encounte
 
 // Iterate till the end
 while self.pos < self.source.len() {
-    let lexeme: char = char_vect[self.pos];
+    let lexeme: char = char_vect[self.pos];
 
-    match lexeme {
-        '{' => tokens.push(Token {
- kind: TokenKind::LBRACE,
- value: None,
- }),
-        '}' => tokens.push(Token {
- kind: TokenKind::RBRACE,
- value: None,
- }),
-        ':' => tokens.push(Token {
- kind: TokenKind::COLON,
- value: None,
- }),
-        ',' => tokens.push(Token {
- kind: TokenKind::COMMA,
- value: None,
- }),
-        '"' => {
-            self.advance(); // consume '"'
-            if let Some(res) = self.scan_str() {
- tokens.push(Token {
- kind: TokenKind::STRING,
- value: Some(res),
- })
- }
- },
- _ => {
-            panic!(
-                "Unexpected character '{}' encountered at pos: {}",
- lexeme, self.pos
- );
- }
- }
+    match lexeme {
+        '{' => tokens.push(Token {
+                kind: TokenKind::LBRACE,
+                value: None,
+            }),
+        '}' => tokens.push(Token {
+                kind: TokenKind::RBRACE,
+                value: None,
+            }),
+        ':' => tokens.push(Token {
+                kind: TokenKind::COLON,
+                value: None,
+            }),
+        ',' => tokens.push(Token {
+                kind: TokenKind::COMMA,
+                value: None,
+            }),
+        '"' => {
+            self.advance(); // consume '"'
+            if let Some(res) = self.scan_str() {
+                    tokens.push(Token {
+                        kind: TokenKind::STRING,
+                        value: Some(res),
+                    })
+                }
+            },
+        _ => {
+            panic!("Unexpected character '{}' encountered at pos: {}", lexeme, self.pos);
+        }
+    }
 }
 
 return tokens;
@@ -488,19 +482,18 @@ use token::Token;
 use tokenizer::Tokenizer;
 
 fn main() {
- // previous code
+    // previous code
+    // Read file and return contents
+    let mut content: String = reader::read_json(json_path);
+    let mut lexer: Tokenizer = tokenizer::Tokenizer {
+        pos: 0,
+        source: content.trim().to_string(),
+    };
 
- // Read file and return contents
-    let mut content: String = reader::read_json(json_path);
-    let mut lexer: Tokenizer = tokenizer::Tokenizer {
- pos: 0,
- source: content.trim().to_string(),
- };
-
-    let tokens: Vec<Token> = lexer.scan();
-    for i in 0..tokens.len() {
-        println!("{:?}", tokens[i]);
- }
+    let tokens: Vec<Token> = lexer.scan();
+    for i in 0..tokens.len() {
+        println!("{:?}", tokens[i]);
+    }
 }
 ```
 
@@ -508,7 +501,7 @@ You can try it on this JSON string, everything should still be working.
 
 ```json
 {
-    "name": "json-parser"
+  "name": "json-parser"
 }
 ```
 
@@ -520,19 +513,19 @@ We can handle numbers just like how we did for strings. We can just track when w
 // Earlier code inside match
 
 '0'..='9' | '-' => {
-    let mut num: String = String::new();
-    if lexeme == '-' {
- num.push('-');
-        self.advance(); // consume "-"
- }
-    if let Some(res) = self.scan_num() {
- num += &res;
- tokens.push(Token {
- kind: TokenKind::NUMBER,
- value: Some(num),
- })
- }
-    self.pos -= 1; // reset cursor
+    let mut num: String = String::new();
+    if lexeme == '-' {
+        num.push('-');
+        self.advance(); // consume "-"
+    }
+    if let Some(res) = self.scan_num() {
+        num += &res;
+        tokens.push(Token {
+            kind: TokenKind::NUMBER,
+            value: Some(num),
+        })
+    }
+    self.pos -= 1; // reset cursor
 }
 ```
 
@@ -547,22 +540,23 @@ My implementation of scan num is similar to scan str:
 
 // Tokenize number values
 fn scan_num(&mut self) -> Option<String> {
-    let start_pos: usize = self.pos;
-    let mut has_decimal: bool = false;
+    let start_pos: usize = self.pos;
+    let mut has_decimal: bool = false;
 
-    while (self.pos + 1) < self.source.len() {
-        let next: char = self.peek().unwrap();
-        if !next.is_numeric() && next == '.' && !has_decimal {
- has_decimal = true;
-            self.advance();
- } else if next.is_numeric() {
-            self.advance();
- } else {
-            self.advance();
-            return Some(self.source[start_pos..self.pos].to_string());
- }
- }
-    return None;
+    while (self.pos + 1) < self.source.len() {
+        let next: char = self.peek().unwrap();
+        if !next.is_numeric() && next == '.' && !has_decimal {
+            has_decimal = true;
+            self.advance();
+        } else if next.is_numeric() {
+            self.advance();
+        } else {
+            self.advance();
+            return Some(self.source[start_pos..self.pos].to_string());
+        }
+    }
+
+  return None;
 }
 ```
 
@@ -575,31 +569,27 @@ This is 80% of the tokenizer done. Finally, we have to handle things like boolea
 
 // Tokenize identifiers (true/false/null)
 fn scan_identifier(&mut self) -> Option<String> {
-    let start_pos: usize = self.pos;
+    let start_pos: usize = self.pos;
 
- // The longest identifier is "false" of length 5
- // So let's track the next four characters
-    if (self.pos + 4) <= self.source.len() {
-        let next_four: String = self.source[start_pos..(self.pos + 4)].to_string();
-        if next_four == "null" || next_four == "true" {
-            self.pos += 4;
-            return Some(next_four);
- } else if (self.pos + 5) <= self.source.len() {
- // If the next five is "false" instead
-            let next_five: String = self.source[start_pos..(self.pos + 5)].to_string();
-            if next_five == "false" {
-                self.pos += 5;
-                return Some(next_five);
- }
- }
- }
+    // The longest identifier is "false" of length 5
+    // So let's track the next four characters
+    if (self.pos + 4) <= self.source.len() {
+        let next_four: String = self.source[start_pos..(self.pos + 4)].to_string();
+        if next_four == "null" || next_four == "true" {
+            self.pos += 4;
+            return Some(next_four);
+        } else if (self.pos + 5) <= self.source.len() {
+            // If the next five is "false" instead
+            let next_five: String = self.source[start_pos..(self.pos + 5)].to_string();
+            if next_five == "false" {
+                self.pos += 5;
+                return Some(next_five);
+            }
+        }
+    }
 
- // An invalid token, panic()
-    panic!(
-        "Unexpected identifier: '{}' at pos: {}",
-        self.source[start_pos..self.pos].to_string(),
-        self.pos
- );
+    // An invalid token, panic()
+    panic!("Unexpected identifier: '{}' at pos: {}", self.source[start_pos..self.pos].to_string(), self.pos);
 }
 ```
 
@@ -613,27 +603,24 @@ We're close to finishing our tokenizer, all that's left is to use the `scan_iden
 
 ```rust showLineNumbers title="src/tokenizer.rs" {2-17}
 _ => {
-if lexeme.is_alphabetic() {
-    if let Some(res) = self.scan_identifier() {
-        if res == "true" || res == "false" {
- tokens.push(Token {
- kind: TokenKind::BOOLEAN,
- value: Some(res),
- })
- } else {
- tokens.push(Token {
- kind: TokenKind::NULL,
- value: None,
- })
- }
-        self.pos -= 1;
- }
-} else {
-    panic!(
-        "Unexpected character '{}' encountered at pos: {}",
- lexeme, self.pos
- );
-}
+    if lexeme.is_alphabetic() {
+        if let Some(res) = self.scan_identifier() {
+            if res == "true" || res == "false" {
+                tokens.push(Token {
+                    kind: TokenKind::BOOLEAN,
+                    value: Some(res),
+                })
+            } else {
+                tokens.push(Token {
+                    kind: TokenKind::NULL,
+                    value: None,
+                })
+            }
+            self.pos -= 1;
+        }
+    } else {
+        panic!("Unexpected character '{}' encountered at pos: {}", lexeme, self.pos);
+    }
 }
 ```
 
@@ -645,7 +632,7 @@ _The tokenizer is the time-consuming part of the system, I promise the parser mo
 
 # [Context-Free Grammar (CFGs)](#context-free-grammar-cfgs)
 
-Before that tho, you need to know what a context-free grammar is. Remember how we said we need a formal grammer in order to parse strings? That's where CFGs come in. CFGs give us a formal way to mathematically model smaller units of a grammar into composable forms. There's a lot of factors that come into choosing a grammar; things like avoiding `left recursion` or `infinite recursions`.
+Now you're almost ready to write the parser, but you need to know what a context-free grammar is first. Remember how we said we need a formal grammar in order to parse strings? That's where CFGs come in. CFGs give us a formal way to mathematically model smaller units of a grammar into composable forms. There's a lot of factors that come into choosing a grammar; things like avoiding `left recursion` or `infinite recursions`.
 
 This is what ours will look like:
 
@@ -664,12 +651,12 @@ Pairs are composed of a `string` and a `value` separated by **colons**.
 
 Values can be any of: **string**, **number**, **object**, **boolean**, or, **null**.
 
-Defining our grammar in this way ensures we can create recursive functions that call themselves in just the right way to build a complex, yet effective heirarchy of tokens.
+Defining our grammar in this way ensures we can create recursive functions that call themselves in just the right way to build a complex, yet effective hierarchy of tokens.
 
 CFGs can quickly become rather complex, if you're interested in learning, more I strongly recommend you check out the [wiki.](https://en.wikipedia.org/wiki/Context-free_grammar)
 
 # [Writing The parser](#writing-the-parser)
 
-Parser WIP
+We've achieved a lot in this blog post! And congrats if you made it this far, here's a pat on the back for you (lol). We'll implement the parser extensively in part 02, so watch out for that! In the mean time, you can test our tokenizer with lots of json strings to see if it works fine, or you could extend it to handle exponential numbers, if you're feeling up for it!
 
 <Closing />
