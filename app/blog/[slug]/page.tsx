@@ -77,20 +77,41 @@ export default async function SingleBlogPage({ params }: { params: any }) {
         return notFound();
 
     let views = 0;
-    await fetch(`${constants.VIEWS_ENDPOINT}/update?slug=${encodeURIComponent(params.slug)}`, {
-        method: 'POST',
-        next: { revalidate: 1200 }
-    }).then(res => {
-        if (!res.ok) {
-            throw new Error("Response was not ok.");
+    let attempts = 0;
+    let isSuccessful = false;
+
+    const DEFAULT_URL = constants.VIEWS_ENDPOINT;
+    const FALLBACK_URL = constants.VIEWS_FALLBACK_ENDPOINT;
+    const retries = 3;
+
+    while (attempts < retries && !isSuccessful) {
+        let url = attempts < retries - 1 ? DEFAULT_URL : FALLBACK_URL;
+
+        try {
+            const res = await fetch(`${url}/update?slug=${encodeURIComponent(params.slug)}`, { method: 'POST', next: { revalidate: 1200 } });
+
+            if (!res.ok) {
+                attempts += 1;
+                throw new Error("Request failed.");
+            }
+
+            const data = await res.json();
+            views = data["payload"]["views"];
+            isSuccessful = true;
+            break;
+        } catch (err) {
+            attempts += 1;
+            console.error(`Attempt ${attempts} failed. Error:`, err);
+
+            if (attempts >= retries) {
+                console.error("All attempts failed, exiting loop.");
+                break;
+            } else if (attempts === retries - 1) {
+                console.log("Falling back to other endpoint...");
+            }
+
         }
-        return res.json();
-    }).then(data => {
-        console.log("Getting...");
-        views = data["payload"]["views"];
-    }).catch(err => {
-        console.error(err);
-    });
+    }
 
     return (
         <BlogContent

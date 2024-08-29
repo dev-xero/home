@@ -36,19 +36,20 @@ export default async function Page() {
 
     let attempts = 0;
     let isSuccessful = false;
-    let DEFAULT_URL = constants.VIEWS_ENDPOINT;
-    let FALLBACK_URL = constants.VIEWS_FALLBACK_ENDPOINT;
+
+    const DEFAULT_URL = constants.VIEWS_ENDPOINT;
+    const FALLBACK_URL = constants.VIEWS_FALLBACK_ENDPOINT;
     const retries = 3;
 
     while (attempts < retries && !isSuccessful) {
         let url = attempts < retries - 1 ? DEFAULT_URL : FALLBACK_URL;
 
         try {
-            const res = await fetch(`${url}/views`, { next: { revalidate: 300 } });
+            const res = await fetch(`${url}/views`, { next: { revalidate: 1200 } });
 
             if (!res.ok) {
                 attempts += 1;
-                throw new Error("Response failed along the line.");
+                throw new Error("Request failed.");
             }
 
             const data = await res.json();
@@ -65,8 +66,7 @@ export default async function Page() {
             isSuccessful = true;
             break;
         } catch (err) {
-            attempts += 1;
-            console.error(`Attempt ${attempts} failed. Error:`, err);
+            console.error(`Attempt ${attempts} failed.`);
 
             if (attempts >= retries) {
                 console.error("All attempts failed, exiting loop.");
