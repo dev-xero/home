@@ -33,7 +33,7 @@ Parsers are crucial in the technology we use daily as software engineers, from c
 
 We'll build a flavor of parsers known as "Recursive Descent Parsers", which use a set of mutually recursive functions to elegantly parse any valid JSON string.
 
-In this blog post we'll mostly focus on the **tokenizer**, and in part 2 we'll write the actual parser. So, even if you don't like Rust (like @anu lol), you can always reproduce this in your favorite programming language (bonus points if you choose C).
+In this blog post we'll mostly focus on the **tokenizer**, and in part 2 we'll write the actual parser. I'll be implementing our parser in Rust, but even if you're not a fan of the language, you can always reproduce this in any language you like. (bonus points if you choose C).
 
 Here's the official JSON specification as a [guide.](https://www.json.org/json-en.html)
 
@@ -190,6 +190,7 @@ This is my ouput! Everything is working perfectly so far, super nice. Let's get 
 <RoundedImage
     src="https://res.cloudinary.com/dnkbrrrld/image/upload/v1723330849/01_tetjn9.png"
     alt="output-1"
+    context="My output on running the program"
 />
 
 ### The Token Struct
@@ -408,7 +409,8 @@ Most of the action is just "peeking" at which character comes next and while it'
 
 <RoundedImage
   src="https://res.cloudinary.com/dnkbrrrld/image/upload/v1723759099/diagram-1_qwew7q.png"
-  alt="diagram-1" context="This is what we're working with"
+  alt="diagram-1"
+  context="This is what we're working with"
 />
 
 But there's an issue, Rust has no idea where to find the `peek()` function. It's just like our `advance` function but it doesn't update the pointer. So let's implement that.
