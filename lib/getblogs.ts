@@ -32,7 +32,6 @@ const rehypePrettyCodeOptions = {
 
 const BLOG_DIR = path.join('content/blog');
 
-
 type Metadata = {
     title: string;
     summary: string;
@@ -141,14 +140,18 @@ async function fetchBlogs() {
 export const getBlogs = cache(fetchBlogs);
 
 export async function getBlog(slug: string) {
-    let blogs = await getBlogs();
+    try {
+        let blogs = await getBlogs();
 
-    if (process.env.APP_ENV != 'development') {
-        blogs = blogs.filter(
-            (blog) => blog.metadata && blog.metadata.published == true
-        );
+        if (process.env.APP_ENV != 'development') {
+            blogs = blogs.filter(
+                (blog) => blog.metadata && blog.metadata.published == true
+            );
+        }
+
+        const blog = blogs.find((blog) => blog.slug === slug);
+        return blog;
+    } catch (err) {
+        throw err;
     }
-
-    const blog = blogs.find((blog) => blog.slug === slug);
-    return blog;
 }

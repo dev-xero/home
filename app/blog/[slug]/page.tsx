@@ -71,10 +71,15 @@ export async function generateMetadata({ params }: { params: any }) {
 
 // Blog page content
 export default async function SingleBlogPage({ params }: { params: any }) {
-    const blog = await getBlog(params.slug);
-
-    if (!blog)
+    let blog = null;
+    try {
+        blog = await getBlog(params.slug);    
+        if (!blog)
+            return notFound();
+    } catch (err) {
+        console.error(err);
         return notFound();
+    }
 
     let views = 0;
     let attempts = 0;
