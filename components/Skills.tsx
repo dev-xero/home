@@ -11,8 +11,8 @@ export default function Skills() {
                 <p>
                     I started programming when I was{" "}
                     <span className="green">{personal.years_programming}</span>,
-                    so here&apos;s some of the languages, frameworks, and tools I work
-                    with regularly.
+                    so here&apos;s some of the languages, frameworks, and tools
+                    I work with regularly.
                 </p>
                 <section className="mt-8 grid gap-8 grid-cols-3 sm:grid-cols-4 md:grid-cols-8 justify-items-center">
                     {skillData.map((skill, id) => (
@@ -33,6 +33,28 @@ export default function Skills() {
                             </label>
                         </div>
                     ))}
+                </section>
+                <section className="mt-8">
+                    <p className="my-2">
+                        <span className="font-bold">Frontend:</span> HTML, CSS,
+                        SASS, TailwindCSS, JavaScript / Typescript, ReactJS,
+                        NexJS, Vue, Astro, Framer Motion.
+                    </p>
+                    <p className="my-2">
+                        <span className="font-bold">Backend:</span> NodeJS,
+                        ExpressJS, NestJS, Flask, PostgreSQL, MySQL, Firebase,
+                        MongoDB, Golang, Redis, ELK stack.
+                    </p>
+                    <p className="my-2">
+                        <span className="font-bold">DevOps:</span> Docker,
+                        Kubernetes, Terraform, Digital Ocean, Render, AWS.
+                    </p>
+                    <p className="my-2">
+                        <span className="font-bold">
+                            Languages &amp; Tools:
+                        </span>{" "}
+                        C/C++, Rust, Java, Kotlin, Git/GitHub, Linux.
+                    </p>
                 </section>
             </section>
         </main>
