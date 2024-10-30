@@ -37,13 +37,12 @@ export default function Skills() {
                 <section className="mt-8">
                     <p className="my-2">
                         <span className="font-bold">Frontend:</span> HTML, CSS,
-                        SASS, TailwindCSS, JavaScript / Typescript, ReactJS,
-                        NexJS, Vue, Astro, Framer Motion.
+                        TailwindCSS, JavaScript / Typescript, ReactJS / NextJS.
                     </p>
                     <p className="my-2">
                         <span className="font-bold">Backend:</span> NodeJS,
-                        ExpressJS, NestJS, Flask, PostgreSQL, MySQL, Firebase,
-                        MongoDB, Golang, Redis, ELK stack.
+                        ExpressJS, NestJS, Flask, PostgreSQL, MySQL,
+                        MongoDB, Golang, Redis.
                     </p>
                     <p className="my-2">
                         <span className="font-bold">DevOps:</span> Docker,
