@@ -164,9 +164,42 @@ p {
     background-color: var(--fg-color);
     color: var(--bg-color);
     padding: 2px;
-    width: 900px;
+    width: 100%;
     max-width: 900px;
     margin: 0 auto;
+}
+
+.bottom-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--bg-color);
+    background-color: var(--fg-color);
+    padding: 2px;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.bottom-bar ul {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.bottom-bar ul li {
+    list-style: none;
+}
+
+.bottom-bar ul li a {
+    color: var(--bg-color) !important;
+    opacity: 1 !important;
+}
+
+.bottom-bar ul li a:hover {
+    background-color: var(--bg-color) !important;
+    color: var(--fg-color) !important;
 }
 
 /* HEADING MAIN */
