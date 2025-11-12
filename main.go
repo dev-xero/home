@@ -9,10 +9,10 @@ import (
 
 func main() {
 	gin.SetMode(gin.ReleaseMode)
-
 	log.Println("[xero]: server is running, listening for requests.")
 
 	r := gin.Default()
+	r.Static("/static", "./static")
 	r.LoadHTMLGlob("templates/*")
 
 	r.GET("/", func(c *gin.Context) {
