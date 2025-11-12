@@ -66,4 +66,115 @@ h6 {
     isolation: isolate;
 }
 
+/* VARIABLES */
+:root {
+    --bg-color: hsl(155deg 80% 5%);
+    --fg-color: hsl(155deg, 93%, 44%);
+}
+
+/* BROWSER */
+::selection {
+    background-color: hsl(155deg, 93%, 44%);
+    color: hsl(155deg 80% 5%);
+}
+
+/* FONTS */
+@font-face {
+    font-family: "JetbrainsMono";
+    src: url("/static/fonts/JetBrainsMono.ttf");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "TsunagiGothic";
+    src: url("/static/fonts/TsunagiGothic.ttf");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Schabo";
+    src: url("/static/fonts/schabo.woff2");
+    font-weight: normal;
+    font-style: normal;
+}
+
 /* GLOBAL STYLES */
+body,
+html {
+    height: 100%;
+    margin: 0;
+    font-family: "JetbrainsMono", monospace;
+    line-height: 1.6;
+    background-color: var(--bg-color);
+    color: var(--fg-color);
+}
+
+a {
+    color: var(--fg-color);
+    text-decoration: none;
+    /*text-underline-offset: 0.5em;*/
+    opacity: 0.5;
+}
+
+a:hover {
+    opacity: 1;
+}
+
+a::before {
+    content: "<";
+    position: inherit;
+}
+
+a::after {
+    content: ">";
+}
+
+/* CLASSES */
+
+.container {
+    width: 100%;
+    max-width: 1000px;
+    height: 100%;
+    margin: 0px auto;
+    padding: 16px;
+    border: 1px var(--fg-color) solid;
+}
+
+.font-jp {
+    font-family: "TsunagiGothic";
+}
+
+.font-alt {
+    font-family: "Schabo";
+}
+
+.font-bold {
+    font-weight: "bold";
+}
+
+/* HEADING MAIN */
+.heading-main {
+    display: inline-block;
+    position: relative;
+}
+
+.text-main-jp {
+    position: absolute;
+    bottom: -0.05em;
+    left: 0.6em;
+    font-size: 3em;
+    mix-blend-mode: difference;
+    /*opacity: 0.7;*/
+}
+
+.text-h1-main {
+    font-size: 6em;
+    font-weight: 200;
+}
+
+p {
+    margin: 24px 0px;
+    opacity: 0.8;
+}
