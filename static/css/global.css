@@ -142,7 +142,7 @@ p {
 .container {
     width: 100%;
     min-height: 100%;
-    max-width: 1000px;
+    max-width: 900px;
     margin: 0px auto;
     padding: 16px;
     border: 1px var(--fg-color) solid;
@@ -158,6 +158,15 @@ p {
 
 .font-bold {
     font-weight: "bold";
+}
+
+.address-bar {
+    background-color: var(--fg-color);
+    color: var(--bg-color);
+    padding: 2px;
+    width: 900px;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
 /* HEADING MAIN */

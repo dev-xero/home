@@ -18,6 +18,7 @@ func main() {
 	r.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "index.html", gin.H{
 			"Title": "ゼロ 地下 (xero's underground)",
+			"Slug":  "",
 		})
 	})
 
