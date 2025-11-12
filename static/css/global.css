@@ -120,23 +120,29 @@ a {
 
 a:hover {
     opacity: 1;
+    background-color: var(--fg-color);
+    color: var(--bg-color);
 }
 
 a::before {
-    content: "<";
+    content: "[";
     position: inherit;
 }
 
 a::after {
-    content: ">";
+    content: "]";
+}
+
+p {
+    margin: 24px 0px;
+    opacity: 0.8;
 }
 
 /* CLASSES */
-
 .container {
     width: 100%;
+    min-height: 100%;
     max-width: 1000px;
-    height: 100%;
     margin: 0px auto;
     padding: 16px;
     border: 1px var(--fg-color) solid;
@@ -155,6 +161,9 @@ a::after {
 }
 
 /* HEADING MAIN */
+/*.h-heading {
+}*/
+
 .heading-main {
     display: inline-block;
     position: relative;
@@ -174,7 +183,25 @@ a::after {
     font-weight: 200;
 }
 
-p {
-    margin: 24px 0px;
-    opacity: 0.8;
+.blinking-cursor {
+    display: inline-block;
+    position: relative;
+    bottom: 0px;
+    right: 0px;
+    width: 20px;
+    height: 80px;
+    background-color: var(--fg-color);
+    animation: blinking 1s infinite ease forwards;
+}
+
+@keyframes blinking {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
 }
