@@ -81,16 +81,18 @@ h6 {
 /* FONTS */
 @font-face {
     font-family: "JetbrainsMono";
-    src: url("/static/fonts/JetBrainsMono.ttf");
+    src: url("/static/fonts/JetBrainsMono.woff2");
     font-weight: normal;
     font-style: normal;
+    font-display: block;
 }
 
 @font-face {
     font-family: "TsunagiGothic";
-    src: url("/static/fonts/TsunagiGothic.ttf");
+    src: url("/static/fonts/TsunagiGothic.woff2");
     font-weight: normal;
     font-style: normal;
+    font-display: block;
 }
 
 @font-face {
@@ -98,6 +100,7 @@ h6 {
     src: url("/static/fonts/Schabo.woff2");
     font-weight: normal;
     font-style: normal;
+    font-display: block;
 }
 
 /* GLOBAL STYLES */
@@ -263,7 +266,7 @@ p {
 
     .blinking-cursor {
         width: 10px;
-        height: 40px;
+        height: 50px;
     }
 
     .bottom-bar {
