@@ -21,7 +21,6 @@ func main() {
 		"True computer randomness requires disturbance or atmospheric noise.",
 		"Cleopatra lived closer to the iPhone than the Pyramids.",
 		"Interestingly, chainsaws were invented for child birth, yikes.",
-		"Vikings discovered America 500 years before Columbus.",
 		"Our bodies completely replaces itself roughly every decade.",
 		"We share 60% of our DNA with a banana, think about that.",
 		"Octopuses have blue blood.",
