@@ -247,3 +247,33 @@ p {
         opacity: 0;
     }
 }
+
+@media screen and (max-width: 420px) {
+    body {
+        font-size: 0.875em !important;
+    }
+
+    .text-main-jp {
+        font-size: 2em;
+    }
+
+    .text-h1-main {
+        font-size: 4em;
+    }
+
+    .blinking-cursor {
+        width: 10px;
+        height: 40px;
+    }
+
+    .bottom-bar {
+        display: block;
+    }
+
+    .bottom-bar ul {
+        justify-content: start;
+        align-items: normal;
+        margin: 8px 0px;
+        padding: 0px;
+    }
+}
