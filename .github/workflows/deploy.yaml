@@ -25,5 +25,5 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            dev-xero/home:latest
+            devxero/home:latest
           platforms: linux/amd64
