@@ -46,5 +46,6 @@ func main() {
 		})
 	})
 
-	r.Run()
+	log.Println("[xero]: server is running on :8080")
+	r.Run(":8080")
 }
