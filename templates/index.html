@@ -1,7 +1,8 @@
 {{ template "header.html" . }}
 <body>
     {{ template "address-bar.html" . }}
-    <section class="container">
+
+    <main class="container crt-container crt-text">
         <section class="h-heading">
             <section class="heading-main">
                 <h1 class="font-alt text-h1-main">Xero&apos;s Underground</h1>
@@ -70,6 +71,9 @@
                 >.
             </p>
         </section>
-    </section>
+
+        <div class="screen-overlay"></div>
+    </main>
+
     {{ template "bottom-bar.html" . }}
 </body>

@@ -9,7 +9,6 @@ import (
 )
 
 var randomFacts = []string{
-	"The moon is actually shaped like a lemon.",
 	"Neptune has only completed one full orbit since it was discovered.",
 	"Saturn could theoretically float in your hot tub.",
 	"Every century, Earth slows by 1/500th of a second.",
@@ -26,13 +25,13 @@ var randomFacts = []string{
 	"Your stomach acid can dissolve razor blades.",
 	"Your brain uses 20% of your energy while being 2% your weight.",
 	"Zeno's paradoxes proved motion is theoretically impossible.",
-	"Gödel showed that a any sufficiently complex system cannot prove itself.",
+	"You should look up Gödel's incompleteness theorem.",
 }
 
 const (
 	baseURL         = "https://sshxero.dev"
-	metaTitle       = "ゼロ 地下 (xero's underground)"
-	metaDescription = "xero :: welcome to the underground"
+	metaTitle       = "ゼロ 地下 :: xero's underground"
+	metaDescription = "- welcome, do have a nice stay -"
 )
 
 func main() {
