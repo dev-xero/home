@@ -26,8 +26,14 @@ var randomFacts = []string{
 	"Your stomach acid can dissolve razor blades.",
 	"Your brain uses 20% of your energy while being 2% your weight.",
 	"Zeno's paradoxes proved motion is theoretically impossible.",
-	"Gödel shows that a sufficiently complex system cannot prove itself.",
+	"Gödel showed that a any sufficiently complex system cannot prove itself.",
 }
+
+const (
+	baseURL         = "https://sshxero.dev"
+	metaTitle       = "ゼロ 地下 (xero's underground)"
+	metaDescription = "xero :: welcome to the underground"
+)
 
 func main() {
 
@@ -40,9 +46,12 @@ func main() {
 
 	r.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "index.html", gin.H{
-			"Title":      "ゼロ 地下 (xero's underground)",
-			"Slug":       "",
-			"RandomFact": randomFacts[rand.Intn(len(randomFacts))],
+			"Title":                   metaTitle,
+			"MetaPropertyTitle":       metaTitle,
+			"MetaDescription":         metaDescription,
+			"MetaPropertyDescription": metaDescription,
+			"Slug":                    "",
+			"RandomFact":              randomFacts[rand.Intn(len(randomFacts))],
 		})
 	})
 
