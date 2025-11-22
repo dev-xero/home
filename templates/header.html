@@ -41,9 +41,21 @@
             data-website-id="464bf80a-8d06-4108-982b-ec02f0823a23"
         ></script>
         <script>
-            const crtButton = document.getElementById("crt-btn");
-            crtButton.addEventListener("click", (ev) => {
-                alert("clicked on that");
+            // Back when you had to write your own event listeners, smh.
+            document.addEventListener("DOMContentLoaded", () => {
+                const crtButton = document.getElementById("crt-btn");
+                crtButton.addEventListener("click", (ev) => {
+                    const container = document.querySelector(".container");
+                    if (container.classList.contains("crt-container")) {
+                        container.classList.remove("crt-container");
+                        container.classList.remove("crt-text");
+                        crtButton.textContent = "CRT Effect [ ]";
+                    } else {
+                        container.classList.add("crt-container");
+                        container.classList.add("crt-text");
+                        crtButton.textContent = "CRT Effect [x]";
+                    }
+                });
             });
         </script>
     </head>

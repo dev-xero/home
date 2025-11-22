@@ -380,6 +380,11 @@ p {
     animation: blinking 1s infinite ease forwards;
 }
 
+#crt-btn {
+    user-select: none;
+    cursor: pointer;
+}
+
 @keyframes blinking {
     0% {
         opacity: 0;
