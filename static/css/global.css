@@ -303,6 +303,9 @@ p {
 }
 
 .address-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     background-color: var(--fg-color);
     color: var(--bg-color);
     padding: 2px;
