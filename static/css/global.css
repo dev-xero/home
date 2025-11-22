@@ -107,7 +107,7 @@ html {
     margin: 0;
     font-family: "JetbrainsMono", monospace;
     line-height: 1.6;
-    background-color: #000;
+    background-color: var(--bg-color) !important;
     color: var(--fg-color);
 }
 
@@ -148,7 +148,7 @@ p {
 
 .crt-container {
     position: relative;
-    background-color: var(--bg-color);
+    /*background-color: var(--bg-color);*/
 }
 
 .crt-container::before {
@@ -206,16 +206,6 @@ p {
         0 0 40px var(--fg-deep-color);
     animation: flicker 0.15s infinite;
     line-height: 1.6;
-}
-
-.crt-text-inverted {
-    position: relative;
-    z-index: 0;
-    color: var(--bg-color);
-    text-shadow:
-        0 0 3px var(--bg-color),
-        0 0 6px var(--bg-color);
-    animation: flicker 0.15s infinite;
 }
 
 @keyframes flicker {
@@ -397,6 +387,10 @@ p {
     100% {
         opacity: 0;
     }
+}
+
+.random-fact {
+    font-size: 0.875em;
 }
 
 @media screen and (max-width: 420px) {
